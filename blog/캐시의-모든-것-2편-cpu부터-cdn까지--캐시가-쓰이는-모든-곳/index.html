@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="AI, 개발, 게임 — 개발자의 기술 블로그">
+        <meta name="description" content="AI, 개발, 게임, 재테크 — 개발자의 기술 블로그">
       
       
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.dev/blog/cache-part2/">
+        <link rel="canonical" href="https://home301.github.io/blog/blog/%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-2%ED%8E%B8-cpu%EB%B6%80%ED%84%B0-cdn%EA%B9%8C%EC%A7%80--%EC%BA%90%EC%8B%9C%EA%B0%80-%EC%93%B0%EC%9D%B4%EB%8A%94-%EB%AA%A8%EB%93%A0-%EA%B3%B3/">
       
       
-        <link rel="prev" href="../cache-part3/">
+        <link rel="prev" href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-3%ED%8E%B8-%EC%BA%90%EC%8B%9C-%EA%B5%90%EC%B2%B4-%EC%A0%95%EC%B1%85-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC/">
       
       
-        <link rel="next" href="../cache-part1/">
+        <link rel="next" href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-1%ED%8E%B8-%EC%BA%90%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%99%9C-%EC%93%B0%EB%8A%94%EA%B0%80/">
       
       
         
@@ -58,16 +58,6 @@
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-  
-  
-
-<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-DTNKMZSB8M"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-DTNKMZSB8M",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-DTNKMZSB8M",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
-  
-    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-  
 
     
     
@@ -595,6 +585,36 @@
     
   
     AI/개발
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../category/%EC%9E%AC%ED%85%8C%ED%81%AC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    재테크
   
 
     
@@ -1301,11 +1321,9 @@
 <blockquote>
 <p>하드웨어부터 소프트웨어까지, 캐시가 동작하는 모든 계층을 정리한다.</p>
 </blockquote>
-<!-- more -->
-
 <hr />
 <h2 id="_1">들어가며<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p><a href="../cache-part1/">1편</a>에서 캐시의 기본 원리를 다뤘다. 이번 편에서는 <strong>캐시가 실제로 어디에서, 어떻게 쓰이는지</strong> 계층별로 살펴본다.</p>
+<p><a href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-1%ED%8E%B8-%EC%BA%90%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%99%9C-%EC%93%B0%EB%8A%94%EA%B0%80/">1편</a>에서 캐시의 기본 원리를 다뤘다. 이번 편에서는 <strong>캐시가 실제로 어디에서, 어떻게 쓰이는지</strong> 계층별로 살펴본다.</p>
 <p>컴퓨터 시스템에서 캐시는 하나가 아니다. <strong>여러 계층에 걸쳐</strong> 캐시가 중첩되어 있고, 각각이 협력하여 전체 시스템의 성능을 끌어올린다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>사용자의 요청이 거치는 캐시 계층:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -1779,8 +1797,6 @@ graph TD
 
 
 
-  
-
 
   
 
@@ -1811,7 +1827,7 @@ graph TD
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../cache-part3/" class="md-footer__link md-footer__link--prev" aria-label="이전: 캐시의 모든 것 3편: 캐시 교체 정책 완벽 정리">
+          <a href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-3%ED%8E%B8-%EC%BA%90%EC%8B%9C-%EA%B5%90%EC%B2%B4-%EC%A0%95%EC%B1%85-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC/" class="md-footer__link md-footer__link--prev" aria-label="이전: 캐시의 모든 것 3편: 캐시 교체 정책 완벽 정리">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1828,7 +1844,7 @@ graph TD
         
         
           
-          <a href="../cache-part1/" class="md-footer__link md-footer__link--next" aria-label="다음: 캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가">
+          <a href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-1%ED%8E%B8-%EC%BA%90%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%99%9C-%EC%93%B0%EB%8A%94%EA%B0%80/" class="md-footer__link md-footer__link--next" aria-label="다음: 캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
