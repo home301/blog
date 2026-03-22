@@ -12,13 +12,13 @@
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.github.io/blog/blog/%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-1%ED%8E%B8-%EC%BA%90%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%99%9C-%EC%93%B0%EB%8A%94%EA%B0%80/">
+        <link rel="canonical" href="https://home301.github.io/blog/blog/openclaw-personal-assistant/">
       
       
-        <link rel="prev" href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-2%ED%8E%B8-cpu%EB%B6%80%ED%84%B0-cdn%EA%B9%8C%EC%A7%80--%EC%BA%90%EC%8B%9C%EA%B0%80-%EC%93%B0%EC%9D%B4%EB%8A%94-%EB%AA%A8%EB%93%A0-%EA%B3%B3/">
+        <link rel="prev" href="../openclaw-tips/">
       
       
-        <link rel="next" href="../rtx-5060-ti-16gb%EC%97%90-stable-diffusion-forge-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">
+        <link rel="next" href="../local-llm-rtx5060ti/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가 - Mingi's Dev Blog</title>
+        <title>OpenClaw으로 개인 AI 비서 만들기 — 텔레그램 + Claude - Mingi's Dev Blog</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1" class="md-skip">
+        <a href="#openclaw-ai-claude" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가
+              OpenClaw으로 개인 AI 비서 만들기 — 텔레그램 + Claude
             
           </span>
         </div>
@@ -669,10 +669,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#openclaw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenClaw이 뭔가
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        들어가며
+        환경
       
     </span>
   </a>
@@ -680,78 +691,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 캐시의 정의
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 간략한 역사
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 왜 캐시가 필요한가
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 왜 캐시가 필요한가">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#3-1-memory-hierarchy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3-1. 메모리 계층 구조 (Memory Hierarchy)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        수치로 체감하기
+        설치
       
     </span>
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-2-principle-of-locality" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3-2. 지역성 원리 (Principle of Locality)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3-2. 지역성 원리 (Principle of Locality)">
+    <nav class="md-nav" aria-label="설치">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#temporal-locality" class="md-nav__link">
+  <a href="#1-nodejs-22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        시간적 지역성 (Temporal Locality)
+        1. Node.js 22 설치
       
     </span>
   </a>
@@ -759,43 +714,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#spatial-locality" class="md-nav__link">
+  <a href="#2-openclaw" class="md-nav__link">
     <span class="md-ellipsis">
       
-        공간적 지역성 (Spatial Locality)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 캐시의 기본 동작
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 캐시의 기본 동작">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#4-1-cache-hit-cache-miss" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-1. Cache Hit와 Cache Miss
+        2. OpenClaw 설치
       
     </span>
   </a>
@@ -803,21 +725,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-2-amat" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4-2. 히트율과 성능 — AMAT
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#memory-wall" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Memory Wall 문제
+        3. 초기 설정
       
     </span>
   </a>
@@ -833,6 +744,178 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
+        텔레그램 연동
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="텔레그램 연동">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        봇 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openclaw_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenClaw 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        게이트웨이 시작
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실제 사용 예
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="실제 사용 예">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        파일 작업
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        웹 검색
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        크론 작업
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주요 설정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주요 설정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        모델 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        하트비트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        워크스페이스
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        보안 주의사항
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         정리
       
     </span>
@@ -841,21 +924,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
       
-        다음 편 예고
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        참고문헌
+        참고
       
     </span>
   </a>
@@ -899,7 +971,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-03-05 00:00:00+00:00" class="md-ellipsis">2026년 3월 5일</time>
+                        <time datetime="2026-03-07 00:00:00+00:00" class="md-ellipsis">2026년 3월 7일</time>
                       </div>
                     </li>
                     
@@ -921,7 +993,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 4분
+                              읽는시간 2분
                             
                           </span>
                         </div>
@@ -949,269 +1021,201 @@
       
       
       
-        <span class="md-tag">backend</span>
+        <span class="md-tag">ai-assistant</span>
       
     
       
       
       
       
-        <span class="md-tag">cache</span>
+        <span class="md-tag">claude</span>
       
     
       
       
       
       
-        <span class="md-tag">series</span>
+        <span class="md-tag">openclaw</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">telegram</span>
       
     
   </nav>
 
 
 
-<h1 id="1">캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가<a class="headerlink" href="#1" title="Permanent link">#</a></h1>
+<h1 id="openclaw-ai-claude">OpenClaw으로 개인 AI 비서 만들기 — 텔레그램 + Claude<a class="headerlink" href="#openclaw-ai-claude" title="Permanent link">#</a></h1>
 <blockquote>
-<p>캐시의 기본 개념부터 동작 원리까지 정리한다.</p>
+<p>텔레그램으로 대화하면 Claude가 내 서버에서 파일을 읽고, 명령어를 실행하고, 이미지를 보내주는 환경을 구축한다.</p>
 </blockquote>
 <!-- more -->
 
 <hr />
-<h2 id="_1">들어가며<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p>논문을 쓰는데 자료가 필요할 때마다 도서관에 간다고 생각해보자. 비효율적이다. 그래서 자주 보는 책은 책상 위에 둔다. 여기서 <strong>책상이 캐시</strong>고, <strong>도서관이 메인 메모리</strong>(혹은 디스크)다.</p>
-<p>원리는 어디에나 적용된다:
-- <strong>냉장고</strong> = 캐시, <strong>마트</strong> = 원본 저장소. 자주 먹는 식재료는 냉장고에 넣어둔다.
-- <strong>스마트폰의 최근 앱 목록</strong> = 캐시. 완전히 종료하지 않은 앱은 빠르게 다시 열린다.
-- <strong>웹 브라우저의 페이지 캐시</strong> = 캐시. 이전에 방문한 사이트는 더 빠르게 로드된다.</p>
-<p>핵심은 간단하다: <strong>자주 쓰는 데이터를 가까이 두면 빠르다.</strong></p>
+<h2 id="openclaw">OpenClaw이 뭔가<a class="headerlink" href="#openclaw" title="Permanent link">#</a></h2>
+<p><a href="https://openclaw.ai">OpenClaw</a>은 AI 에이전트를 메신저(텔레그램, WhatsApp, Discord 등)에 연결하는 게이트웨이다. 단순한 챗봇이 아니라, 서버에서 직접 명령어를 실행하고 파일을 다루는 <strong>개인 비서</strong> 수준의 에이전트를 만들 수 있다.</p>
+<p>할 수 있는 것들:</p>
+<ul>
+<li>텔레그램으로 대화하면 Claude/GPT가 응답</li>
+<li>서버의 파일 읽기/쓰기</li>
+<li>셸 명령어 실행</li>
+<li>웹 검색</li>
+<li>이미지 생성 후 메신저로 전송</li>
+<li>크론 작업 (정기적으로 알림, 모니터링 등)</li>
+<li>브라우저 자동화</li>
+</ul>
 <hr />
-<h2 id="1_1">1. 캐시의 정의<a class="headerlink" href="#1_1" title="Permanent link">#</a></h2>
-<blockquote>
-<p>캐시(Cache)란, 향후 요청을 더 빠르게 처리하기 위해 데이터의 사본을 <strong>더 빠른 저장소</strong>에 보관하는 하드웨어 또는 소프트웨어 구성 요소다.</p>
-</blockquote>
-<p>핵심 키워드는 <strong>사본</strong>(copy)과 <strong>더 빠른 저장소</strong>다.</p>
-<p>캐시에 저장된 데이터는 원본이 아니라 복사본이다. 원본은 여전히 느린 저장소에 있고, 캐시는 그 사본을 빠른 곳에 두어 접근 속도를 높인다.</p>
-<p>참고로 "캐시(cache)"라는 단어는 프랑스어 <em>cacher</em>에서 왔는데, <strong>숨기다</strong>라는 뜻이다. 실제로 캐시는 사용자에게 <strong>투명하게</strong>(transparently) 동작한다. 웹 브라우저가 이미지를 캐시에서 불러올 때, 사용자는 그 사실을 의식하지 못한다. 그냥 "빠르다"고 느낄 뿐이다.</p>
-<hr />
-<h2 id="2">2. 간략한 역사<a class="headerlink" href="#2" title="Permanent link">#</a></h2>
-<p>캐시의 역사는 1960년대로 거슬러 올라간다.</p>
-<p><strong>1963년</strong> — 캠브리지 대학의 <strong>Atlas 2</strong>(Titan) 컴퓨터에서 초기 캐시 개념이 적용되었다.</p>
-<p><strong>1965년</strong> — Maurice Wilkes가 <strong>slave memory</strong>라는 이름으로 캐시 개념을 제안한 논문을 발표한다. 지금 우리가 아는 캐시의 학술적 시작점이다.</p>
-<p><strong>1968년</strong> — <strong>IBM System/360 Model 85</strong>에서 상용 컴퓨터 최초로 캐시 메모리를 탑재한다. "cache"라는 용어가 널리 퍼진 계기가 되었다.</p>
-<p><strong>1976년</strong> — IBM 801 CPU에서 최초로 <strong>명령어 캐시</strong>(I-cache)와 <strong>데이터 캐시</strong>(D-cache)를 분리한다. 현대 CPU에서도 사용되는 Split L1 캐시의 시작이다.</p>
-<p><strong>현재</strong> — L1/L2/L3 다단계 캐시 구조는 표준이 되었고, 1달러 미만의 마이크로컨트롤러에도 캐시가 탑재된다.</p>
-<hr />
-<h2 id="3">3. 왜 캐시가 필요한가<a class="headerlink" href="#3" title="Permanent link">#</a></h2>
-<p>캐시가 존재하는 이유를 이해하려면 두 가지 핵심 개념을 알아야 한다: <strong>메모리 계층 구조</strong>와 <strong>지역성 원리</strong>.</p>
-<h3 id="3-1-memory-hierarchy">3-1. 메모리 계층 구조 (Memory Hierarchy)<a class="headerlink" href="#3-1-memory-hierarchy" title="Permanent link">#</a></h3>
-<p>컴퓨터의 저장 장치는 계층적으로 구성된다. 위로 갈수록 빠르고 작고 비싸며, 아래로 갈수록 느리고 크고 저렴하다.</p>
+<h2 id="_1">환경<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
-<th>계층</th>
-<th>속도</th>
-<th>용량</th>
+<th>항목</th>
+<th>내용</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>레지스터</td>
-<td>~1ns</td>
-<td>수 KB</td>
+<td>서버</td>
+<td>Pop!_OS 24.04 LTS</td>
 </tr>
 <tr>
-<td>L1 캐시</td>
-<td>1~4 cycle</td>
-<td>32~64KB</td>
+<td>Node.js</td>
+<td>v22.22.0</td>
 </tr>
 <tr>
-<td>L2 캐시</td>
-<td>3~10ns</td>
-<td>256KB~1MB</td>
+<td>OpenClaw</td>
+<td>2026.2.26</td>
 </tr>
 <tr>
-<td>L3 캐시</td>
-<td>10~30ns</td>
-<td>4~64MB</td>
+<td>AI 모델</td>
+<td>Anthropic Claude Opus 4.6</td>
 </tr>
 <tr>
-<td>메인 메모리</td>
-<td>50~100ns</td>
-<td>8~64GB</td>
-</tr>
-<tr>
-<td>SSD</td>
-<td>~100μs</td>
-<td>256GB~4TB</td>
-</tr>
-<tr>
-<td>HDD</td>
-<td>~10ms</td>
-<td>1~20TB</td>
+<td>메신저</td>
+<td>텔레그램</td>
 </tr>
 </tbody>
 </table>
-<p>이것은 물리적 한계 때문이다. 빠른 메모리는 물리적으로 CPU에 가까이 있어야 하고, 가까이 있으려면 크기가 작아야 한다. SRAM(캐시에 사용)은 DRAM(메인 메모리)보다 훨씬 빠르지만, 같은 용량을 만드는 데 수십 배의 비용과 면적이 필요하다.</p>
-<h3 id="_2">수치로 체감하기<a class="headerlink" href="#_2" title="Permanent link">#</a></h3>
-<p>L1 캐시 접근(~1ns)과 HDD 접근(~10ms)의 속도 차이를 <strong>인간 시간 척도</strong>로 변환하면:</p>
-<table>
-<thead>
-<tr>
-<th>저장소</th>
-<th>접근 시간</th>
-<th>인간 척도 비유</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>L1 캐시</td>
-<td>~1ns</td>
-<td>1초</td>
-</tr>
-<tr>
-<td>L2 캐시</td>
-<td>~5ns</td>
-<td>5초</td>
-</tr>
-<tr>
-<td>L3 캐시</td>
-<td>~20ns</td>
-<td>20초</td>
-</tr>
-<tr>
-<td>메인 메모리</td>
-<td>~100ns</td>
-<td>1분 40초</td>
-</tr>
-<tr>
-<td>SSD</td>
-<td>~100μs</td>
-<td>약 1일</td>
-</tr>
-<tr>
-<td>HDD</td>
-<td>~10ms</td>
-<td>약 4개월</td>
-</tr>
-</tbody>
-</table>
-<p>L1 캐시에서 데이터를 가져오는 게 1초라면, HDD에서 가져오는 건 <strong>4개월</strong>이다. 이 속도 차이가 캐시의 존재 이유다.</p>
-<h3 id="3-2-principle-of-locality">3-2. 지역성 원리 (Principle of Locality)<a class="headerlink" href="#3-2-principle-of-locality" title="Permanent link">#</a></h3>
-<p>캐시가 효과적인 이유는 프로그램이 데이터에 접근하는 패턴에 <strong>규칙성</strong>이 있기 때문이다. 이것을 <strong>지역성 원리</strong>라고 한다.</p>
-<h4 id="temporal-locality">시간적 지역성 (Temporal Locality)<a class="headerlink" href="#temporal-locality" title="Permanent link">#</a></h4>
-<blockquote>
-<p>최근에 접근한 데이터는 <strong>가까운 미래에 다시 접근할 가능성이 높다.</strong></p>
-</blockquote>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 예: 반복문의 변수</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">total</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># &#39;total&#39; 변수에 1000번 반복 접근</span>
-</span></code></pre></div>
-<p><code>total</code> 변수는 루프가 돌 때마다 접근된다. 한 번 캐시에 올려두면 999번은 캐시에서 빠르게 읽을 수 있다.</p>
-<h4 id="spatial-locality">공간적 지역성 (Spatial Locality)<a class="headerlink" href="#spatial-locality" title="Permanent link">#</a></h4>
-<blockquote>
-<p>최근에 접근한 데이터 <strong>근처의 데이터</strong>도 곧 접근할 가능성이 높다.</p>
-</blockquote>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 예: 배열 순차 접근</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># data[0], data[1], data[2]... 순서대로 접근</span>
-</span></code></pre></div>
-<p><code>data[0]</code>을 읽을 때 캐시는 <code>data[0]</code>만 가져오는 게 아니라, 인접한 <code>data[1]</code>, <code>data[2]</code>... 등도 함께 가져온다(캐시 라인 단위). 그래서 <code>data[1]</code>에 접근할 때는 이미 캐시에 있어 빠르게 읽을 수 있다.</p>
 <hr />
-<h2 id="4">4. 캐시의 기본 동작<a class="headerlink" href="#4" title="Permanent link">#</a></h2>
-<h3 id="4-1-cache-hit-cache-miss">4-1. Cache Hit와 Cache Miss<a class="headerlink" href="#4-1-cache-hit-cache-miss" title="Permanent link">#</a></h3>
-<p>캐시의 동작은 단 두 가지 경우로 나뉜다:</p>
-<p><strong>Cache Hit</strong>(캐시 적중): 요청한 데이터가 캐시에 있음 → 빠르게 반환</p>
-<p><strong>Cache Miss</strong>(캐시 미스): 요청한 데이터가 캐시에 없음 → 느린 저장소에서 가져옴</p>
-<p>캐시 미스는 다시 세 가지로 분류된다:</p>
-<table>
-<thead>
-<tr>
-<th>종류</th>
-<th>원인</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Cold Miss</strong> (Compulsory)</td>
-<td>처음 접근</td>
-<td>한 번도 캐시에 올라온 적 없는 데이터</td>
-</tr>
-<tr>
-<td><strong>Capacity Miss</strong></td>
-<td>용량 부족</td>
-<td>캐시가 꽉 차서 오래된 데이터가 밀려남</td>
-</tr>
-<tr>
-<td><strong>Conflict Miss</strong></td>
-<td>매핑 충돌</td>
-<td>다른 데이터가 같은 캐시 위치를 사용</td>
-</tr>
-</tbody>
-</table>
-<h3 id="4-2-amat">4-2. 히트율과 성능 — AMAT<a class="headerlink" href="#4-2-amat" title="Permanent link">#</a></h3>
-<p>캐시 성능을 측정하는 가장 중요한 지표는 <strong>히트율</strong>(Hit Rate)이다.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>히트율 = 캐시 히트 수 / 전체 접근 수
+<h2 id="_2">설치<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
+<h3 id="1-nodejs-22">1. Node.js 22 설치<a class="headerlink" href="#1-nodejs-22" title="Permanent link">#</a></h3>
+<p>OpenClaw은 Node.js 22 이상이 필요하다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://deb.nodesource.com/setup_22.x<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>-E<span class="w"> </span>bash<span class="w"> </span>-
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nodejs
 </span></code></pre></div>
-<p>캐시의 성능 효과를 정량화하는 공식:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>AMAT = Hit Time + (Miss Rate × Miss Penalty)
+<h3 id="2-openclaw">2. OpenClaw 설치<a class="headerlink" href="#2-openclaw" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://openclaw.ai/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </span></code></pre></div>
-<p>Hit Time = 1ns, Miss Penalty = 100ns라고 가정하면:</p>
-<table>
-<thead>
-<tr>
-<th>히트율</th>
-<th>Miss Rate</th>
-<th>AMAT</th>
-<th>체감 속도</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>90%</td>
-<td>10%</td>
-<td>11ns</td>
-<td>기본</td>
-</tr>
-<tr>
-<td>95%</td>
-<td>5%</td>
-<td>6ns</td>
-<td><strong>1.8배</strong> 빠름</td>
-</tr>
-<tr>
-<td>99%</td>
-<td>1%</td>
-<td>2ns</td>
-<td><strong>5.5배</strong> 빠름</td>
-</tr>
-</tbody>
-</table>
-<p>히트율이 90%에서 99%로, 겨우 <strong>9% 올랐을 뿐인데</strong> 성능은 <strong>5배 이상</strong> 차이가 난다.</p>
-<h3 id="memory-wall">Memory Wall 문제<a class="headerlink" href="#memory-wall" title="Permanent link">#</a></h3>
-<p>CPU의 연산 속도는 매년 빠르게 발전해왔지만, 메모리(DRAM)의 접근 속도는 상대적으로 느리게 발전해왔다. 이 격차를 <strong>Memory Wall</strong>(메모리 벽)이라 부른다.</p>
-<p>CPU가 아무리 빨라도, 데이터를 기다리느라 놀고 있다면 의미가 없다. 캐시는 이 격차를 메우는 핵심 기술이다.</p>
-<hr />
-<h2 id="_3">정리<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<p>설치 스크립트가 npm 글로벌 설치와 초기 설정 마법사를 자동으로 실행한다.</p>
+<h3 id="3">3. 초기 설정<a class="headerlink" href="#3" title="Permanent link">#</a></h3>
+<p>마법사가 묻는 것들:</p>
 <ol>
-<li><strong>캐시란</strong> 자주 쓰는 데이터의 사본을 빠른 저장소에 보관하는 것</li>
-<li><strong>메모리 계층 구조</strong>에서 속도와 용량은 트레이드오프 관계</li>
-<li><strong>지역성 원리</strong> 덕분에 작은 캐시로도 높은 히트율 달성 가능</li>
-<li><strong>히트율 몇 %의 차이</strong>가 성능에 극적인 영향을 미침</li>
+<li><strong>AI 프로바이더</strong> — Anthropic, OpenAI 등 선택</li>
+<li><strong>API 키</strong> — 선택한 프로바이더의 API 키 입력</li>
+<li><strong>모델</strong> — 사용할 모델 선택 (예: claude-opus-4-6)</li>
+<li><strong>메신저 채널</strong> — 텔레그램, WhatsApp 등 선택</li>
 </ol>
 <hr />
-<h2 id="_4">다음 편 예고<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
-<p><strong>2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳</strong>에서는 CPU L1/L2/L3 캐시의 구조와 매핑 방식, 디스크 캐시, 웹 브라우저 캐시, CDN, Redis/Memcached 등 각 계층별 캐시를 다룬다.</p>
-<hr />
-<h2 id="_5">참고문헌<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
+<h2 id="_3">텔레그램 연동<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<h3 id="_4">봇 생성<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
 <ol>
-<li>Hennessy, J. L. &amp; Patterson, D. A. (2017). <em>Computer Architecture: A Quantitative Approach</em>, 6th Edition. Morgan Kaufmann.</li>
-<li>Bryant, R. E. &amp; O'Hallaron, D. R. (2015). <em>Computer Systems: A Programmer's Perspective</em>, 3rd Edition. Pearson.</li>
-<li>Wilkes, M. V. (1965). "Slave Memories and Dynamic Storage Allocation." <em>IEEE Transactions on Electronic Computers</em>, EC-14(2).</li>
-<li>Denning, P. J. (2005). "The Locality Principle." <em>Communications of the ACM</em>, 48(7).</li>
-<li>Wulf, W. A. &amp; McKee, S. A. (1995). "Hitting the Memory Wall." <em>ACM SIGARCH Computer Architecture News</em>, 23(1).</li>
+<li>텔레그램에서 <a href="https://t.me/BotFather">@BotFather</a>에게 <code>/newbot</code> 명령</li>
+<li>봇 이름과 username 설정</li>
+<li>발급된 <strong>Bot Token</strong> 복사</li>
 </ol>
+<h3 id="openclaw_1">OpenClaw 설정<a class="headerlink" href="#openclaw_1" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>openclaw<span class="w"> </span>config
+</span></code></pre></div>
+<p>텔레그램 채널 설정에서 Bot Token을 입력하고, <code>allowFrom</code>에 자신의 텔레그램 ID를 등록한다. 이렇게 해야 본인만 봇과 대화할 수 있다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 텔레그램 ID 확인: @userinfobot에게 메시지를 보내면 알려준다</span>
+</span></code></pre></div>
+<h3 id="_5">게이트웨이 시작<a class="headerlink" href="#_5" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>openclaw<span class="w"> </span>gateway<span class="w"> </span>start
+</span></code></pre></div>
+<p>이제 텔레그램에서 봇에게 메시지를 보내면 Claude가 응답한다.</p>
+<hr />
+<h2 id="_6">실제 사용 예<a class="headerlink" href="#_6" title="Permanent link">#</a></h2>
+<h3 id="_7">파일 작업<a class="headerlink" href="#_7" title="Permanent link">#</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>나: 워크스페이스에 있는 파일 목록 보여줘
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>봇: (ls 실행 후 결과 전달)
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>나: MEMORY.md 내용 보여줘
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>봇: (파일 읽어서 내용 전달)
+</span></code></pre></div>
+<h3 id="_8">이미지 생성<a class="headerlink" href="#_8" title="Permanent link">#</a></h3>
+<p>로컬에 Stable Diffusion이 설치되어 있으면 API로 호출해서 이미지를 생성하고 텔레그램으로 바로 보내준다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>나: 판타지 풍경 이미지 생성해줘
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>봇: (Forge/ComfyUI API 호출 → 이미지 생성 → 텔레그램 전송)
+</span></code></pre></div>
+<h3 id="_9">웹 검색<a class="headerlink" href="#_9" title="Permanent link">#</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>나: RTX 5060 Ti 벤치마크 검색해줘
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>봇: (Brave Search API 호출 → 결과 요약)
+</span></code></pre></div>
+<h3 id="_10">크론 작업<a class="headerlink" href="#_10" title="Permanent link">#</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>나: 매일 아침 9시에 날씨 알려줘
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>봇: (크론 작업 등록 → 매일 9시에 텔레그램으로 날씨 전송)
+</span></code></pre></div>
+<hr />
+<h2 id="_11">주요 설정<a class="headerlink" href="#_11" title="Permanent link">#</a></h2>
+<h3 id="_12">모델 설정<a class="headerlink" href="#_12" title="Permanent link">#</a></h3>
+<p><code>openclaw.json</code>에서 기본 모델과 폴백을 설정할 수 있다. API 과부하 시 자동으로 하위 모델로 전환하는 것도 가능하다.</p>
+<h3 id="_13">하트비트<a class="headerlink" href="#_13" title="Permanent link">#</a></h3>
+<p>에이전트가 주기적으로 깨어나서 할 일을 체크하는 기능이다. 이메일 확인, 캘린더 알림, 날씨 체크 등을 자동으로 수행할 수 있다.</p>
+<h3 id="_14">워크스페이스<a class="headerlink" href="#_14" title="Permanent link">#</a></h3>
+<p><code>~/.openclaw/workspace/</code>가 에이전트의 작업 디렉토리다. 에이전트의 성격(SOUL.md), 사용자 정보(USER.md), 기억(MEMORY.md) 등을 파일로 관리한다.</p>
+<table>
+<thead>
+<tr>
+<th>파일</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOUL.md</td>
+<td>에이전트의 성격, 말투</td>
+</tr>
+<tr>
+<td>USER.md</td>
+<td>사용자 정보, 선호도</td>
+</tr>
+<tr>
+<td>MEMORY.md</td>
+<td>장기 기억</td>
+</tr>
+<tr>
+<td>RULES.md</td>
+<td>운영 규칙</td>
+</tr>
+<tr>
+<td>memory/YYYY-MM-DD.md</td>
+<td>일별 기록</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_15">보안 주의사항<a class="headerlink" href="#_15" title="Permanent link">#</a></h2>
+<p>OpenClaw은 서버에서 셸 명령어를 실행할 수 있는 강력한 도구다. 반드시 지켜야 할 것:</p>
+<ul>
+<li><strong>allowFrom 설정</strong> — 본인의 메신저 ID만 허용. 설정하지 않으면 누구나 서버에 명령을 내릴 수 있다</li>
+<li><strong>전용 계정 사용</strong> — root가 아닌 일반 사용자 계정으로 실행</li>
+<li><strong>API 키 관리</strong> — 설정 파일 권한 확인 (chmod 600)</li>
+</ul>
+<hr />
+<h2 id="_16">정리<a class="headerlink" href="#_16" title="Permanent link">#</a></h2>
+<p>OpenClaw은 설치 자체는 간단하지만, 진짜 가치는 설정 이후에 나온다. 텔레그램 하나로 서버 관리, 이미지 생성, 웹 검색, 파일 작업을 할 수 있는 개인 비서가 만들어진다.</p>
+<p>로컬 LLM(Ollama)이나 Stable Diffusion과 결합하면 클라우드 의존도를 더 줄일 수도 있다.</p>
+<hr />
+<h2 id="_17">참고<a class="headerlink" href="#_17" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://docs.openclaw.ai">OpenClaw 공식 문서</a></li>
+<li><a href="https://github.com/openclaw/openclaw">OpenClaw GitHub</a></li>
+<li><a href="https://discord.com/invite/clawd">OpenClaw 커뮤니티 (Discord)</a></li>
+</ul>
 
 
 
@@ -1254,7 +1258,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-2%ED%8E%B8-cpu%EB%B6%80%ED%84%B0-cdn%EA%B9%8C%EC%A7%80--%EC%BA%90%EC%8B%9C%EA%B0%80-%EC%93%B0%EC%9D%B4%EB%8A%94-%EB%AA%A8%EB%93%A0-%EA%B3%B3/" class="md-footer__link md-footer__link--prev" aria-label="이전: 캐시의 모든 것 2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳">
+          <a href="../openclaw-tips/" class="md-footer__link md-footer__link--prev" aria-label="이전: OpenClaw 한 달 사용기 — 삽질하면서 배운 것들">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1264,20 +1268,20 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                캐시의 모든 것 2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳
+                OpenClaw 한 달 사용기 — 삽질하면서 배운 것들
               </div>
             </div>
           </a>
         
         
           
-          <a href="../rtx-5060-ti-16gb%EC%97%90-stable-diffusion-forge-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/" class="md-footer__link md-footer__link--next" aria-label="다음: RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기">
+          <a href="../local-llm-rtx5060ti/" class="md-footer__link md-footer__link--next" aria-label="다음: RTX 5060 Ti 16GB로 로컬 LLM 돌리기 — Ollama + Qwen">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기
+                RTX 5060 Ti 16GB로 로컬 LLM 돌리기 — Ollama + Qwen
               </div>
             </div>
             <div class="md-footer__button md-icon">

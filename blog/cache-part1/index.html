@@ -12,13 +12,13 @@
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.github.io/blog/blog/rtx-5060-ti-16gb%EC%97%90-stable-diffusion-forge-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">
+        <link rel="canonical" href="https://home301.github.io/blog/blog/cache-part1/">
       
       
-        <link rel="prev" href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-1%ED%8E%B8-%EC%BA%90%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%99%9C-%EC%93%B0%EB%8A%94%EA%B0%80/">
+        <link rel="prev" href="../cache-part2/">
       
       
-        <link rel="next" href="../openclaw-%ED%95%9C-%EB%8B%AC-%EC%82%AC%EC%9A%A9%EA%B8%B0--%EC%82%BD%EC%A7%88%ED%95%98%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B4-%EA%B2%83%EB%93%A4/">
+        <link rel="next" href="../sd-forge-rtx5060ti-install/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기 - Mingi's Dev Blog</title>
+        <title>캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가 - Mingi's Dev Blog</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rtx-5060-ti-16gb-stable-diffusion-forge" class="md-skip">
+        <a href="#1" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기
+              캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가
             
           </span>
         </div>
@@ -672,7 +672,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        환경
+        들어가며
       
     </span>
   </a>
@@ -680,10 +680,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sm_120" class="md-nav__link">
+  <a href="#1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 문제: sm_120
+        1. 캐시의 정의
       
     </span>
   </a>
@@ -691,22 +691,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        설치 과정
+        2. 간략한 역사
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="설치 과정">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 왜 캐시가 필요한가
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 왜 캐시가 필요한가">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-forge" class="md-nav__link">
+  <a href="#3-1-memory-hierarchy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Forge 클론
+        3-1. 메모리 계층 구조 (Memory Hierarchy)
       
     </span>
   </a>
@@ -714,10 +725,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-python-310" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Python 3.10 가상환경
+        수치로 체감하기
       
     </span>
   </a>
@@ -725,10 +736,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-pytorch-nightly-cu128" class="md-nav__link">
+  <a href="#3-2-principle-of-locality" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. PyTorch nightly cu128 설치
+        3-2. 지역성 원리 (Principle of Locality)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-2. 지역성 원리 (Principle of Locality)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#temporal-locality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시간적 지역성 (Temporal Locality)
       
     </span>
   </a>
@@ -736,10 +759,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-forge" class="md-nav__link">
+  <a href="#spatial-locality" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Forge 의존성 설치
+        공간적 지역성 (Spatial Locality)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 캐시의 기본 동작
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 캐시의 기본 동작">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-1-cache-hit-cache-miss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-1. Cache Hit와 Cache Miss
       
     </span>
   </a>
@@ -747,10 +803,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-webui" class="md-nav__link">
+  <a href="#4-2-amat" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. WebUI 모드는 안 된다
+        4-2. 히트율과 성능 — AMAT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-wall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memory Wall 문제
       
     </span>
   </a>
@@ -766,18 +833,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        성능
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API로 이미지 생성하기
+        정리
       
     </span>
   </a>
@@ -788,7 +844,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        정리
+        다음 편 예고
       
     </span>
   </a>
@@ -799,7 +855,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        참고
+        참고문헌
       
     </span>
   </a>
@@ -843,7 +899,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-03-07 00:00:00+00:00" class="md-ellipsis">2026년 3월 7일</time>
+                        <time datetime="2026-03-05 00:00:00+00:00" class="md-ellipsis">2026년 3월 5일</time>
                       </div>
                     </li>
                     
@@ -865,7 +921,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 2분
+                              읽는시간 4분
                             
                           </span>
                         </div>
@@ -893,221 +949,269 @@
       
       
       
-        <span class="md-tag">ai-image</span>
+        <span class="md-tag">backend</span>
       
     
       
       
       
       
-        <span class="md-tag">pytorch</span>
+        <span class="md-tag">cache</span>
       
     
       
       
       
       
-        <span class="md-tag">rtx5060ti</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">stable-diffusion</span>
+        <span class="md-tag">series</span>
       
     
   </nav>
 
 
 
-<h1 id="rtx-5060-ti-16gb-stable-diffusion-forge">RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기<a class="headerlink" href="#rtx-5060-ti-16gb-stable-diffusion-forge" title="Permanent link">#</a></h1>
+<h1 id="1">캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가<a class="headerlink" href="#1" title="Permanent link">#</a></h1>
 <blockquote>
-<p>RTX 50 시리즈 초기 사용자가 겪는 PyTorch 호환 삽질의 기록.</p>
+<p>캐시의 기본 개념부터 동작 원리까지 정리한다.</p>
 </blockquote>
 <!-- more -->
 
 <hr />
-<h2 id="_1">환경<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>스펙</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GPU</td>
-<td>NVIDIA GeForce RTX 5060 Ti 16GB</td>
-</tr>
-<tr>
-<td>OS</td>
-<td>Pop!_OS 24.04 LTS (커널 6.18.7)</td>
-</tr>
-<tr>
-<td>NVIDIA 드라이버</td>
-<td>580.126.18</td>
-</tr>
-<tr>
-<td>CUDA</td>
-<td>12.8</td>
-</tr>
-<tr>
-<td>Python</td>
-<td>3.10.20</td>
-</tr>
-<tr>
-<td>저장공간</td>
-<td>238GB SSD + 2.7TB HDD</td>
-</tr>
-</tbody>
-</table>
+<h2 id="_1">들어가며<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
+<p>논문을 쓰는데 자료가 필요할 때마다 도서관에 간다고 생각해보자. 비효율적이다. 그래서 자주 보는 책은 책상 위에 둔다. 여기서 <strong>책상이 캐시</strong>고, <strong>도서관이 메인 메모리</strong>(혹은 디스크)다.</p>
+<p>원리는 어디에나 적용된다:
+- <strong>냉장고</strong> = 캐시, <strong>마트</strong> = 원본 저장소. 자주 먹는 식재료는 냉장고에 넣어둔다.
+- <strong>스마트폰의 최근 앱 목록</strong> = 캐시. 완전히 종료하지 않은 앱은 빠르게 다시 열린다.
+- <strong>웹 브라우저의 페이지 캐시</strong> = 캐시. 이전에 방문한 사이트는 더 빠르게 로드된다.</p>
+<p>핵심은 간단하다: <strong>자주 쓰는 데이터를 가까이 두면 빠르다.</strong></p>
 <hr />
-<h2 id="sm_120">핵심 문제: sm_120<a class="headerlink" href="#sm_120" title="Permanent link">#</a></h2>
-<p>RTX 5060 Ti는 Blackwell 아키텍처로, CUDA compute capability가 <strong>sm_120</strong>이다. 2026년 3월 기준으로 이 아키텍처를 지원하는 PyTorch는 <strong>nightly cu128 빌드뿐</strong>이다.</p>
-<p>안정 릴리스(cu121, cu126)로 설치하면 이런 에러가 나온다:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>CUDA error: no kernel image is available for execution on the device
-</span></code></pre></div>
-<p>또는 아예 GPU를 인식하지 못한다.</p>
-<hr />
-<h2 id="_2">설치 과정<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
-<h3 id="1-forge">1. Forge 클론<a class="headerlink" href="#1-forge" title="Permanent link">#</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>~
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lllyasviel/stable-diffusion-webui-forge.git
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">cd</span><span class="w"> </span>stable-diffusion-webui-forge
-</span></code></pre></div>
-<h3 id="2-python-310">2. Python 3.10 가상환경<a class="headerlink" href="#2-python-310" title="Permanent link">#</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3.10<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
-</span></code></pre></div>
-<h3 id="3-pytorch-nightly-cu128">3. PyTorch nightly cu128 설치<a class="headerlink" href="#3-pytorch-nightly-cu128" title="Permanent link">#</a></h3>
-<p>여기가 핵심이다. Forge의 기본 설치 스크립트를 쓰면 안정 버전 PyTorch가 설치되는데, sm_120에서는 동작하지 않는다. <strong>수동으로 nightly를 먼저 설치</strong>해야 한다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span>torch<span class="w"> </span>torchvision<span class="w"> </span>torchaudio<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/nightly/cu128
-</span></code></pre></div>
-<p>설치되는 버전: <code>torch 2.12.0.dev20260304+cu128</code></p>
-<p>설치 후 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import torch; print(torch.__version__); print(torch.cuda.is_available())&quot;</span>
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>2.12.0.dev20260304+cu128
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>True
-</span></code></pre></div>
-<h3 id="4-forge">4. Forge 의존성 설치<a class="headerlink" href="#4-forge" title="Permanent link">#</a></h3>
-<p>PyTorch가 이미 설치된 상태에서 Forge를 실행하면 나머지 의존성만 추가로 설치된다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>bash<span class="w"> </span>webui.sh<span class="w"> </span>--xformers<span class="w"> </span>--skip-torch-cuda-test<span class="w"> </span>--skip-python-version-check
-</span></code></pre></div>
+<h2 id="1_1">1. 캐시의 정의<a class="headerlink" href="#1_1" title="Permanent link">#</a></h2>
 <blockquote>
-<p><code>--skip-torch-cuda-test</code>를 빼면 nightly 버전에서 검증 에러가 날 수 있다.</p>
+<p>캐시(Cache)란, 향후 요청을 더 빠르게 처리하기 위해 데이터의 사본을 <strong>더 빠른 저장소</strong>에 보관하는 하드웨어 또는 소프트웨어 구성 요소다.</p>
 </blockquote>
-<h3 id="5-webui">5. WebUI 모드는 안 된다<a class="headerlink" href="#5-webui" title="Permanent link">#</a></h3>
-<p>여기서 한 가지 함정이 있다. 설치 완료 후 WebUI가 정상적으로 뜨는 것처럼 보이지만, 실제로는 <strong>"Using online LoRAs in FP16: False"</strong> 메시지 이후 조용히 멈춘다. 에러 메시지도 없다.</p>
-<p>원인은 PyTorch nightly 환경에서 모델 로드 시점의 의존성 프리징(특히 xformers나 어텐션 연산 관련 최적화) 문제로 추정된다. 해결책은 <strong>API 모드로 실행</strong>하는 것이다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python<span class="w"> </span>launch.py<span class="w"> </span>--nowebui<span class="w"> </span>--api<span class="w"> </span>--listen<span class="w"> </span>--port<span class="w"> </span><span class="m">7861</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--skip-torch-cuda-test<span class="w"> </span>--xformers
-</span></code></pre></div>
-<p>이 모드에서는 <code>http://localhost:7861/sdapi/v1/txt2img</code> 엔드포인트로 이미지를 생성할 수 있다.</p>
+<p>핵심 키워드는 <strong>사본</strong>(copy)과 <strong>더 빠른 저장소</strong>다.</p>
+<p>캐시에 저장된 데이터는 원본이 아니라 복사본이다. 원본은 여전히 느린 저장소에 있고, 캐시는 그 사본을 빠른 곳에 두어 접근 속도를 높인다.</p>
+<p>참고로 "캐시(cache)"라는 단어는 프랑스어 <em>cacher</em>에서 왔는데, <strong>숨기다</strong>라는 뜻이다. 실제로 캐시는 사용자에게 <strong>투명하게</strong>(transparently) 동작한다. 웹 브라우저가 이미지를 캐시에서 불러올 때, 사용자는 그 사실을 의식하지 못한다. 그냥 "빠르다"고 느낄 뿐이다.</p>
 <hr />
-<h2 id="_3">성능<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
-<p>DreamShaper v8 모델 기준:</p>
+<h2 id="2">2. 간략한 역사<a class="headerlink" href="#2" title="Permanent link">#</a></h2>
+<p>캐시의 역사는 1960년대로 거슬러 올라간다.</p>
+<p><strong>1963년</strong> — 캠브리지 대학의 <strong>Atlas 2</strong>(Titan) 컴퓨터에서 초기 캐시 개념이 적용되었다.</p>
+<p><strong>1965년</strong> — Maurice Wilkes가 <strong>slave memory</strong>라는 이름으로 캐시 개념을 제안한 논문을 발표한다. 지금 우리가 아는 캐시의 학술적 시작점이다.</p>
+<p><strong>1968년</strong> — <strong>IBM System/360 Model 85</strong>에서 상용 컴퓨터 최초로 캐시 메모리를 탑재한다. "cache"라는 용어가 널리 퍼진 계기가 되었다.</p>
+<p><strong>1976년</strong> — IBM 801 CPU에서 최초로 <strong>명령어 캐시</strong>(I-cache)와 <strong>데이터 캐시</strong>(D-cache)를 분리한다. 현대 CPU에서도 사용되는 Split L1 캐시의 시작이다.</p>
+<p><strong>현재</strong> — L1/L2/L3 다단계 캐시 구조는 표준이 되었고, 1달러 미만의 마이크로컨트롤러에도 캐시가 탑재된다.</p>
+<hr />
+<h2 id="3">3. 왜 캐시가 필요한가<a class="headerlink" href="#3" title="Permanent link">#</a></h2>
+<p>캐시가 존재하는 이유를 이해하려면 두 가지 핵심 개념을 알아야 한다: <strong>메모리 계층 구조</strong>와 <strong>지역성 원리</strong>.</p>
+<h3 id="3-1-memory-hierarchy">3-1. 메모리 계층 구조 (Memory Hierarchy)<a class="headerlink" href="#3-1-memory-hierarchy" title="Permanent link">#</a></h3>
+<p>컴퓨터의 저장 장치는 계층적으로 구성된다. 위로 갈수록 빠르고 작고 비싸며, 아래로 갈수록 느리고 크고 저렴하다.</p>
 <table>
 <thead>
 <tr>
-<th>해상도</th>
-<th>스텝</th>
-<th>소요 시간</th>
+<th>계층</th>
 <th>속도</th>
+<th>용량</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>512x512</td>
-<td>10</td>
-<td>1.4초</td>
-<td>7.02 it/s</td>
+<td>레지스터</td>
+<td>~1ns</td>
+<td>수 KB</td>
 </tr>
 <tr>
-<td>512x512</td>
-<td>20</td>
-<td>2.8초</td>
-<td>7.02 it/s</td>
+<td>L1 캐시</td>
+<td>1~4 cycle</td>
+<td>32~64KB</td>
 </tr>
 <tr>
-<td>1024x1024</td>
-<td>20</td>
-<td>~11초</td>
-<td>—</td>
+<td>L2 캐시</td>
+<td>3~10ns</td>
+<td>256KB~1MB</td>
+</tr>
+<tr>
+<td>L3 캐시</td>
+<td>10~30ns</td>
+<td>4~64MB</td>
+</tr>
+<tr>
+<td>메인 메모리</td>
+<td>50~100ns</td>
+<td>8~64GB</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>~100μs</td>
+<td>256GB~4TB</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>~10ms</td>
+<td>1~20TB</td>
 </tr>
 </tbody>
 </table>
-<p>RTX 3050 6GB 대비 약 5배 빠르다. VRAM 16GB 덕분에 1024x1024도 무리 없이 생성된다.</p>
+<p>이것은 물리적 한계 때문이다. 빠른 메모리는 물리적으로 CPU에 가까이 있어야 하고, 가까이 있으려면 크기가 작아야 한다. SRAM(캐시에 사용)은 DRAM(메인 메모리)보다 훨씬 빠르지만, 같은 용량을 만드는 데 수십 배의 비용과 면적이 필요하다.</p>
+<h3 id="_2">수치로 체감하기<a class="headerlink" href="#_2" title="Permanent link">#</a></h3>
+<p>L1 캐시 접근(~1ns)과 HDD 접근(~10ms)의 속도 차이를 <strong>인간 시간 척도</strong>로 변환하면:</p>
 <table>
 <thead>
 <tr>
-<th>모델</th>
-<th>해상도</th>
-<th>가능 여부</th>
+<th>저장소</th>
+<th>접근 시간</th>
+<th>인간 척도 비유</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>SD 1.5</td>
-<td>512~1024</td>
-<td>O</td>
+<td>L1 캐시</td>
+<td>~1ns</td>
+<td>1초</td>
 </tr>
 <tr>
-<td>SDXL</td>
-<td>1024x1024</td>
-<td>O</td>
+<td>L2 캐시</td>
+<td>~5ns</td>
+<td>5초</td>
 </tr>
 <tr>
-<td>SD 3</td>
-<td>1024x1024</td>
-<td>O (VRAM 여유)</td>
+<td>L3 캐시</td>
+<td>~20ns</td>
+<td>20초</td>
 </tr>
 <tr>
-<td>Flux</td>
-<td>—</td>
-<td>△ (모델에 따라)</td>
+<td>메인 메모리</td>
+<td>~100ns</td>
+<td>1분 40초</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>~100μs</td>
+<td>약 1일</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>~10ms</td>
+<td>약 4개월</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="api">API로 이미지 생성하기<a class="headerlink" href="#api" title="Permanent link">#</a></h2>
-<p>WebUI가 없으니 API로 직접 호출한다.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span><span class="o">,</span><span class="w"> </span><span class="nn">base64</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:7861/sdapi/v1/txt2img&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;a fantasy landscape, detailed, 4k&quot;</span><span class="p">,</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="s2">&quot;negative_prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;blurry, low quality&quot;</span><span class="p">,</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="s2">&quot;cfg_scale&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="s2">&quot;sampler_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Euler a&quot;</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="p">})</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="n">img_data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;images&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">img_data</span><span class="p">))</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;output.png&quot;</span><span class="p">)</span>
+<p>L1 캐시에서 데이터를 가져오는 게 1초라면, HDD에서 가져오는 건 <strong>4개월</strong>이다. 이 속도 차이가 캐시의 존재 이유다.</p>
+<h3 id="3-2-principle-of-locality">3-2. 지역성 원리 (Principle of Locality)<a class="headerlink" href="#3-2-principle-of-locality" title="Permanent link">#</a></h3>
+<p>캐시가 효과적인 이유는 프로그램이 데이터에 접근하는 패턴에 <strong>규칙성</strong>이 있기 때문이다. 이것을 <strong>지역성 원리</strong>라고 한다.</p>
+<h4 id="temporal-locality">시간적 지역성 (Temporal Locality)<a class="headerlink" href="#temporal-locality" title="Permanent link">#</a></h4>
+<blockquote>
+<p>최근에 접근한 데이터는 <strong>가까운 미래에 다시 접근할 가능성이 높다.</strong></p>
+</blockquote>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 예: 반복문의 변수</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">total</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># &#39;total&#39; 변수에 1000번 반복 접근</span>
 </span></code></pre></div>
+<p><code>total</code> 변수는 루프가 돌 때마다 접근된다. 한 번 캐시에 올려두면 999번은 캐시에서 빠르게 읽을 수 있다.</p>
+<h4 id="spatial-locality">공간적 지역성 (Spatial Locality)<a class="headerlink" href="#spatial-locality" title="Permanent link">#</a></h4>
+<blockquote>
+<p>최근에 접근한 데이터 <strong>근처의 데이터</strong>도 곧 접근할 가능성이 높다.</p>
+</blockquote>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 예: 배열 순차 접근</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># data[0], data[1], data[2]... 순서대로 접근</span>
+</span></code></pre></div>
+<p><code>data[0]</code>을 읽을 때 캐시는 <code>data[0]</code>만 가져오는 게 아니라, 인접한 <code>data[1]</code>, <code>data[2]</code>... 등도 함께 가져온다(캐시 라인 단위). 그래서 <code>data[1]</code>에 접근할 때는 이미 캐시에 있어 빠르게 읽을 수 있다.</p>
 <hr />
-<h2 id="_4">정리<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
-<p>RTX 5060 Ti에서 Forge를 돌리기 위한 핵심:</p>
+<h2 id="4">4. 캐시의 기본 동작<a class="headerlink" href="#4" title="Permanent link">#</a></h2>
+<h3 id="4-1-cache-hit-cache-miss">4-1. Cache Hit와 Cache Miss<a class="headerlink" href="#4-1-cache-hit-cache-miss" title="Permanent link">#</a></h3>
+<p>캐시의 동작은 단 두 가지 경우로 나뉜다:</p>
+<p><strong>Cache Hit</strong>(캐시 적중): 요청한 데이터가 캐시에 있음 → 빠르게 반환</p>
+<p><strong>Cache Miss</strong>(캐시 미스): 요청한 데이터가 캐시에 없음 → 느린 저장소에서 가져옴</p>
+<p>캐시 미스는 다시 세 가지로 분류된다:</p>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>원인</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cold Miss</strong> (Compulsory)</td>
+<td>처음 접근</td>
+<td>한 번도 캐시에 올라온 적 없는 데이터</td>
+</tr>
+<tr>
+<td><strong>Capacity Miss</strong></td>
+<td>용량 부족</td>
+<td>캐시가 꽉 차서 오래된 데이터가 밀려남</td>
+</tr>
+<tr>
+<td><strong>Conflict Miss</strong></td>
+<td>매핑 충돌</td>
+<td>다른 데이터가 같은 캐시 위치를 사용</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-2-amat">4-2. 히트율과 성능 — AMAT<a class="headerlink" href="#4-2-amat" title="Permanent link">#</a></h3>
+<p>캐시 성능을 측정하는 가장 중요한 지표는 <strong>히트율</strong>(Hit Rate)이다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>히트율 = 캐시 히트 수 / 전체 접근 수
+</span></code></pre></div>
+<p>캐시의 성능 효과를 정량화하는 공식:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>AMAT = Hit Time + (Miss Rate × Miss Penalty)
+</span></code></pre></div>
+<p>Hit Time = 1ns, Miss Penalty = 100ns라고 가정하면:</p>
+<table>
+<thead>
+<tr>
+<th>히트율</th>
+<th>Miss Rate</th>
+<th>AMAT</th>
+<th>체감 속도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>90%</td>
+<td>10%</td>
+<td>11ns</td>
+<td>기본</td>
+</tr>
+<tr>
+<td>95%</td>
+<td>5%</td>
+<td>6ns</td>
+<td><strong>1.8배</strong> 빠름</td>
+</tr>
+<tr>
+<td>99%</td>
+<td>1%</td>
+<td>2ns</td>
+<td><strong>5.5배</strong> 빠름</td>
+</tr>
+</tbody>
+</table>
+<p>히트율이 90%에서 99%로, 겨우 <strong>9% 올랐을 뿐인데</strong> 성능은 <strong>5배 이상</strong> 차이가 난다.</p>
+<h3 id="memory-wall">Memory Wall 문제<a class="headerlink" href="#memory-wall" title="Permanent link">#</a></h3>
+<p>CPU의 연산 속도는 매년 빠르게 발전해왔지만, 메모리(DRAM)의 접근 속도는 상대적으로 느리게 발전해왔다. 이 격차를 <strong>Memory Wall</strong>(메모리 벽)이라 부른다.</p>
+<p>CPU가 아무리 빨라도, 데이터를 기다리느라 놀고 있다면 의미가 없다. 캐시는 이 격차를 메우는 핵심 기술이다.</p>
+<hr />
+<h2 id="_3">정리<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
 <ol>
-<li><strong>PyTorch nightly cu128</strong> 수동 설치 (안정 버전은 sm_120 미지원)</li>
-<li><strong><code>--nowebui --api</code> 모드</strong> 사용 (WebUI는 조용히 멈춤)</li>
-<li><code>--skip-torch-cuda-test</code> 플래그 필수</li>
+<li><strong>캐시란</strong> 자주 쓰는 데이터의 사본을 빠른 저장소에 보관하는 것</li>
+<li><strong>메모리 계층 구조</strong>에서 속도와 용량은 트레이드오프 관계</li>
+<li><strong>지역성 원리</strong> 덕분에 작은 캐시로도 높은 히트율 달성 가능</li>
+<li><strong>히트율 몇 %의 차이</strong>가 성능에 극적인 영향을 미침</li>
 </ol>
-<p>RTX 50 시리즈 초기라 이런 삽질이 필요하지만, PyTorch 안정 릴리스에 sm_120 지원이 포함되면 일반적인 설치 방법으로 돌아갈 수 있다.</p>
 <hr />
-<h2 id="_5">참고<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
-<ul>
-<li><a href="https://github.com/lllyasviel/stable-diffusion-webui-forge">Stable Diffusion WebUI Forge GitHub</a></li>
-<li><a href="https://pytorch.org/get-started/locally/">PyTorch Nightly 설치</a></li>
-<li><a href="https://developer.nvidia.com/blackwell">NVIDIA Blackwell 아키텍처</a></li>
-</ul>
+<h2 id="_4">다음 편 예고<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
+<p><strong>2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳</strong>에서는 CPU L1/L2/L3 캐시의 구조와 매핑 방식, 디스크 캐시, 웹 브라우저 캐시, CDN, Redis/Memcached 등 각 계층별 캐시를 다룬다.</p>
+<hr />
+<h2 id="_5">참고문헌<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
+<ol>
+<li>Hennessy, J. L. &amp; Patterson, D. A. (2017). <em>Computer Architecture: A Quantitative Approach</em>, 6th Edition. Morgan Kaufmann.</li>
+<li>Bryant, R. E. &amp; O'Hallaron, D. R. (2015). <em>Computer Systems: A Programmer's Perspective</em>, 3rd Edition. Pearson.</li>
+<li>Wilkes, M. V. (1965). "Slave Memories and Dynamic Storage Allocation." <em>IEEE Transactions on Electronic Computers</em>, EC-14(2).</li>
+<li>Denning, P. J. (2005). "The Locality Principle." <em>Communications of the ACM</em>, 48(7).</li>
+<li>Wulf, W. A. &amp; McKee, S. A. (1995). "Hitting the Memory Wall." <em>ACM SIGARCH Computer Architecture News</em>, 23(1).</li>
+</ol>
 
 
 
@@ -1150,7 +1254,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../%EC%BA%90%EC%8B%9C%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-1%ED%8E%B8-%EC%BA%90%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%99%9C-%EC%93%B0%EB%8A%94%EA%B0%80/" class="md-footer__link md-footer__link--prev" aria-label="이전: 캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가">
+          <a href="../cache-part2/" class="md-footer__link md-footer__link--prev" aria-label="이전: 캐시의 모든 것 2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1160,20 +1264,20 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가
+                캐시의 모든 것 2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳
               </div>
             </div>
           </a>
         
         
           
-          <a href="../openclaw-%ED%95%9C-%EB%8B%AC-%EC%82%AC%EC%9A%A9%EA%B8%B0--%EC%82%BD%EC%A7%88%ED%95%98%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B4-%EA%B2%83%EB%93%A4/" class="md-footer__link md-footer__link--next" aria-label="다음: OpenClaw 한 달 사용기 — 삽질하면서 배운 것들">
+          <a href="../sd-forge-rtx5060ti-install/" class="md-footer__link md-footer__link--next" aria-label="다음: RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                OpenClaw 한 달 사용기 — 삽질하면서 배운 것들
+                RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기
               </div>
             </div>
             <div class="md-footer__button md-icon">
