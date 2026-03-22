@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="AI, 개발, 게임, 재테크 — 개발자의 기술 블로그">
+        <meta name="description" content="AI, 개발, 게임 — 개발자의 기술 블로그">
       
       
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.github.io/blog/blog/linux%EC%97%90%EC%84%9C-gpu-%ED%81%AC%EB%9E%98%EC%8B%9C-%ED%9B%84-%EC%9E%90%EB%8F%99-%EB%B3%B5%EA%B5%AC%ED%95%98%EA%B8%B0--rtcwake-%EC%BD%9C%EB%93%9C%EB%B6%80%ED%8C%85/">
+        <link rel="canonical" href="https://home301.dev/blog/openclaw-personal-assistant/">
       
       
-        <link rel="prev" href="../%ED%95%9C%EA%B5%AD-%EC%A6%9D%EA%B6%8C%EC%82%AC-open-api-%EB%B9%84%EA%B5%90-%EB%B6%84%EC%84%9D-2026/">
+        <link rel="prev" href="../openclaw-tips/">
       
+      
+        <link rel="next" href="../local-llm-rtx5060ti/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅 - Mingi's Dev Blog</title>
+        <title>OpenClaw으로 개인 AI 비서 만들기 — 텔레그램 + Claude - Mingi's Dev Blog</title>
       
     
     
@@ -56,6 +58,16 @@
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-DTNKMZSB8M"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-DTNKMZSB8M",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-DTNKMZSB8M",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
 
     
     
@@ -78,7 +90,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#linux-gpu-rtcwake" class="md-skip">
+        <a href="#openclaw-ai-claude" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅
+              OpenClaw으로 개인 AI 비서 만들기 — 텔레그램 + Claude
             
           </span>
         </div>
@@ -596,36 +608,6 @@
 
               
             
-              
-                
-  
-  
-  
-    
-  
-  
-    <li class="md-nav__item">
-      <a href="../category/%EC%9E%AC%ED%85%8C%ED%81%AC/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    재테크
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -697,10 +679,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#openclaw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenClaw이 뭔가
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        문제 상황
+        환경
       
     </span>
   </a>
@@ -708,22 +701,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rtcwake" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        rtcwake로 콜드부팅 자동화
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="rtcwake로 콜드부팅 자동화">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        스크립트로 만들기
+        설치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="설치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nodejs-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Node.js 22 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-openclaw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. OpenClaw 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 초기 설정
       
     </span>
   </a>
@@ -736,72 +751,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#msi-bios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MSI 메인보드 BIOS 설정
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="MSI 메인보드 BIOS 설정">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rtc-wake" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RTC Wake 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        온보드 그래픽 출력 문제
+        텔레그램 연동
       
     </span>
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        부팅 후 자동 복구 확인
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GPU 크래시를 재현해보려 했다
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GPU 크래시를 재현해보려 했다">
+    <nav class="md-nav" aria-label="텔레그램 연동">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-vram" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        시도 1: VRAM 가득 채우기
+        봇 생성
       
     </span>
   </a>
@@ -809,21 +774,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-ollama-comfyui" class="md-nav__link">
+  <a href="#openclaw_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        시도 2: Ollama + ComfyUI 동시 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-cuda" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        시도 3: 직접 CUDA 메모리 할당
+        OpenClaw 설정
       
     </span>
   </a>
@@ -834,7 +788,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        결론
+        게이트웨이 시작
       
     </span>
   </a>
@@ -850,7 +804,140 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
+        실제 사용 예
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="실제 사용 예">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        파일 작업
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        웹 검색
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        크론 작업
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주요 설정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주요 설정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        모델 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        하트비트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        워크스페이스
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        보안 주의사항
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         정리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고
       
     </span>
   </a>
@@ -894,7 +981,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-03-08 00:00:00+00:00" class="md-ellipsis">2026년 3월 8일</time>
+                        <time datetime="2026-03-07 00:00:00+00:00" class="md-ellipsis">2026년 3월 7일</time>
                       </div>
                     </li>
                     
@@ -916,7 +1003,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 3분
+                              읽는시간 2분
                             
                           </span>
                         </div>
@@ -944,158 +1031,55 @@
       
       
       
-        <span class="md-tag">cold-boot</span>
+        <span class="md-tag">ai-assistant</span>
       
     
       
       
       
       
-        <span class="md-tag">gpu</span>
+        <span class="md-tag">claude</span>
       
     
       
       
       
       
-        <span class="md-tag">linux</span>
+        <span class="md-tag">openclaw</span>
       
     
       
       
       
       
-        <span class="md-tag">msi-bios</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">rtcwake</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">rtx5060ti</span>
+        <span class="md-tag">telegram</span>
       
     
   </nav>
 
 
 
-<h1 id="linux-gpu-rtcwake">Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅<a class="headerlink" href="#linux-gpu-rtcwake" title="Permanent link">#</a></h1>
+<h1 id="openclaw-ai-claude">OpenClaw으로 개인 AI 비서 만들기 — 텔레그램 + Claude<a class="headerlink" href="#openclaw-ai-claude" title="Permanent link">#</a></h1>
 <blockquote>
-<p>RTX 5060 Ti로 AI 이미지를 생성하다 GPU가 먹통이 됐다. 소프트 리부트로는 안 살아나고, 전원을 완전히 끄는 콜드부팅만이 답이었다. 원격 환경에서 이걸 자동화한 기록.</p>
+<p>텔레그램으로 대화하면 Claude가 내 서버에서 파일을 읽고, 명령어를 실행하고, 이미지를 보내주는 환경을 구축한다.</p>
 </blockquote>
 <!-- more -->
 
-<h2 id="_1">문제 상황<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p>ComfyUI에서 SDXL + IP-Adapter를 돌리다 VRAM이 초과됐다. <code>nvidia-smi</code>를 찍어보면:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>NVIDIA-SMI has failed because it couldn&#39;t communicate with the NVIDIA driver.
-</span></code></pre></div>
-<p>또는:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>No devices were found
-</span></code></pre></div>
-<p>GPU가 완전히 응답을 멈춘 상태. <code>sudo reboot</code>으로 재시작해도 동일한 증상이 반복된다. 소프트 리부트으로는 GPU 하드웨어 상태가 초기화되지 않기 때문이다.</p>
-<p><strong>콜드부팅</strong>(전원을 완전히 끄고 다시 켜는 것)만이 해결책이다.</p>
 <hr />
-<h2 id="rtcwake">rtcwake로 콜드부팅 자동화<a class="headerlink" href="#rtcwake" title="Permanent link">#</a></h2>
-<p>모니터 없이 원격으로만 접속하는 서버라면, 전원을 끄면 다시 켤 수가 없다. <code>rtcwake</code>를 쓰면 "전원 끄고 N초 뒤에 자동으로 켜라"를 예약할 수 있다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>rtcwake<span class="w"> </span>-m<span class="w"> </span>off<span class="w"> </span>-s<span class="w"> </span><span class="m">60</span>
-</span></code></pre></div>
+<h2 id="openclaw">OpenClaw이 뭔가<a class="headerlink" href="#openclaw" title="Permanent link">#</a></h2>
+<p><a href="https://openclaw.ai">OpenClaw</a>은 AI 에이전트를 메신저(텔레그램, WhatsApp, Discord 등)에 연결하는 게이트웨이다. 단순한 챗봇이 아니라, 서버에서 직접 명령어를 실행하고 파일을 다루는 <strong>개인 비서</strong> 수준의 에이전트를 만들 수 있다.</p>
+<p>할 수 있는 것들:</p>
 <ul>
-<li><code>-m off</code>: 전원 완전 차단 (콜드 파워오프)</li>
-<li><code>-s 60</code>: 60초 후 자동 부팅</li>
+<li>텔레그램으로 대화하면 Claude/GPT가 응답</li>
+<li>서버의 파일 읽기/쓰기</li>
+<li>셸 명령어 실행</li>
+<li>웹 검색</li>
+<li>이미지 생성 후 메신저로 전송</li>
+<li>크론 작업 (정기적으로 알림, 모니터링 등)</li>
+<li>브라우저 자동화</li>
 </ul>
-<p>이 명령을 실행하면 시스템이 즉시 꺼지고, 메인보드의 RTC(Real Time Clock) 알람이 60초 후 시스템을 자동으로 켠다.</p>
-<h3 id="_2">스크립트로 만들기<a class="headerlink" href="#_2" title="Permanent link">#</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="ch">#!/bin/bash</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># cold-reboot.sh</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">DELAY</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">60</span><span class="si">}</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">: 콜드부팅 예약 - </span><span class="si">${</span><span class="nv">DELAY</span><span class="si">}</span><span class="s2">초 후 자동 재시작&quot;</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sudo<span class="w"> </span>rtcwake<span class="w"> </span>-m<span class="w"> </span>off<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DELAY</span><span class="s2">&quot;</span>
-</span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>cold-reboot.sh
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>./cold-reboot.sh<span class="w"> </span><span class="m">60</span><span class="w">     </span><span class="c1"># 60초 후 재시작</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>./cold-reboot.sh<span class="w"> </span><span class="m">300</span><span class="w">    </span><span class="c1"># 5분 후 재시작</span>
-</span></code></pre></div>
 <hr />
-<h2 id="msi-bios">MSI 메인보드 BIOS 설정<a class="headerlink" href="#msi-bios" title="Permanent link">#</a></h2>
-<p>rtcwake를 실행했는데 전원이 꺼지기만 하고 자동으로 안 켜진다면, <strong>BIOS 설정</strong>을 확인해야 한다.</p>
-<h3 id="rtc-wake">RTC Wake 설정<a class="headerlink" href="#rtc-wake" title="Permanent link">#</a></h3>
-<p>MSI 메인보드 기준:</p>
-<ol>
-<li>BIOS 진입 (부팅 시 DEL 키)</li>
-<li><strong>Advanced</strong> → <strong>Wake Up Event Setup</strong> → <strong>Resume By RTC Alarm</strong></li>
-<li><strong>OS 모드</strong>로 설정</li>
-</ol>
-<p>주의할 점이 있다. MSI BIOS의 RTC Wake에는 두 가지 모드가 있다.</p>
-<ul>
-<li><strong>BIOS 모드</strong>: BIOS에서 직접 시간을 지정 (예: 매일 07:00에 켜기)</li>
-<li><strong>OS 모드</strong>: OS(Linux)가 RTC 알람을 설정하도록 허용</li>
-</ul>
-<p><code>rtcwake</code>는 OS에서 RTC 알람을 설정하는 방식이므로, 반드시 <strong>OS 모드</strong>여야 한다. BIOS 모드로 두면 <code>rtcwake</code>가 설정한 알람이 무시된다.</p>
-<p>설정 후 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cat<span class="w"> </span>/proc/driver/rtc
-</span></code></pre></div>
-<p><code>alarm_IRQ: yes</code>가 보이면 정상이다. <code>alarm_IRQ: no</code>라면 BIOS 설정이 잘못된 것이다.</p>
-<h3 id="_3">온보드 그래픽 출력 문제<a class="headerlink" href="#_3" title="Permanent link">#</a></h3>
-<p>BIOS 설정을 바꾸려면 모니터를 연결해야 하는데, 여기서 또 다른 문제가 있었다.</p>
-<p>RTX 5060 Ti에는 DisplayPort와 HDMI만 있다. 기존 모니터가 DVI-D라면 직접 연결할 수 없다. 이 경우 메인보드의 <strong>온보드 그래픽</strong>(내장 GPU)으로 모니터를 연결해야 한다.</p>
-<p>MSI 메인보드에서 온보드 그래픽 출력을 활성화하려면:</p>
-<ol>
-<li>BIOS 진입</li>
-<li><strong>Advanced</strong> → <strong>Integrated Graphics Configuration</strong> (또는 <strong>IGD Multi-Monitor</strong>)</li>
-<li><strong>Initiate Graphic Adapter</strong>: <strong>IGD</strong>로 변경</li>
-</ol>
-<p>기본값은 <strong>PEG</strong>(외장 GPU 우선)로 되어 있어서, 외장 GPU에 모니터를 연결하지 않으면 화면이 안 나온다. <strong>IGD</strong>로 바꾸면 메인보드의 HDMI/VGA 포트로 화면이 출력된다.</p>
-<p>문제는 이미 BIOS에서 PEG로 설정된 상태에서 외장 GPU에 모니터를 연결할 수 없으면, BIOS 화면 자체를 볼 수 없다는 것이다. 이 경우:</p>
-<ol>
-<li><strong>CMOS 초기화</strong>: 메인보드의 CMOS 클리어 점퍼를 사용하거나 배터리를 빼서 BIOS를 초기화한다</li>
-<li>초기화 후 온보드 출력이 기본 활성화되므로, 메인보드 포트로 모니터를 연결한다</li>
-<li>BIOS에서 IGD 설정 + RTC Wake OS 모드를 함께 잡는다</li>
-</ol>
-<hr />
-<h2 id="_4">부팅 후 자동 복구 확인<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
-<p>콜드부팅 후 시스템이 켜지면, 서비스들이 제대로 올라왔는지 확인해야 한다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># GPU 정상 확인</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>nvidia-smi
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># OpenClaw (또는 다른 상주 서비스) 확인</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>status<span class="w"> </span>openclaw-gateway
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># ComfyUI 등은 수동 시작 필요</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nb">cd</span><span class="w"> </span>~/ComfyUI<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./venv/bin/python<span class="w"> </span>main.py<span class="w"> </span>--lowvram<span class="w"> </span>--listen<span class="w"> </span>--port<span class="w"> </span><span class="m">8188</span><span class="w"> </span><span class="p">&amp;</span>
-</span></code></pre></div>
-<p>원격 환경이라면 cron이나 systemd 타이머로 부팅 후 자동 알림을 설정해두면 편하다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># crontab -e</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>@reboot<span class="w"> </span>sleep<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;https://api.telegram.org/bot&lt;TOKEN&gt;/sendMessage?chat_id=&lt;ID&gt;&amp;text=서버 재부팅 완료&quot;</span>
-</span></code></pre></div>
-<hr />
-<h2 id="gpu">GPU 크래시를 재현해보려 했다<a class="headerlink" href="#gpu" title="Permanent link">#</a></h2>
-<p>콜드부팅 자동 복구 흐름을 테스트하려면 GPU 크래시를 의도적으로 만들어야 한다. 여러 방법을 시도했다.</p>
-<h3 id="1-vram">시도 1: VRAM 가득 채우기<a class="headerlink" href="#1-vram" title="Permanent link">#</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">tensors</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">tensors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">))</span>
-</span></code></pre></div>
-<p>결과: CUDA가 OOM(Out of Memory) 에러를 내고 <strong>정상 종료</strong>한다. GPU는 멀쩡하다.</p>
-<h3 id="2-ollama-comfyui">시도 2: Ollama + ComfyUI 동시 실행<a class="headerlink" href="#2-ollama-comfyui" title="Permanent link">#</a></h3>
-<p>35B 모델을 Ollama에 올린 상태에서 ComfyUI로 SDXL 이미지 생성을 시도했다.</p>
-<p>결과: VRAM이 부족하면 Ollama가 모델을 CPU로 오프로딩하거나, ComfyUI가 OOM으로 중단한다. GPU 크래시는 발생하지 않았다.</p>
-<h3 id="3-cuda">시도 3: 직접 CUDA 메모리 할당<a class="headerlink" href="#3-cuda" title="Permanent link">#</a></h3>
-<p><code>cudaMalloc</code>으로 VRAM 전체를 직접 할당하는 C 프로그램을 작성해봤다.</p>
-<p>결과: 역시 CUDA 런타임이 할당 실패를 반환할 뿐, GPU 드라이버 크래시로 이어지지 않았다.</p>
-<h3 id="_5">결론<a class="headerlink" href="#_5" title="Permanent link">#</a></h3>
-<p><strong>최신 CUDA 드라이버는 OOM을 graceful하게 처리한다.</strong> 단순히 VRAM을 초과하는 것만으로는 GPU 크래시가 나지 않는다.</p>
-<p>실제로 크래시가 발생했던 상황은 PyTorch nightly + ComfyUI에서 SDXL + IP-Adapter를 <code>--lowvram</code> 없이 돌렸을 때였다. nightly 빌드의 드라이버 레벨 버그와 여러 대형 모델의 동시 로딩이 결합되어 발생한 것으로 추정된다. 안정적인 드라이버 + 적절한 VRAM 관리(<code>--lowvram</code> 모드)를 사용하면 사실상 GPU 크래시를 걱정할 필요가 없다.</p>
-<p>그래도 만약을 위해 콜드부팅 스크립트는 만들어두는 게 좋다. 복구 수단이 있다는 것 자체가 안심이 된다.</p>
-<hr />
-<h2 id="_6">정리<a class="headerlink" href="#_6" title="Permanent link">#</a></h2>
+<h2 id="_1">환경<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -1105,28 +1089,143 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>문제</strong></td>
-<td>GPU 크래시 후 소프트 리부트으로 복구 불가</td>
+<td>서버</td>
+<td>Pop!_OS 24.04 LTS</td>
 </tr>
 <tr>
-<td><strong>해결</strong></td>
-<td><code>rtcwake -m off -s 60</code>으로 콜드부팅</td>
+<td>Node.js</td>
+<td>v22.22.0</td>
 </tr>
 <tr>
-<td><strong>BIOS 설정</strong></td>
-<td>RTC Wake → OS 모드, 그래픽 → IGD</td>
+<td>OpenClaw</td>
+<td>2026.2.26</td>
 </tr>
 <tr>
-<td><strong>크래시 재현</strong></td>
-<td>CUDA OOM은 graceful 처리되어 크래시 불가</td>
+<td>AI 모델</td>
+<td>Anthropic Claude Opus 4.6</td>
 </tr>
 <tr>
-<td><strong>교훈</strong></td>
-<td><code>--lowvram</code> 모드 사용하면 OOM 자체를 방지할 수 있다</td>
+<td>메신저</td>
+<td>텔레그램</td>
 </tr>
 </tbody>
 </table>
-<p>환경: Pop!_OS 24.04 LTS, RTX 5060 Ti 16GB, NVIDIA 드라이버 580.126.18, MSI 메인보드</p>
+<hr />
+<h2 id="_2">설치<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
+<h3 id="1-nodejs-22">1. Node.js 22 설치<a class="headerlink" href="#1-nodejs-22" title="Permanent link">#</a></h3>
+<p>OpenClaw은 Node.js 22 이상이 필요하다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://deb.nodesource.com/setup_22.x<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>-E<span class="w"> </span>bash<span class="w"> </span>-
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nodejs
+</span></code></pre></div>
+<h3 id="2-openclaw">2. OpenClaw 설치<a class="headerlink" href="#2-openclaw" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://openclaw.ai/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span></code></pre></div>
+<p>설치 스크립트가 npm 글로벌 설치와 초기 설정 마법사를 자동으로 실행한다.</p>
+<h3 id="3">3. 초기 설정<a class="headerlink" href="#3" title="Permanent link">#</a></h3>
+<p>마법사가 묻는 것들:</p>
+<ol>
+<li><strong>AI 프로바이더</strong> — Anthropic, OpenAI 등 선택</li>
+<li><strong>API 키</strong> — 선택한 프로바이더의 API 키 입력</li>
+<li><strong>모델</strong> — 사용할 모델 선택 (예: claude-opus-4-6)</li>
+<li><strong>메신저 채널</strong> — 텔레그램, WhatsApp 등 선택</li>
+</ol>
+<hr />
+<h2 id="_3">텔레그램 연동<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<h3 id="_4">봇 생성<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
+<ol>
+<li>텔레그램에서 <a href="https://t.me/BotFather">@BotFather</a>에게 <code>/newbot</code> 명령</li>
+<li>봇 이름과 username 설정</li>
+<li>발급된 <strong>Bot Token</strong> 복사</li>
+</ol>
+<h3 id="openclaw_1">OpenClaw 설정<a class="headerlink" href="#openclaw_1" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>openclaw<span class="w"> </span>config
+</span></code></pre></div>
+<p>텔레그램 채널 설정에서 Bot Token을 입력하고, <code>allowFrom</code>에 자신의 텔레그램 ID를 등록한다. 이렇게 해야 본인만 봇과 대화할 수 있다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 텔레그램 ID 확인: @userinfobot에게 메시지를 보내면 알려준다</span>
+</span></code></pre></div>
+<h3 id="_5">게이트웨이 시작<a class="headerlink" href="#_5" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>openclaw<span class="w"> </span>gateway<span class="w"> </span>start
+</span></code></pre></div>
+<p>이제 텔레그램에서 봇에게 메시지를 보내면 Claude가 응답한다.</p>
+<hr />
+<h2 id="_6">실제 사용 예<a class="headerlink" href="#_6" title="Permanent link">#</a></h2>
+<h3 id="_7">파일 작업<a class="headerlink" href="#_7" title="Permanent link">#</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>나: 워크스페이스에 있는 파일 목록 보여줘
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>봇: (ls 실행 후 결과 전달)
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>나: MEMORY.md 내용 보여줘
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>봇: (파일 읽어서 내용 전달)
+</span></code></pre></div>
+<h3 id="_8">이미지 생성<a class="headerlink" href="#_8" title="Permanent link">#</a></h3>
+<p>로컬에 Stable Diffusion이 설치되어 있으면 API로 호출해서 이미지를 생성하고 텔레그램으로 바로 보내준다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>나: 판타지 풍경 이미지 생성해줘
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>봇: (Forge/ComfyUI API 호출 → 이미지 생성 → 텔레그램 전송)
+</span></code></pre></div>
+<h3 id="_9">웹 검색<a class="headerlink" href="#_9" title="Permanent link">#</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>나: RTX 5060 Ti 벤치마크 검색해줘
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>봇: (Brave Search API 호출 → 결과 요약)
+</span></code></pre></div>
+<h3 id="_10">크론 작업<a class="headerlink" href="#_10" title="Permanent link">#</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>나: 매일 아침 9시에 날씨 알려줘
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>봇: (크론 작업 등록 → 매일 9시에 텔레그램으로 날씨 전송)
+</span></code></pre></div>
+<hr />
+<h2 id="_11">주요 설정<a class="headerlink" href="#_11" title="Permanent link">#</a></h2>
+<h3 id="_12">모델 설정<a class="headerlink" href="#_12" title="Permanent link">#</a></h3>
+<p><code>openclaw.json</code>에서 기본 모델과 폴백을 설정할 수 있다. API 과부하 시 자동으로 하위 모델로 전환하는 것도 가능하다.</p>
+<h3 id="_13">하트비트<a class="headerlink" href="#_13" title="Permanent link">#</a></h3>
+<p>에이전트가 주기적으로 깨어나서 할 일을 체크하는 기능이다. 이메일 확인, 캘린더 알림, 날씨 체크 등을 자동으로 수행할 수 있다.</p>
+<h3 id="_14">워크스페이스<a class="headerlink" href="#_14" title="Permanent link">#</a></h3>
+<p><code>~/.openclaw/workspace/</code>가 에이전트의 작업 디렉토리다. 에이전트의 성격(SOUL.md), 사용자 정보(USER.md), 기억(MEMORY.md) 등을 파일로 관리한다.</p>
+<table>
+<thead>
+<tr>
+<th>파일</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOUL.md</td>
+<td>에이전트의 성격, 말투</td>
+</tr>
+<tr>
+<td>USER.md</td>
+<td>사용자 정보, 선호도</td>
+</tr>
+<tr>
+<td>MEMORY.md</td>
+<td>장기 기억</td>
+</tr>
+<tr>
+<td>RULES.md</td>
+<td>운영 규칙</td>
+</tr>
+<tr>
+<td>memory/YYYY-MM-DD.md</td>
+<td>일별 기록</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_15">보안 주의사항<a class="headerlink" href="#_15" title="Permanent link">#</a></h2>
+<p>OpenClaw은 서버에서 셸 명령어를 실행할 수 있는 강력한 도구다. 반드시 지켜야 할 것:</p>
+<ul>
+<li><strong>allowFrom 설정</strong> — 본인의 메신저 ID만 허용. 설정하지 않으면 누구나 서버에 명령을 내릴 수 있다</li>
+<li><strong>전용 계정 사용</strong> — root가 아닌 일반 사용자 계정으로 실행</li>
+<li><strong>API 키 관리</strong> — 설정 파일 권한 확인 (chmod 600)</li>
+</ul>
+<hr />
+<h2 id="_16">정리<a class="headerlink" href="#_16" title="Permanent link">#</a></h2>
+<p>OpenClaw은 설치 자체는 간단하지만, 진짜 가치는 설정 이후에 나온다. 텔레그램 하나로 서버 관리, 이미지 생성, 웹 검색, 파일 작업을 할 수 있는 개인 비서가 만들어진다.</p>
+<p>로컬 LLM(Ollama)이나 Stable Diffusion과 결합하면 클라우드 의존도를 더 줄일 수도 있다.</p>
+<hr />
+<h2 id="_17">참고<a class="headerlink" href="#_17" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://docs.openclaw.ai">OpenClaw 공식 문서</a></li>
+<li><a href="https://github.com/openclaw/openclaw">OpenClaw GitHub</a></li>
+<li><a href="https://discord.com/invite/clawd">OpenClaw 커뮤니티 (Discord)</a></li>
+</ul>
 
 
 
@@ -1138,6 +1237,8 @@
   
 
 
+
+  
 
 
   
@@ -1169,7 +1270,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../%ED%95%9C%EA%B5%AD-%EC%A6%9D%EA%B6%8C%EC%82%AC-open-api-%EB%B9%84%EA%B5%90-%EB%B6%84%EC%84%9D-2026/" class="md-footer__link md-footer__link--prev" aria-label="이전: 한국 증권사 Open API 비교 분석 (2026)">
+          <a href="../openclaw-tips/" class="md-footer__link md-footer__link--prev" aria-label="이전: OpenClaw 한 달 사용기 — 삽질하면서 배운 것들">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1179,11 +1280,27 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                한국 증권사 Open API 비교 분석 (2026)
+                OpenClaw 한 달 사용기 — 삽질하면서 배운 것들
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../local-llm-rtx5060ti/" class="md-footer__link md-footer__link--next" aria-label="다음: RTX 5060 Ti 16GB로 로컬 LLM 돌리기 — Ollama + Qwen">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                RTX 5060 Ti 16GB로 로컬 LLM 돌리기 — Ollama + Qwen
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     

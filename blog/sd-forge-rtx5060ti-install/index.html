@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="AI, 개발, 게임, 재테크 — 개발자의 기술 블로그">
+        <meta name="description" content="AI, 개발, 게임 — 개발자의 기술 블로그">
       
       
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.github.io/blog/blog/%ED%95%9C%EA%B5%AD-%EC%A6%9D%EA%B6%8C%EC%82%AC-open-api-%EB%B9%84%EA%B5%90-%EB%B6%84%EC%84%9D-2026/">
+        <link rel="canonical" href="https://home301.dev/blog/sd-forge-rtx5060ti-install/">
       
       
-        <link rel="prev" href="../rtx-5060-ti-16gb%EC%97%90-comfyui-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">
+        <link rel="prev" href="../cache-part1/">
       
       
-        <link rel="next" href="../linux%EC%97%90%EC%84%9C-gpu-%ED%81%AC%EB%9E%98%EC%8B%9C-%ED%9B%84-%EC%9E%90%EB%8F%99-%EB%B3%B5%EA%B5%AC%ED%95%98%EA%B8%B0--rtcwake-%EC%BD%9C%EB%93%9C%EB%B6%80%ED%8C%85/">
+        <link rel="next" href="../openclaw-tips/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>한국 증권사 Open API 비교 분석 (2026) - Mingi's Dev Blog</title>
+        <title>RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기 - Mingi's Dev Blog</title>
       
     
     
@@ -58,6 +58,16 @@
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-DTNKMZSB8M"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-DTNKMZSB8M",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-DTNKMZSB8M",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
 
     
     
@@ -80,7 +90,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#open-api-2026" class="md-skip">
+        <a href="#rtx-5060-ti-16gb-stable-diffusion-forge" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -114,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              한국 증권사 Open API 비교 분석 (2026)
+              RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기
             
           </span>
         </div>
@@ -598,36 +608,6 @@
 
               
             
-              
-                
-  
-  
-  
-    
-  
-  
-    <li class="md-nav__item">
-      <a href="../category/%EC%9E%AC%ED%85%8C%ED%81%AC/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    재테크
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -702,7 +682,18 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        비교 대상
+        환경
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sm_120" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 문제: sm_120
       
     </span>
   </a>
@@ -713,395 +704,112 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        한눈에 보는 비교표
+        설치 과정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="설치 과정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-forge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Forge 클론
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#1-kis-developers" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#2-python-310" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. KIS Developers (한국투자증권)
+        2. Python 3.10 가상환경
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. KIS Developers (한국투자증권)">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
+  <a href="#3-pytorch-nightly-cu128" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. PyTorch nightly cu128 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-forge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Forge 의존성 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-webui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. WebUI 모드는 안 된다
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        주요 특징
+        성능
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API로 이미지 생성하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        장점
+        정리
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        단점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        링크
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-ls-open-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. LS증권 Open API (구 이베스트투자증권)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. LS증권 Open API (구 이베스트투자증권)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        주요 특징
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        장점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        단점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        링크
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-rest-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 키움증권 REST API
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 키움증권 REST API">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        주요 특징
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        장점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        단점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        링크
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-cybos-plus" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 대신증권 CYBOS Plus
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 대신증권 CYBOS Plus">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        주요 특징
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        장점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        단점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        링크
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-api-lab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 신한투자증권 API Lab
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. 신한투자증권 API Lab">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        주요 특징
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        장점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        단점
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_22" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        링크
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_23" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        용도별 추천
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="용도별 추천">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_24" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        데이터 수집 (분봉/일봉/수급)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_25" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        자동매매 시스템
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_26" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        조건검색 기반 트레이딩
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#linux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Linux 환경에서 운영
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_27" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        개발자 관점 정리
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_28" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        마치며
+        참고
       
     </span>
   </a>
@@ -1145,7 +853,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-03-08 00:00:00+00:00" class="md-ellipsis">2026년 3월 8일</time>
+                        <time datetime="2026-03-07 00:00:00+00:00" class="md-ellipsis">2026년 3월 7일</time>
                       </div>
                     </li>
                     
@@ -1156,7 +864,7 @@
                           <span class="md-ellipsis">
                             카테고리
                             
-                              <a href="../category/%EC%9E%AC%ED%85%8C%ED%81%AC/">재테크</a></span>
+                              <a href="../category/ai%EA%B0%9C%EB%B0%9C/">AI/개발</a></span>
                         </div>
                       </li>
                     
@@ -1167,7 +875,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 5분
+                              읽는시간 2분
                             
                           </span>
                         </div>
@@ -1195,369 +903,221 @@
       
       
       
-        <span class="md-tag">api</span>
+        <span class="md-tag">ai-image</span>
       
     
       
       
       
       
-        <span class="md-tag">python</span>
+        <span class="md-tag">pytorch</span>
       
     
       
       
       
       
-        <span class="md-tag">데이터수집</span>
+        <span class="md-tag">rtx5060ti</span>
       
     
       
       
       
       
-        <span class="md-tag">자동매매</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">주식</span>
+        <span class="md-tag">stable-diffusion</span>
       
     
   </nav>
 
 
 
-<h1 id="open-api-2026">한국 증권사 Open API 비교 분석 (2026)<a class="headerlink" href="#open-api-2026" title="Permanent link">#</a></h1>
+<h1 id="rtx-5060-ti-16gb-stable-diffusion-forge">RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기<a class="headerlink" href="#rtx-5060-ti-16gb-stable-diffusion-forge" title="Permanent link">#</a></h1>
 <blockquote>
-<p>주식 데이터 수집이나 자동매매 시스템을 만들 때, 어떤 증권사 API를 써야 할까. 국내 주요 증권사 5곳의 Open API를 비교 분석한다.</p>
+<p>RTX 50 시리즈 초기 사용자가 겪는 PyTorch 호환 삽질의 기록.</p>
 </blockquote>
 <!-- more -->
 
-<h2 id="_1">비교 대상<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p>이 글에서 다루는 증권사 API는 다음 5개다.</p>
-<ul>
-<li><strong>KIS Developers</strong> (한국투자증권)</li>
-<li><strong>LS증권 Open API</strong> (구 이베스트투자증권)</li>
-<li><strong>키움증권 REST API</strong></li>
-<li><strong>대신증권 CYBOS Plus</strong></li>
-<li><strong>신한투자증권 API Lab</strong></li>
-</ul>
-<h2 id="_2">한눈에 보는 비교표<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
+<hr />
+<h2 id="_1">환경<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
 <th>항목</th>
-<th style="text-align: center;">KIS (한국투자)</th>
-<th style="text-align: center;">LS증권</th>
-<th style="text-align: center;">키움증권</th>
-<th style="text-align: center;">대신증권</th>
-<th style="text-align: center;">신한투자</th>
+<th>스펙</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>API 방식</strong></td>
-<td style="text-align: center;">REST + WebSocket</td>
-<td style="text-align: center;">REST + WebSocket</td>
-<td style="text-align: center;">REST</td>
-<td style="text-align: center;">COM+ (CYBOS Plus)</td>
-<td style="text-align: center;">REST</td>
+<td>GPU</td>
+<td>NVIDIA GeForce RTX 5060 Ti 16GB</td>
 </tr>
 <tr>
-<td><strong>OS 지원</strong></td>
-<td style="text-align: center;">Windows/Linux/Mac</td>
-<td style="text-align: center;">Windows/Linux/Mac</td>
-<td style="text-align: center;">Windows/Linux/Mac</td>
-<td style="text-align: center;"><strong>Windows 전용</strong></td>
-<td style="text-align: center;">Windows/Linux/Mac</td>
+<td>OS</td>
+<td>Pop!_OS 24.04 LTS (커널 6.18.7)</td>
 </tr>
 <tr>
-<td><strong>실시간 시세</strong></td>
-<td style="text-align: center;">WebSocket</td>
-<td style="text-align: center;">WebSocket</td>
-<td style="text-align: center;">미제공 (REST만)</td>
-<td style="text-align: center;">COM+ 이벤트</td>
-<td style="text-align: center;">미제공</td>
+<td>NVIDIA 드라이버</td>
+<td>580.126.18</td>
 </tr>
 <tr>
-<td><strong>분봉 데이터</strong></td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">제한적</td>
+<td>CUDA</td>
+<td>12.8</td>
 </tr>
 <tr>
-<td><strong>투자자별 매매</strong></td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">제한적</td>
+<td>Python</td>
+<td>3.10.20</td>
 </tr>
 <tr>
-<td><strong>호가 정보</strong></td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-</tr>
-<tr>
-<td><strong>주문/매매</strong></td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-</tr>
-<tr>
-<td><strong>모의투자</strong></td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-</tr>
-<tr>
-<td><strong>Python 지원</strong></td>
-<td style="text-align: center;">공식 샘플</td>
-<td style="text-align: center;">공식 샘플</td>
-<td style="text-align: center;">공식 문서</td>
-<td style="text-align: center;">pywin32 필요</td>
-<td style="text-align: center;">공식 문서</td>
-</tr>
-<tr>
-<td><strong>GitHub 샘플</strong></td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">X</td>
-<td style="text-align: center;">X</td>
-<td style="text-align: center;">X</td>
-</tr>
-<tr>
-<td><strong>조건검색</strong></td>
-<td style="text-align: center;">X</td>
-<td style="text-align: center;">X</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">X</td>
-</tr>
-<tr>
-<td><strong>해외주식</strong></td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">O</td>
-<td style="text-align: center;">X</td>
-<td style="text-align: center;">O</td>
+<td>저장공간</td>
+<td>238GB SSD + 2.7TB HDD</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="1-kis-developers">1. KIS Developers (한국투자증권)<a class="headerlink" href="#1-kis-developers" title="Permanent link">#</a></h2>
-<p>현재 국내에서 가장 적극적으로 Open API를 밀고 있는 증권사다. REST + WebSocket을 모두 지원하고, 문서화 수준이 높으며, GitHub에 공식 Python 샘플 코드를 제공한다. GPTs 기반 개발 지원 봇까지 운영하고 있다.</p>
-<h3 id="_3">주요 특징<a class="headerlink" href="#_3" title="Permanent link">#</a></h3>
-<ul>
-<li><strong>인증</strong>: OAuth2 기반. AppKey + AppSecret으로 접근토큰 발급, 24시간 유효</li>
-<li><strong>REST API</strong>: 주문, 시세, 잔고, 분봉, 일봉, 투자자별 매매동향</li>
-<li><strong>WebSocket</strong>: 실시간 체결가, 호가, 체결통보</li>
-<li><strong>호출 제한</strong>: 초당 20건 (REST), WebSocket 동시 접속 40건</li>
-<li><strong>분봉 조회</strong>: 1회 요청당 최대 30건 반환</li>
-</ul>
-<h3 id="_4">장점<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
-<ul>
-<li>문서가 잘 정리되어 있고, 테스트베드(API 호출 테스트 페이지)를 제공한다</li>
-<li>OS 제약 없음 — Linux, Mac에서도 완전히 동작한다</li>
-<li>GitHub에 Python REST/WebSocket 샘플 코드가 있어 빠르게 시작할 수 있다</li>
-<li>해외주식 API도 제공한다</li>
-</ul>
-<h3 id="_5">단점<a class="headerlink" href="#_5" title="Permanent link">#</a></h3>
-<ul>
-<li>조건검색 기능이 없다</li>
-<li>분봉 데이터 1회 요청당 30건 제한이 있어, 전 종목 백필 시 호출 횟수가 많아진다</li>
-<li>토큰 유효기간이 24시간이라 장기 운영 시 자동 갱신 로직이 필요하다</li>
-</ul>
-<h3 id="_6">링크<a class="headerlink" href="#_6" title="Permanent link">#</a></h3>
-<ul>
-<li>개발자 포털: <a href="https://apiportal.koreainvestment.com">https://apiportal.koreainvestment.com</a></li>
-<li>API 문서: <a href="https://apiportal.koreainvestment.com/apiservice">https://apiportal.koreainvestment.com/apiservice</a></li>
-<li>GitHub 샘플: <a href="https://github.com/koreainvestment/open-trading-api">https://github.com/koreainvestment/open-trading-api</a></li>
-<li>서비스 신청 가이드: <a href="https://apiportal.koreainvestment.com/about-howto">https://apiportal.koreainvestment.com/about-howto</a></li>
-</ul>
+<h2 id="sm_120">핵심 문제: sm_120<a class="headerlink" href="#sm_120" title="Permanent link">#</a></h2>
+<p>RTX 5060 Ti는 Blackwell 아키텍처로, CUDA compute capability가 <strong>sm_120</strong>이다. 2026년 3월 기준으로 이 아키텍처를 지원하는 PyTorch는 <strong>nightly cu128 빌드뿐</strong>이다.</p>
+<p>안정 릴리스(cu121, cu126)로 설치하면 이런 에러가 나온다:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>CUDA error: no kernel image is available for execution on the device
+</span></code></pre></div>
+<p>또는 아예 GPU를 인식하지 못한다.</p>
 <hr />
-<h2 id="2-ls-open-api">2. LS증권 Open API (구 이베스트투자증권)<a class="headerlink" href="#2-ls-open-api" title="Permanent link">#</a></h2>
-<p>이베스트투자증권이 LS증권으로 사명을 변경하면서 기존 xingAPI를 Open API로 전환했다. REST + WebSocket 기반이며, 주식/선물/옵션/해외 주식/해외 선물까지 폭넓은 상품을 지원한다.</p>
-<h3 id="_7">주요 특징<a class="headerlink" href="#_7" title="Permanent link">#</a></h3>
-<ul>
-<li><strong>인증</strong>: OAuth2 기반</li>
-<li><strong>REST API</strong>: 업종, 주식, 선물/옵션, 해외선물, 해외주식, 기타</li>
-<li><strong>WebSocket</strong>: 실시간 시세 지원</li>
-<li><strong>모의투자 도메인</strong> 별도 제공</li>
-<li><strong>TR 코드 체계</strong>: 기존 xingAPI의 TR 구조를 REST로 래핑한 형태</li>
-</ul>
-<h3 id="_8">장점<a class="headerlink" href="#_8" title="Permanent link">#</a></h3>
-<ul>
-<li>상품 커버리지가 넓다 (국내주식 + 선물/옵션 + 해외선물 + 해외주식)</li>
-<li>REST + WebSocket 모두 지원하여 실시간 데이터 수신이 가능하다</li>
-<li>기존 xingAPI 사용자라면 TR 코드 체계에 익숙하다</li>
-</ul>
-<h3 id="_9">단점<a class="headerlink" href="#_9" title="Permanent link">#</a></h3>
-<ul>
-<li>기존 xingAPI에서 전환되면서 문서가 다소 산만한 편이다</li>
-<li>GitHub 공식 샘플은 있지만 KIS에 비해 예제가 적다</li>
-<li>법인 계좌 관련 절차가 별도로 필요하다</li>
-</ul>
-<h3 id="_10">링크<a class="headerlink" href="#_10" title="Permanent link">#</a></h3>
-<ul>
-<li>개발자 포털: <a href="https://openapi.ls-sec.co.kr">https://openapi.ls-sec.co.kr</a></li>
-<li>API 가이드: <a href="https://openapi.ls-sec.co.kr/apiservice">https://openapi.ls-sec.co.kr/apiservice</a></li>
-<li>기존 xingAPI 안내: <a href="https://www.ls-sec.co.kr/xingapi">https://www.ls-sec.co.kr/xingapi</a></li>
-</ul>
+<h2 id="_2">설치 과정<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
+<h3 id="1-forge">1. Forge 클론<a class="headerlink" href="#1-forge" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>~
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lllyasviel/stable-diffusion-webui-forge.git
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">cd</span><span class="w"> </span>stable-diffusion-webui-forge
+</span></code></pre></div>
+<h3 id="2-python-310">2. Python 3.10 가상환경<a class="headerlink" href="#2-python-310" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3.10<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</span></code></pre></div>
+<h3 id="3-pytorch-nightly-cu128">3. PyTorch nightly cu128 설치<a class="headerlink" href="#3-pytorch-nightly-cu128" title="Permanent link">#</a></h3>
+<p>여기가 핵심이다. Forge의 기본 설치 스크립트를 쓰면 안정 버전 PyTorch가 설치되는데, sm_120에서는 동작하지 않는다. <strong>수동으로 nightly를 먼저 설치</strong>해야 한다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span>torch<span class="w"> </span>torchvision<span class="w"> </span>torchaudio<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/nightly/cu128
+</span></code></pre></div>
+<p>설치되는 버전: <code>torch 2.12.0.dev20260304+cu128</code></p>
+<p>설치 후 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import torch; print(torch.__version__); print(torch.cuda.is_available())&quot;</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>2.12.0.dev20260304+cu128
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>True
+</span></code></pre></div>
+<h3 id="4-forge">4. Forge 의존성 설치<a class="headerlink" href="#4-forge" title="Permanent link">#</a></h3>
+<p>PyTorch가 이미 설치된 상태에서 Forge를 실행하면 나머지 의존성만 추가로 설치된다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>bash<span class="w"> </span>webui.sh<span class="w"> </span>--xformers<span class="w"> </span>--skip-torch-cuda-test<span class="w"> </span>--skip-python-version-check
+</span></code></pre></div>
+<blockquote>
+<p><code>--skip-torch-cuda-test</code>를 빼면 nightly 버전에서 검증 에러가 날 수 있다.</p>
+</blockquote>
+<h3 id="5-webui">5. WebUI 모드는 안 된다<a class="headerlink" href="#5-webui" title="Permanent link">#</a></h3>
+<p>여기서 한 가지 함정이 있다. 설치 완료 후 WebUI가 정상적으로 뜨는 것처럼 보이지만, 실제로는 <strong>"Using online LoRAs in FP16: False"</strong> 메시지 이후 조용히 멈춘다. 에러 메시지도 없다.</p>
+<p>원인은 PyTorch nightly 환경에서 모델 로드 시점의 의존성 프리징(특히 xformers나 어텐션 연산 관련 최적화) 문제로 추정된다. 해결책은 <strong>API 모드로 실행</strong>하는 것이다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python<span class="w"> </span>launch.py<span class="w"> </span>--nowebui<span class="w"> </span>--api<span class="w"> </span>--listen<span class="w"> </span>--port<span class="w"> </span><span class="m">7861</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--skip-torch-cuda-test<span class="w"> </span>--xformers
+</span></code></pre></div>
+<p>이 모드에서는 <code>http://localhost:7861/sdapi/v1/txt2img</code> 엔드포인트로 이미지를 생성할 수 있다.</p>
 <hr />
-<h2 id="3-rest-api">3. 키움증권 REST API<a class="headerlink" href="#3-rest-api" title="Permanent link">#</a></h2>
-<p>국내 개인투자자 점유율 1위 증권사답게, 키움도 REST API를 제공한다. 가장 큰 차별점은 <strong>조건검색</strong> 기능이다. 영웅문4에서 만든 조건검색식을 API로 호출할 수 있다.</p>
-<h3 id="_11">주요 특징<a class="headerlink" href="#_11" title="Permanent link">#</a></h3>
-<ul>
-<li><strong>인증</strong>: IP 기반 접근 제한 + 인증토큰</li>
-<li><strong>REST API</strong>: 시세, 차트, 주문, 계좌, 투자자별 매매, 순위 정보</li>
-<li><strong>조건검색</strong>: 영웅문4 조건검색식 연동 가능</li>
-<li><strong>보안</strong>: 허용 IP에서만 API 요청 가능</li>
-</ul>
-<h3 id="_12">장점<a class="headerlink" href="#_12" title="Permanent link">#</a></h3>
-<ul>
-<li><strong>조건검색 연동</strong>은 키움만의 고유 기능이다. 복잡한 종목 스크리닝 로직을 HTS에서 만들고 API로 가져올 수 있다</li>
-<li>국내 개인투자자 커뮤니티에서 관련 자료가 가장 많다</li>
-<li>REST 기반이라 OS 제약이 없다</li>
-</ul>
-<h3 id="_13">단점<a class="headerlink" href="#_13" title="Permanent link">#</a></h3>
-<ul>
-<li><strong>WebSocket/실시간 시세가 없다</strong>. REST 폴링으로만 시세를 가져와야 한다</li>
-<li>GitHub 공식 샘플 코드가 없다</li>
-<li>API 문서가 최근 리뉴얼되면서 일부 구버전 링크가 깨져 있다</li>
-</ul>
-<h3 id="_14">링크<a class="headerlink" href="#_14" title="Permanent link">#</a></h3>
-<ul>
-<li>개발자 포털: <a href="https://openapi.kiwoom.com">https://openapi.kiwoom.com</a></li>
-<li>API 서비스: <a href="https://openapi.kiwoom.com/main/home">https://openapi.kiwoom.com/main/home</a></li>
-<li>키움 금융센터: 1544-9000</li>
-</ul>
-<hr />
-<h2 id="4-cybos-plus">4. 대신증권 CYBOS Plus<a class="headerlink" href="#4-cybos-plus" title="Permanent link">#</a></h2>
-<p>가장 오래된 증권사 API 중 하나다. Windows COM+(OLE Automation) 기반이라 반드시 <strong>Windows + 32비트 Python</strong> 환경이 필요하다. 역사가 긴 만큼 제공하는 데이터 종류는 풍부하지만, 기술적 제약이 크다.</p>
-<h3 id="_15">주요 특징<a class="headerlink" href="#_15" title="Permanent link">#</a></h3>
-<ul>
-<li><strong>인증</strong>: CYBOS Plus(대신증권 HTS) 로그인 필수. 프로그램이 실행 중이어야 API 호출 가능</li>
-<li><strong>통신 방식</strong>: Windows COM+ 객체 (<code>win32com.client</code>)</li>
-<li><strong>데이터</strong>: 분봉, 일봉, 체결강도, 매수/매도 잔량, 조건검색</li>
-<li><strong>호출 제한</strong>: 15초당 60건</li>
-</ul>
-<h3 id="_16">장점<a class="headerlink" href="#_16" title="Permanent link">#</a></h3>
-<ul>
-<li>데이터 종류가 매우 풍부하다 (체결강도, 누적 매수/매도 등 세부 지표 제공)</li>
-<li>조건검색을 API에서 사용할 수 있다</li>
-<li>실시간 이벤트를 COM+ 이벤트 핸들러로 수신할 수 있다</li>
-</ul>
-<h3 id="_17">단점<a class="headerlink" href="#_17" title="Permanent link">#</a></h3>
-<ul>
-<li><strong>Windows 전용</strong>, <strong>32비트 Python 전용</strong> — Linux/Mac 사용 불가</li>
-<li>CYBOS Plus HTS가 반드시 실행 중이어야 한다</li>
-<li>COM+ 기반이라 프로그래밍이 번거롭다 (<code>pywin32</code> 필수)</li>
-<li>REST API가 없어 현대적 웹 서비스 구조와 호환이 안 된다</li>
-<li>해외주식을 지원하지 않는다</li>
-</ul>
-<h3 id="_18">링크<a class="headerlink" href="#_18" title="Permanent link">#</a></h3>
-<ul>
-<li>CYBOS Plus 도움말: <a href="https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_List_Page.aspx?boardseq=285">https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_List_Page.aspx?boardseq=285</a></li>
-<li>CYBOS Plus 다운로드: <a href="https://money2.daishin.com">https://money2.daishin.com</a> (로그인 후 CYBOS Plus 메뉴)</li>
-<li>모의투자: <a href="https://vtsweb.daishin.com">https://vtsweb.daishin.com</a></li>
-</ul>
-<hr />
-<h2 id="5-api-lab">5. 신한투자증권 API Lab<a class="headerlink" href="#5-api-lab" title="Permanent link">#</a></h2>
-<p>신한투자증권도 REST 기반 Open API를 제공한다. 다만 다른 증권사에 비해 API 기능 범위가 제한적이고, 문서화 수준도 낮은 편이다.</p>
-<h3 id="_19">주요 특징<a class="headerlink" href="#_19" title="Permanent link">#</a></h3>
-<ul>
-<li><strong>인증</strong>: OAuth2 기반</li>
-<li><strong>REST API</strong>: 주문, 시세, 계좌</li>
-<li><strong>모의투자</strong>: 지원</li>
-</ul>
-<h3 id="_20">장점<a class="headerlink" href="#_20" title="Permanent link">#</a></h3>
-<ul>
-<li>신한금융 계열 통합 서비스와 연동 가능성이 있다</li>
-<li>REST 기반이라 OS 제약이 없다</li>
-</ul>
-<h3 id="_21">단점<a class="headerlink" href="#_21" title="Permanent link">#</a></h3>
-<ul>
-<li>분봉 데이터, 투자자별 매매동향 등 데이터 분석에 필요한 API가 제한적이다</li>
-<li>WebSocket/실시간 시세를 제공하지 않는다</li>
-<li>API 문서와 개발자 커뮤니티가 부족하다</li>
-<li>외부 접근 시 간헐적으로 500 에러가 발생한다</li>
-</ul>
-<h3 id="_22">링크<a class="headerlink" href="#_22" title="Permanent link">#</a></h3>
-<ul>
-<li>API Lab: <a href="https://www.shinhansec.com/siw/wealth-management/api-lab/SOSIE0000000.do">https://www.shinhansec.com/siw/wealth-management/api-lab/SOSIE0000000.do</a></li>
-</ul>
-<hr />
-<h2 id="_23">용도별 추천<a class="headerlink" href="#_23" title="Permanent link">#</a></h2>
-<h3 id="_24">데이터 수집 (분봉/일봉/수급)<a class="headerlink" href="#_24" title="Permanent link">#</a></h3>
-<p><strong>KIS Developers</strong>를 추천한다. REST + WebSocket을 모두 지원하고 Linux에서 동작하며, 분봉, 투자자별 매매동향, 호가 데이터를 모두 제공한다. 공식 Python 샘플이 있어 시작이 빠르다.</p>
-<p>대신증권 CYBOS Plus도 데이터 종류는 풍부하지만, Windows + 32비트 Python이라는 환경 제약이 너무 크다. Windows 서버를 따로 운영할 게 아니라면 추천하지 않는다.</p>
-<h3 id="_25">자동매매 시스템<a class="headerlink" href="#_25" title="Permanent link">#</a></h3>
-<p><strong>KIS</strong> 또는 <strong>LS증권</strong>을 추천한다. 둘 다 REST로 주문을 넣고 WebSocket으로 체결통보를 실시간으로 받을 수 있다. 해외 선물까지 커버해야 한다면 LS증권이 더 폭넓다.</p>
-<h3 id="_26">조건검색 기반 트레이딩<a class="headerlink" href="#_26" title="Permanent link">#</a></h3>
-<p><strong>키움증권</strong>이 유일한 선택지다. 영웅문4의 조건검색식을 API로 가져올 수 있는 건 키움뿐이다. 다만 실시간 시세가 없으니, 조건검색 + 키움 주문 / 시세 보조는 다른 API 조합을 고려할 수도 있다.</p>
-<h3 id="linux">Linux 환경에서 운영<a class="headerlink" href="#linux" title="Permanent link">#</a></h3>
-<p>대신증권을 제외하면 모두 가능하다. 그 중에서도 <strong>KIS</strong>가 문서화, 샘플 코드, 커뮤니티 지원 면에서 가장 낫다.</p>
-<hr />
-<h2 id="_27">개발자 관점 정리<a class="headerlink" href="#_27" title="Permanent link">#</a></h2>
+<h2 id="_3">성능<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<p>DreamShaper v8 모델 기준:</p>
 <table>
 <thead>
 <tr>
-<th>관점</th>
-<th>추천</th>
-<th>이유</th>
+<th>해상도</th>
+<th>스텝</th>
+<th>소요 시간</th>
+<th>속도</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>문서 품질</td>
-<td>KIS</td>
-<td>테스트베드, GPTs 봇, GitHub 샘플</td>
+<td>512x512</td>
+<td>10</td>
+<td>1.4초</td>
+<td>7.02 it/s</td>
 </tr>
 <tr>
-<td>데이터 풍부성</td>
-<td>대신증권</td>
-<td>체결강도, 누적 매수/매도 등 세부 지표</td>
+<td>512x512</td>
+<td>20</td>
+<td>2.8초</td>
+<td>7.02 it/s</td>
 </tr>
 <tr>
-<td>크로스플랫폼</td>
-<td>KIS, LS, 키움</td>
-<td>REST 기반</td>
+<td>1024x1024</td>
+<td>20</td>
+<td>~11초</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>RTX 3050 6GB 대비 약 5배 빠르다. VRAM 16GB 덕분에 1024x1024도 무리 없이 생성된다.</p>
+<table>
+<thead>
+<tr>
+<th>모델</th>
+<th>해상도</th>
+<th>가능 여부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SD 1.5</td>
+<td>512~1024</td>
+<td>O</td>
 </tr>
 <tr>
-<td>실시간 데이터</td>
-<td>KIS, LS</td>
-<td>WebSocket 지원</td>
+<td>SDXL</td>
+<td>1024x1024</td>
+<td>O</td>
 </tr>
 <tr>
-<td>조건검색</td>
-<td>키움, 대신</td>
-<td>HTS 조건검색 API 연동</td>
+<td>SD 3</td>
+<td>1024x1024</td>
+<td>O (VRAM 여유)</td>
 </tr>
 <tr>
-<td>시작 난이도</td>
-<td>KIS</td>
-<td>가입 → 토큰 발급 → 바로 호출</td>
+<td>Flux</td>
+<td>—</td>
+<td>△ (모델에 따라)</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_28">마치며<a class="headerlink" href="#_28" title="Permanent link">#</a></h2>
-<p>2026년 기준, 새로 시작하는 개인 프로젝트에는 <strong>KIS Developers</strong>가 가장 무난한 선택이다. REST + WebSocket 기반으로 Linux/Mac에서 동작하고, 문서와 샘플이 충실하며, 분봉부터 수급 데이터까지 대부분의 데이터를 커버한다.</p>
-<p>다만 각 증권사마다 고유 강점이 있으니 목적에 따라 선택하면 된다. 조건검색이 필수라면 키움, 해외 선물까지 한 API로 해결하고 싶다면 LS증권, 세부 체결 데이터가 필요하고 Windows 환경이라면 대신증권이 답이다.</p>
-<p>결국 "계좌를 어디서 만드느냐"보다 "어떤 데이터를, 어떤 환경에서, 얼마나 자주 쓸 것인가"가 API 선택의 핵심이다.</p>
+<h2 id="api">API로 이미지 생성하기<a class="headerlink" href="#api" title="Permanent link">#</a></h2>
+<p>WebUI가 없으니 API로 직접 호출한다.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span><span class="o">,</span><span class="w"> </span><span class="nn">base64</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:7861/sdapi/v1/txt2img&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;a fantasy landscape, detailed, 4k&quot;</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="s2">&quot;negative_prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;blurry, low quality&quot;</span><span class="p">,</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="s2">&quot;cfg_scale&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="s2">&quot;sampler_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Euler a&quot;</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="p">})</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="n">img_data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;images&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">img_data</span><span class="p">))</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;output.png&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<hr />
+<h2 id="_4">정리<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
+<p>RTX 5060 Ti에서 Forge를 돌리기 위한 핵심:</p>
+<ol>
+<li><strong>PyTorch nightly cu128</strong> 수동 설치 (안정 버전은 sm_120 미지원)</li>
+<li><strong><code>--nowebui --api</code> 모드</strong> 사용 (WebUI는 조용히 멈춤)</li>
+<li><code>--skip-torch-cuda-test</code> 플래그 필수</li>
+</ol>
+<p>RTX 50 시리즈 초기라 이런 삽질이 필요하지만, PyTorch 안정 릴리스에 sm_120 지원이 포함되면 일반적인 설치 방법으로 돌아갈 수 있다.</p>
+<hr />
+<h2 id="_5">참고<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://github.com/lllyasviel/stable-diffusion-webui-forge">Stable Diffusion WebUI Forge GitHub</a></li>
+<li><a href="https://pytorch.org/get-started/locally/">PyTorch Nightly 설치</a></li>
+<li><a href="https://developer.nvidia.com/blackwell">NVIDIA Blackwell 아키텍처</a></li>
+</ul>
 
 
 
@@ -1569,6 +1129,8 @@
   
 
 
+
+  
 
 
   
@@ -1600,7 +1162,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../rtx-5060-ti-16gb%EC%97%90-comfyui-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/" class="md-footer__link md-footer__link--prev" aria-label="이전: RTX 5060 Ti 16GB에 ComfyUI 설치하기">
+          <a href="../cache-part1/" class="md-footer__link md-footer__link--prev" aria-label="이전: 캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1610,20 +1172,20 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                RTX 5060 Ti 16GB에 ComfyUI 설치하기
+                캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가
               </div>
             </div>
           </a>
         
         
           
-          <a href="../linux%EC%97%90%EC%84%9C-gpu-%ED%81%AC%EB%9E%98%EC%8B%9C-%ED%9B%84-%EC%9E%90%EB%8F%99-%EB%B3%B5%EA%B5%AC%ED%95%98%EA%B8%B0--rtcwake-%EC%BD%9C%EB%93%9C%EB%B6%80%ED%8C%85/" class="md-footer__link md-footer__link--next" aria-label="다음: Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅">
+          <a href="../openclaw-tips/" class="md-footer__link md-footer__link--next" aria-label="다음: OpenClaw 한 달 사용기 — 삽질하면서 배운 것들">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅
+                OpenClaw 한 달 사용기 — 삽질하면서 배운 것들
               </div>
             </div>
             <div class="md-footer__button md-icon">

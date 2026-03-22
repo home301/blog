@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="AI, 개발, 게임, 재테크 — 개발자의 기술 블로그">
+        <meta name="description" content="AI, 개발, 게임 — 개발자의 기술 블로그">
       
       
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.github.io/blog/blog/openclaw-%ED%95%9C-%EB%8B%AC-%EC%82%AC%EC%9A%A9%EA%B8%B0--%EC%82%BD%EC%A7%88%ED%95%98%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B4-%EA%B2%83%EB%93%A4/">
+        <link rel="canonical" href="https://home301.dev/blog/cache-part1/">
       
       
-        <link rel="prev" href="../rtx-5060-ti-16gb%EC%97%90-stable-diffusion-forge-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">
+        <link rel="prev" href="../cache-part2/">
       
       
-        <link rel="next" href="../openclaw%EC%9C%BC%EB%A1%9C-%EA%B0%9C%EC%9D%B8-ai-%EB%B9%84%EC%84%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0--%ED%85%94%EB%A0%88%EA%B7%B8%EB%9E%A8--claude/">
+        <link rel="next" href="../sd-forge-rtx5060ti-install/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>OpenClaw 한 달 사용기 — 삽질하면서 배운 것들 - Mingi's Dev Blog</title>
+        <title>캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가 - Mingi's Dev Blog</title>
       
     
     
@@ -58,6 +58,16 @@
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-DTNKMZSB8M"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-DTNKMZSB8M",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-DTNKMZSB8M",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
 
     
     
@@ -80,7 +90,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#openclaw" class="md-skip">
+        <a href="#1" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -114,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              OpenClaw 한 달 사용기 — 삽질하면서 배운 것들
+              캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가
             
           </span>
         </div>
@@ -598,36 +608,6 @@
 
               
             
-              
-                
-  
-  
-  
-    
-  
-  
-    <li class="md-nav__item">
-      <a href="../category/%EC%9E%AC%ED%85%8C%ED%81%AC/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    재테크
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -702,7 +682,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        에이전트가 마음대로 한다
+        들어가며
       
     </span>
   </a>
@@ -710,10 +690,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
+  <a href="#1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU가 죽었는데 살릴 수가 없다
+        1. 캐시의 정의
       
     </span>
   </a>
@@ -721,13 +701,141 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 간략한 역사
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 왜 캐시가 필요한가
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 왜 캐시가 필요한가">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1-memory-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-1. 메모리 계층 구조 (Memory Hierarchy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        말투가 들쑥날쑥하다
+        수치로 체감하기
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-principle-of-locality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-2. 지역성 원리 (Principle of Locality)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-2. 지역성 원리 (Principle of Locality)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#temporal-locality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시간적 지역성 (Temporal Locality)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spatial-locality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        공간적 지역성 (Spatial Locality)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 캐시의 기본 동작
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 캐시의 기본 동작">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-1-cache-hit-cache-miss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-1. Cache Hit와 Cache Miss
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-2-amat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-2. 히트율과 성능 — AMAT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-wall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memory Wall 문제
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -735,7 +843,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        "이거 기억해"라고 했는데 다음에 모른다
+        정리
       
     </span>
   </a>
@@ -746,7 +854,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        하트비트를 켜두면 편하다
+        다음 편 예고
       
     </span>
   </a>
@@ -757,18 +865,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        워크스페이스가 지저분해지면 느려진다
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        참고
+        참고문헌
       
     </span>
   </a>
@@ -812,7 +909,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-03-07 00:00:00+00:00" class="md-ellipsis">2026년 3월 7일</time>
+                        <time datetime="2026-03-05 00:00:00+00:00" class="md-ellipsis">2026년 3월 5일</time>
                       </div>
                     </li>
                     
@@ -834,7 +931,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 2분
+                              읽는시간 4분
                             
                           </span>
                         </div>
@@ -862,81 +959,269 @@
       
       
       
-        <span class="md-tag">ai-assistant</span>
+        <span class="md-tag">backend</span>
       
     
       
       
       
       
-        <span class="md-tag">openclaw</span>
+        <span class="md-tag">cache</span>
       
     
       
       
       
       
-        <span class="md-tag">tips</span>
+        <span class="md-tag">series</span>
       
     
   </nav>
 
 
 
-<h1 id="openclaw">OpenClaw 한 달 사용기 — 삽질하면서 배운 것들<a class="headerlink" href="#openclaw" title="Permanent link">#</a></h1>
+<h1 id="1">캐시의 모든 것 1편: 캐시란 무엇이고, 왜 쓰는가<a class="headerlink" href="#1" title="Permanent link">#</a></h1>
 <blockquote>
-<p>AI 비서를 붙여놓고 쓰면서 겪은 문제와 나름의 해결 방법을 정리한다.</p>
+<p>캐시의 기본 개념부터 동작 원리까지 정리한다.</p>
 </blockquote>
 <!-- more -->
 
 <hr />
-<h2 id="_1">에이전트가 마음대로 한다<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p>처음에는 "알아서 잘 해줘"로 시작했다. 문제는 진짜 알아서 한다는 거였다.</p>
-<p>블로그 글 작성을 시켰는데, 중간에 "이 구조가 더 나을 것 같아서" 하면서 승인했던 계획을 바꿔버렸다. 에러가 났는데 보고 없이 조용히 다른 방법을 시도하기도 했다.</p>
-<p>결국 RULES.md라는 파일을 만들어서 규칙을 적어뒀다:</p>
-<ul>
-<li>계획을 세우면 승인을 받고, 승인된 계획을 임의로 변경하지 않는다</li>
-<li>작업 결과는 반드시 보고한다. 안 되면 안 됐다고, 잘 되면 잘 됐다고</li>
-</ul>
-<p>파일에 적어두니까 세션이 바뀌어도 규칙이 유지됐다. 구두로 "이렇게 해"라고 말한 건 다음 세션에서 잊어버리지만, 파일은 매번 읽으니까.</p>
+<h2 id="_1">들어가며<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
+<p>논문을 쓰는데 자료가 필요할 때마다 도서관에 간다고 생각해보자. 비효율적이다. 그래서 자주 보는 책은 책상 위에 둔다. 여기서 <strong>책상이 캐시</strong>고, <strong>도서관이 메인 메모리</strong>(혹은 디스크)다.</p>
+<p>원리는 어디에나 적용된다:
+- <strong>냉장고</strong> = 캐시, <strong>마트</strong> = 원본 저장소. 자주 먹는 식재료는 냉장고에 넣어둔다.
+- <strong>스마트폰의 최근 앱 목록</strong> = 캐시. 완전히 종료하지 않은 앱은 빠르게 다시 열린다.
+- <strong>웹 브라우저의 페이지 캐시</strong> = 캐시. 이전에 방문한 사이트는 더 빠르게 로드된다.</p>
+<p>핵심은 간단하다: <strong>자주 쓰는 데이터를 가까이 두면 빠르다.</strong></p>
 <hr />
-<h2 id="gpu">GPU가 죽었는데 살릴 수가 없다<a class="headerlink" href="#gpu" title="Permanent link">#</a></h2>
-<p>VRAM 초과로 GPU 크래시가 나면 소프트 리부트로는 복구가 안 된다. 콜드부팅(전원 완전 차단 후 재시작)이 필요한데, 원격 환경에서 이걸 자동화하는 게 꽤 까다로웠다. BIOS 설정 변경, 온보드 그래픽 문제, 크래시 재현 시도 등 자세한 내용은 별도 글에 정리했다.</p>
+<h2 id="1_1">1. 캐시의 정의<a class="headerlink" href="#1_1" title="Permanent link">#</a></h2>
 <blockquote>
-<p><a href="../linux-gpu-cold-reboot.md">Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅</a></p>
+<p>캐시(Cache)란, 향후 요청을 더 빠르게 처리하기 위해 데이터의 사본을 <strong>더 빠른 저장소</strong>에 보관하는 하드웨어 또는 소프트웨어 구성 요소다.</p>
 </blockquote>
-<p>재발 방지로 Ollama VRAM 제한(<code>OLLAMA_MAX_VRAM=14G</code>)을 걸고, GPU를 쓰는 프로그램(Ollama, Forge, ComfyUI)은 동시에 하나만 실행하는 규칙을 추가했다.</p>
+<p>핵심 키워드는 <strong>사본</strong>(copy)과 <strong>더 빠른 저장소</strong>다.</p>
+<p>캐시에 저장된 데이터는 원본이 아니라 복사본이다. 원본은 여전히 느린 저장소에 있고, 캐시는 그 사본을 빠른 곳에 두어 접근 속도를 높인다.</p>
+<p>참고로 "캐시(cache)"라는 단어는 프랑스어 <em>cacher</em>에서 왔는데, <strong>숨기다</strong>라는 뜻이다. 실제로 캐시는 사용자에게 <strong>투명하게</strong>(transparently) 동작한다. 웹 브라우저가 이미지를 캐시에서 불러올 때, 사용자는 그 사실을 의식하지 못한다. 그냥 "빠르다"고 느낄 뿐이다.</p>
 <hr />
-<h2 id="_2">말투가 들쑥날쑥하다<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
-<p>대화할 때마다 에이전트의 톤이 달랐다. 어떤 세션에서는 반말, 어떤 세션에서는 존대. "좋은 질문이에요!" 같은 불필요한 사족이 붙기도 했다.</p>
-<p>SOUL.md에 성격을 적어두니 해결됐다. 이름, 말투, 금지 사항 같은 것들을 정해놓으면 세션이 바뀌어도 일관성이 유지된다.</p>
-<p>나는 높임말을 쓰게 했고, 이모지는 허락 없이 쓰지 않게 했다. 블로그 글을 쓸 때는 반말 서술체(~다, ~이다)로 쓰게 하고, 대화할 때는 높임말로 하게 했는데 — 이것도 처음에는 섞여서 한번 더 잡아줘야 했다.</p>
+<h2 id="2">2. 간략한 역사<a class="headerlink" href="#2" title="Permanent link">#</a></h2>
+<p>캐시의 역사는 1960년대로 거슬러 올라간다.</p>
+<p><strong>1963년</strong> — 캠브리지 대학의 <strong>Atlas 2</strong>(Titan) 컴퓨터에서 초기 캐시 개념이 적용되었다.</p>
+<p><strong>1965년</strong> — Maurice Wilkes가 <strong>slave memory</strong>라는 이름으로 캐시 개념을 제안한 논문을 발표한다. 지금 우리가 아는 캐시의 학술적 시작점이다.</p>
+<p><strong>1968년</strong> — <strong>IBM System/360 Model 85</strong>에서 상용 컴퓨터 최초로 캐시 메모리를 탑재한다. "cache"라는 용어가 널리 퍼진 계기가 되었다.</p>
+<p><strong>1976년</strong> — IBM 801 CPU에서 최초로 <strong>명령어 캐시</strong>(I-cache)와 <strong>데이터 캐시</strong>(D-cache)를 분리한다. 현대 CPU에서도 사용되는 Split L1 캐시의 시작이다.</p>
+<p><strong>현재</strong> — L1/L2/L3 다단계 캐시 구조는 표준이 되었고, 1달러 미만의 마이크로컨트롤러에도 캐시가 탑재된다.</p>
 <hr />
-<h2 id="_3">"이거 기억해"라고 했는데 다음에 모른다<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
-<p>에이전트에게 "이건 앞으로도 기억해둬"라고 말한 적이 있다. 다음 세션에서 물어보니 모른다.</p>
-<p>당연한 거였다. 에이전트는 세션마다 초기화된다. 파일에 쓰지 않으면 사라진다.</p>
-<p>그래서 기억 체계를 파일로 만들었다:</p>
-<ul>
-<li><strong>MEMORY.md</strong> — 장기 기억. 중요한 결정, 환경 정보, 교훈</li>
-<li><strong>memory/YYYY-MM-DD.md</strong> — 일별 기록. 그날 뭘 했는지</li>
-<li><strong>USER.md</strong> — 내 선호도. 말투, 블로그 스타일 같은 것</li>
-</ul>
-<p>에이전트가 매 세션 시작 시 이 파일들을 읽으니까, 파일에 있는 건 확실히 기억한다. 반대로 파일에 없는 건 절대 기억 못 한다.</p>
+<h2 id="3">3. 왜 캐시가 필요한가<a class="headerlink" href="#3" title="Permanent link">#</a></h2>
+<p>캐시가 존재하는 이유를 이해하려면 두 가지 핵심 개념을 알아야 한다: <strong>메모리 계층 구조</strong>와 <strong>지역성 원리</strong>.</p>
+<h3 id="3-1-memory-hierarchy">3-1. 메모리 계층 구조 (Memory Hierarchy)<a class="headerlink" href="#3-1-memory-hierarchy" title="Permanent link">#</a></h3>
+<p>컴퓨터의 저장 장치는 계층적으로 구성된다. 위로 갈수록 빠르고 작고 비싸며, 아래로 갈수록 느리고 크고 저렴하다.</p>
+<table>
+<thead>
+<tr>
+<th>계층</th>
+<th>속도</th>
+<th>용량</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>레지스터</td>
+<td>~1ns</td>
+<td>수 KB</td>
+</tr>
+<tr>
+<td>L1 캐시</td>
+<td>1~4 cycle</td>
+<td>32~64KB</td>
+</tr>
+<tr>
+<td>L2 캐시</td>
+<td>3~10ns</td>
+<td>256KB~1MB</td>
+</tr>
+<tr>
+<td>L3 캐시</td>
+<td>10~30ns</td>
+<td>4~64MB</td>
+</tr>
+<tr>
+<td>메인 메모리</td>
+<td>50~100ns</td>
+<td>8~64GB</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>~100μs</td>
+<td>256GB~4TB</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>~10ms</td>
+<td>1~20TB</td>
+</tr>
+</tbody>
+</table>
+<p>이것은 물리적 한계 때문이다. 빠른 메모리는 물리적으로 CPU에 가까이 있어야 하고, 가까이 있으려면 크기가 작아야 한다. SRAM(캐시에 사용)은 DRAM(메인 메모리)보다 훨씬 빠르지만, 같은 용량을 만드는 데 수십 배의 비용과 면적이 필요하다.</p>
+<h3 id="_2">수치로 체감하기<a class="headerlink" href="#_2" title="Permanent link">#</a></h3>
+<p>L1 캐시 접근(~1ns)과 HDD 접근(~10ms)의 속도 차이를 <strong>인간 시간 척도</strong>로 변환하면:</p>
+<table>
+<thead>
+<tr>
+<th>저장소</th>
+<th>접근 시간</th>
+<th>인간 척도 비유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 캐시</td>
+<td>~1ns</td>
+<td>1초</td>
+</tr>
+<tr>
+<td>L2 캐시</td>
+<td>~5ns</td>
+<td>5초</td>
+</tr>
+<tr>
+<td>L3 캐시</td>
+<td>~20ns</td>
+<td>20초</td>
+</tr>
+<tr>
+<td>메인 메모리</td>
+<td>~100ns</td>
+<td>1분 40초</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>~100μs</td>
+<td>약 1일</td>
+</tr>
+<tr>
+<td>HDD</td>
+<td>~10ms</td>
+<td>약 4개월</td>
+</tr>
+</tbody>
+</table>
+<p>L1 캐시에서 데이터를 가져오는 게 1초라면, HDD에서 가져오는 건 <strong>4개월</strong>이다. 이 속도 차이가 캐시의 존재 이유다.</p>
+<h3 id="3-2-principle-of-locality">3-2. 지역성 원리 (Principle of Locality)<a class="headerlink" href="#3-2-principle-of-locality" title="Permanent link">#</a></h3>
+<p>캐시가 효과적인 이유는 프로그램이 데이터에 접근하는 패턴에 <strong>규칙성</strong>이 있기 때문이다. 이것을 <strong>지역성 원리</strong>라고 한다.</p>
+<h4 id="temporal-locality">시간적 지역성 (Temporal Locality)<a class="headerlink" href="#temporal-locality" title="Permanent link">#</a></h4>
+<blockquote>
+<p>최근에 접근한 데이터는 <strong>가까운 미래에 다시 접근할 가능성이 높다.</strong></p>
+</blockquote>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 예: 반복문의 변수</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">total</span> <span class="o">+=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># &#39;total&#39; 변수에 1000번 반복 접근</span>
+</span></code></pre></div>
+<p><code>total</code> 변수는 루프가 돌 때마다 접근된다. 한 번 캐시에 올려두면 999번은 캐시에서 빠르게 읽을 수 있다.</p>
+<h4 id="spatial-locality">공간적 지역성 (Spatial Locality)<a class="headerlink" href="#spatial-locality" title="Permanent link">#</a></h4>
+<blockquote>
+<p>최근에 접근한 데이터 <strong>근처의 데이터</strong>도 곧 접근할 가능성이 높다.</p>
+</blockquote>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 예: 배열 순차 접근</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">process</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># data[0], data[1], data[2]... 순서대로 접근</span>
+</span></code></pre></div>
+<p><code>data[0]</code>을 읽을 때 캐시는 <code>data[0]</code>만 가져오는 게 아니라, 인접한 <code>data[1]</code>, <code>data[2]</code>... 등도 함께 가져온다(캐시 라인 단위). 그래서 <code>data[1]</code>에 접근할 때는 이미 캐시에 있어 빠르게 읽을 수 있다.</p>
 <hr />
-<h2 id="_4">하트비트를 켜두면 편하다<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
-<p>하트비트는 에이전트가 주기적으로(기본 30분) 깨어나서 할 일을 체크하는 기능이다.</p>
-<p>HEARTBEAT.md에 체크리스트를 적어두면 된다. 나는 API 상태 모니터링을 넣어뒀는데, Anthropic API 과부하가 감지되면 자동으로 모델을 전환하고 알려주게 했다.</p>
-<p>이메일 확인, 캘린더 알림 같은 것도 넣을 수 있다. 다만 깨어날 때마다 API 비용이 발생하니까 너무 자주 깨우면 비용이 올라간다.</p>
+<h2 id="4">4. 캐시의 기본 동작<a class="headerlink" href="#4" title="Permanent link">#</a></h2>
+<h3 id="4-1-cache-hit-cache-miss">4-1. Cache Hit와 Cache Miss<a class="headerlink" href="#4-1-cache-hit-cache-miss" title="Permanent link">#</a></h3>
+<p>캐시의 동작은 단 두 가지 경우로 나뉜다:</p>
+<p><strong>Cache Hit</strong>(캐시 적중): 요청한 데이터가 캐시에 있음 → 빠르게 반환</p>
+<p><strong>Cache Miss</strong>(캐시 미스): 요청한 데이터가 캐시에 없음 → 느린 저장소에서 가져옴</p>
+<p>캐시 미스는 다시 세 가지로 분류된다:</p>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>원인</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cold Miss</strong> (Compulsory)</td>
+<td>처음 접근</td>
+<td>한 번도 캐시에 올라온 적 없는 데이터</td>
+</tr>
+<tr>
+<td><strong>Capacity Miss</strong></td>
+<td>용량 부족</td>
+<td>캐시가 꽉 차서 오래된 데이터가 밀려남</td>
+</tr>
+<tr>
+<td><strong>Conflict Miss</strong></td>
+<td>매핑 충돌</td>
+<td>다른 데이터가 같은 캐시 위치를 사용</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-2-amat">4-2. 히트율과 성능 — AMAT<a class="headerlink" href="#4-2-amat" title="Permanent link">#</a></h3>
+<p>캐시 성능을 측정하는 가장 중요한 지표는 <strong>히트율</strong>(Hit Rate)이다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>히트율 = 캐시 히트 수 / 전체 접근 수
+</span></code></pre></div>
+<p>캐시의 성능 효과를 정량화하는 공식:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>AMAT = Hit Time + (Miss Rate × Miss Penalty)
+</span></code></pre></div>
+<p>Hit Time = 1ns, Miss Penalty = 100ns라고 가정하면:</p>
+<table>
+<thead>
+<tr>
+<th>히트율</th>
+<th>Miss Rate</th>
+<th>AMAT</th>
+<th>체감 속도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>90%</td>
+<td>10%</td>
+<td>11ns</td>
+<td>기본</td>
+</tr>
+<tr>
+<td>95%</td>
+<td>5%</td>
+<td>6ns</td>
+<td><strong>1.8배</strong> 빠름</td>
+</tr>
+<tr>
+<td>99%</td>
+<td>1%</td>
+<td>2ns</td>
+<td><strong>5.5배</strong> 빠름</td>
+</tr>
+</tbody>
+</table>
+<p>히트율이 90%에서 99%로, 겨우 <strong>9% 올랐을 뿐인데</strong> 성능은 <strong>5배 이상</strong> 차이가 난다.</p>
+<h3 id="memory-wall">Memory Wall 문제<a class="headerlink" href="#memory-wall" title="Permanent link">#</a></h3>
+<p>CPU의 연산 속도는 매년 빠르게 발전해왔지만, 메모리(DRAM)의 접근 속도는 상대적으로 느리게 발전해왔다. 이 격차를 <strong>Memory Wall</strong>(메모리 벽)이라 부른다.</p>
+<p>CPU가 아무리 빨라도, 데이터를 기다리느라 놀고 있다면 의미가 없다. 캐시는 이 격차를 메우는 핵심 기술이다.</p>
 <hr />
-<h2 id="_5">워크스페이스가 지저분해지면 느려진다<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
-<p>작업을 하다 보면 워크스페이스에 파일이 쌓인다. 에이전트가 컨텍스트를 파악하는 데 읽는 파일이 많아지면 응답이 느려지고 비용도 올라간다.</p>
-<p>프로젝트별로 하위 디렉토리를 만들어서 분리하고, 핵심 설정 파일(SOUL.md, USER.md, MEMORY.md 등)만 루트에 두는 게 깔끔하다.</p>
+<h2 id="_3">정리<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<ol>
+<li><strong>캐시란</strong> 자주 쓰는 데이터의 사본을 빠른 저장소에 보관하는 것</li>
+<li><strong>메모리 계층 구조</strong>에서 속도와 용량은 트레이드오프 관계</li>
+<li><strong>지역성 원리</strong> 덕분에 작은 캐시로도 높은 히트율 달성 가능</li>
+<li><strong>히트율 몇 %의 차이</strong>가 성능에 극적인 영향을 미침</li>
+</ol>
 <hr />
-<h2 id="_6">참고<a class="headerlink" href="#_6" title="Permanent link">#</a></h2>
-<ul>
-<li><a href="https://docs.openclaw.ai">OpenClaw 공식 문서</a></li>
-<li><a href="https://github.com/openclaw/openclaw">OpenClaw GitHub</a></li>
-</ul>
+<h2 id="_4">다음 편 예고<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
+<p><strong>2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳</strong>에서는 CPU L1/L2/L3 캐시의 구조와 매핑 방식, 디스크 캐시, 웹 브라우저 캐시, CDN, Redis/Memcached 등 각 계층별 캐시를 다룬다.</p>
+<hr />
+<h2 id="_5">참고문헌<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
+<ol>
+<li>Hennessy, J. L. &amp; Patterson, D. A. (2017). <em>Computer Architecture: A Quantitative Approach</em>, 6th Edition. Morgan Kaufmann.</li>
+<li>Bryant, R. E. &amp; O'Hallaron, D. R. (2015). <em>Computer Systems: A Programmer's Perspective</em>, 3rd Edition. Pearson.</li>
+<li>Wilkes, M. V. (1965). "Slave Memories and Dynamic Storage Allocation." <em>IEEE Transactions on Electronic Computers</em>, EC-14(2).</li>
+<li>Denning, P. J. (2005). "The Locality Principle." <em>Communications of the ACM</em>, 48(7).</li>
+<li>Wulf, W. A. &amp; McKee, S. A. (1995). "Hitting the Memory Wall." <em>ACM SIGARCH Computer Architecture News</em>, 23(1).</li>
+</ol>
 
 
 
@@ -948,6 +1233,8 @@
   
 
 
+
+  
 
 
   
@@ -979,7 +1266,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../rtx-5060-ti-16gb%EC%97%90-stable-diffusion-forge-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/" class="md-footer__link md-footer__link--prev" aria-label="이전: RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기">
+          <a href="../cache-part2/" class="md-footer__link md-footer__link--prev" aria-label="이전: 캐시의 모든 것 2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -989,20 +1276,20 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기
+                캐시의 모든 것 2편: CPU부터 CDN까지 — 캐시가 쓰이는 모든 곳
               </div>
             </div>
           </a>
         
         
           
-          <a href="../openclaw%EC%9C%BC%EB%A1%9C-%EA%B0%9C%EC%9D%B8-ai-%EB%B9%84%EC%84%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0--%ED%85%94%EB%A0%88%EA%B7%B8%EB%9E%A8--claude/" class="md-footer__link md-footer__link--next" aria-label="다음: OpenClaw으로 개인 AI 비서 만들기 — 텔레그램 + Claude">
+          <a href="../sd-forge-rtx5060ti-install/" class="md-footer__link md-footer__link--next" aria-label="다음: RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                OpenClaw으로 개인 AI 비서 만들기 — 텔레그램 + Claude
+                RTX 5060 Ti 16GB에 Stable Diffusion Forge 설치하기
               </div>
             </div>
             <div class="md-footer__button md-icon">
