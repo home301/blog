@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="RTX 5060 Ti로 AI 이미지를 생성하다 GPU가 먹통이 됐다. 소프트 리부트로는 안 살아나고, 전원을 완전히 끄는 콜드부팅만이 답이었다. 원격 환경에서 이걸 자동화한 기록.">
+        <meta name="description" content="RTX 5060 Ti GPU 크래시 후 rtcwake 콜드부팅으로 자동 복구를 시도했으나, 1회 콜드부팅만으로는 GPU 드라이버가 완전히 초기화되지 않아 실패한 기록.">
       
       
         <meta name="author" content="Mingi Choi">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅 - Home301 Dev Blog</title>
+        <title>Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계 - Home301 Dev Blog</title>
       
     
     
@@ -71,8 +71,8 @@
     
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅 - Home301 Dev Blog">
-  <meta property="og:description" content="RTX 5060 Ti로 AI 이미지를 생성하다 GPU가 먹통이 됐다. 소프트 리부트로는 안 살아나고, 전원을 완전히 끄는 콜드부팅만이 답이었다. 원격 환경에서 이걸 자동화한 기록.">
+  <meta property="og:title" content="Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계 - Home301 Dev Blog">
+  <meta property="og:description" content="RTX 5060 Ti GPU 크래시 후 rtcwake 콜드부팅으로 자동 복구를 시도했으나, 1회 콜드부팅만으로는 GPU 드라이버가 완전히 초기화되지 않아 실패한 기록.">
   <meta property="og:url" content="https://home301.dev/blog/linux-gpu-cold-reboot/">
   <meta property="og:site_name" content="Home301 Dev Blog">
   <meta property="og:locale" content="ko_KR">
@@ -81,8 +81,8 @@
   <meta property="article:author" content="Mingi Choi">
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅 - Home301 Dev Blog">
-  <meta name="twitter:description" content="RTX 5060 Ti로 AI 이미지를 생성하다 GPU가 먹통이 됐다. 소프트 리부트로는 안 살아나고, 전원을 완전히 끄는 콜드부팅만이 답이었다. 원격 환경에서 이걸 자동화한 기록.">
+  <meta name="twitter:title" content="Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계 - Home301 Dev Blog">
+  <meta name="twitter:description" content="RTX 5060 Ti GPU 크래시 후 rtcwake 콜드부팅으로 자동 복구를 시도했으나, 1회 콜드부팅만으로는 GPU 드라이버가 완전히 초기화되지 않아 실패한 기록.">
 
 
   </head>
@@ -138,7 +138,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅
+              Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계
             
           </span>
         </div>
@@ -744,6 +744,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        첫 번째 시도 — 실패
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rtc-wake" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -755,7 +766,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         온보드 그래픽 출력 문제
@@ -771,10 +782,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        부팅 후 자동 복구 확인
+        두 번째 시도 — 부분 성공
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실전 투입 — 실패
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        왜 실패했는가
       
     </span>
   </a>
@@ -827,7 +860,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         결론
@@ -843,7 +876,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        남은 과제
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         정리
@@ -912,7 +956,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 3분
+                              읽는시간 4분
                             
                           </span>
                         </div>
@@ -982,12 +1026,13 @@
 
 
 
-<h1 id="linux-gpu-rtcwake">Linux에서 GPU 크래시 후 자동 복구하기 — rtcwake 콜드부팅<a class="headerlink" href="#linux-gpu-rtcwake" title="Permanent link">#</a></h1>
+<h1 id="linux-gpu-rtcwake">Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계<a class="headerlink" href="#linux-gpu-rtcwake" title="Permanent link">#</a></h1>
 <blockquote>
-<p>RTX 5060 Ti로 AI 이미지를 생성하다 GPU가 먹통이 됐다. 소프트 리부트로는 안 살아나고, 전원을 완전히 끄는 콜드부팅만이 답이었다. 원격 환경에서 이걸 자동화한 기록.</p>
+<p>RTX 5060 Ti로 AI 이미지를 생성하다 GPU가 먹통이 됐다. 원격 환경에서 rtcwake 콜드부팅으로 자동 복구를 시도했지만, 결론부터 말하면 완전한 자동 복구에는 실패했다.</p>
 </blockquote>
 <!-- more -->
 
+<hr />
 <h2 id="_1">문제 상황<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
 <p>ComfyUI에서 SDXL + IP-Adapter를 돌리다 VRAM이 초과됐다. <code>nvidia-smi</code>를 찍어보면:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>NVIDIA-SMI has failed because it couldn&#39;t communicate with the NVIDIA driver.
@@ -995,7 +1040,7 @@
 <p>또는:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>No devices were found
 </span></code></pre></div>
-<p>GPU가 완전히 응답을 멈춘 상태. <code>sudo reboot</code>으로 재시작해도 동일한 증상이 반복된다. 소프트 리부트으로는 GPU 하드웨어 상태가 초기화되지 않기 때문이다.</p>
+<p>GPU가 완전히 응답을 멈춘 상태. <code>sudo reboot</code>으로 재시작해도 동일한 증상이 반복된다. 소프트 리부트로는 GPU 하드웨어 상태가 초기화되지 않기 때문이다.</p>
 <p><strong>콜드부팅</strong>(전원을 완전히 끄고 다시 켜는 것)만이 해결책이다.</p>
 <hr />
 <h2 id="rtcwake">rtcwake로 콜드부팅 자동화<a class="headerlink" href="#rtcwake" title="Permanent link">#</a></h2>
@@ -1021,6 +1066,11 @@
 <hr />
 <h2 id="msi-bios">MSI 메인보드 BIOS 설정<a class="headerlink" href="#msi-bios" title="Permanent link">#</a></h2>
 <p>rtcwake를 실행했는데 전원이 꺼지기만 하고 자동으로 안 켜진다면, <strong>BIOS 설정</strong>을 확인해야 한다.</p>
+<h3 id="_3">첫 번째 시도 — 실패<a class="headerlink" href="#_3" title="Permanent link">#</a></h3>
+<p>처음 rtcwake를 실행했을 때, 전원은 꺼졌지만 60초가 지나도 자동으로 켜지지 않았다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cat<span class="w"> </span>/proc/driver/rtc
+</span></code></pre></div>
+<p><code>alarm_IRQ: no</code> — BIOS에서 RTC Wake가 비활성화된 상태였다.</p>
 <h3 id="rtc-wake">RTC Wake 설정<a class="headerlink" href="#rtc-wake" title="Permanent link">#</a></h3>
 <p>MSI 메인보드 기준:</p>
 <ol>
@@ -1035,10 +1085,10 @@
 </ul>
 <p><code>rtcwake</code>는 OS에서 RTC 알람을 설정하는 방식이므로, 반드시 <strong>OS 모드</strong>여야 한다. BIOS 모드로 두면 <code>rtcwake</code>가 설정한 알람이 무시된다.</p>
 <p>설정 후 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cat<span class="w"> </span>/proc/driver/rtc
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cat<span class="w"> </span>/proc/driver/rtc
 </span></code></pre></div>
-<p><code>alarm_IRQ: yes</code>가 보이면 정상이다. <code>alarm_IRQ: no</code>라면 BIOS 설정이 잘못된 것이다.</p>
-<h3 id="_3">온보드 그래픽 출력 문제<a class="headerlink" href="#_3" title="Permanent link">#</a></h3>
+<p><code>alarm_IRQ: yes</code>가 보이면 정상이다.</p>
+<h3 id="_4">온보드 그래픽 출력 문제<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
 <p>BIOS 설정을 바꾸려면 모니터를 연결해야 하는데, 여기서 또 다른 문제가 있었다.</p>
 <p>RTX 5060 Ti에는 DisplayPort와 HDMI만 있다. 기존 모니터가 DVI-D라면 직접 연결할 수 없다. 이 경우 메인보드의 <strong>온보드 그래픽</strong>(내장 GPU)으로 모니터를 연결해야 한다.</p>
 <p>MSI 메인보드에서 온보드 그래픽 출력을 활성화하려면:</p>
@@ -1055,29 +1105,41 @@
 <li>BIOS에서 IGD 설정 + RTC Wake OS 모드를 함께 잡는다</li>
 </ol>
 <hr />
-<h2 id="_4">부팅 후 자동 복구 확인<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
-<p>콜드부팅 후 시스템이 켜지면, 서비스들이 제대로 올라왔는지 확인해야 한다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># GPU 정상 확인</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>nvidia-smi
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># OpenClaw (또는 다른 상주 서비스) 확인</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>status<span class="w"> </span>openclaw-gateway
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># ComfyUI 등은 수동 시작 필요</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nb">cd</span><span class="w"> </span>~/ComfyUI<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./venv/bin/python<span class="w"> </span>main.py<span class="w"> </span>--lowvram<span class="w"> </span>--listen<span class="w"> </span>--port<span class="w"> </span><span class="m">8188</span><span class="w"> </span><span class="p">&amp;</span>
+<h2 id="_5">두 번째 시도 — 부분 성공<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
+<p>BIOS 설정을 마치고 다시 테스트했다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>rtcwake<span class="w"> </span>-m<span class="w"> </span>off<span class="w"> </span>-s<span class="w"> </span><span class="m">60</span>
 </span></code></pre></div>
-<p>원격 환경이라면 cron이나 systemd 타이머로 부팅 후 자동 알림을 설정해두면 편하다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># crontab -e</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>@reboot<span class="w"> </span>sleep<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;https://api.telegram.org/bot&lt;TOKEN&gt;/sendMessage?chat_id=&lt;ID&gt;&amp;text=서버 재부팅 완료&quot;</span>
+<p>이번에는 성공했다. 전원이 꺼지고 60초 후 자동으로 켜졌다. GPU도 정상이었다.</p>
+<p>여기서 "해결됐다"고 생각했다.</p>
+<hr />
+<h2 id="_6">실전 투입 — 실패<a class="headerlink" href="#_6" title="Permanent link">#</a></h2>
+<p>실제 GPU 크래시가 다시 발생했다. 이미지 생성 작업(3모델 x 4표정) 중이었다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nvidia-smi: &quot;Unable to determine the device handle&quot;
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>nvidia-smi: &quot;No devices were found&quot;
 </span></code></pre></div>
+<p>콜드부팅 스크립트를 실행했다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>rtcwake<span class="w"> </span>-m<span class="w"> </span>off<span class="w"> </span>-s<span class="w"> </span><span class="m">60</span>
+</span></code></pre></div>
+<p>전원 차단은 성공했다. 60초 후 자동 재시작도 됐다. <strong>하지만 OS 부팅에 실패했다.</strong></p>
+<p>화면에는 GPU 드라이버 에러 메시지가 반복 출력됐다. 부팅이 완료되지 않아 SSH 접속도 불가능했다.</p>
+<p>결국 직접 전원 버튼을 길게 눌러 강제 종료하고, 수동으로 전원을 다시 켜서야 정상 부팅됐다.</p>
+<hr />
+<h2 id="_7">왜 실패했는가<a class="headerlink" href="#_7" title="Permanent link">#</a></h2>
+<p>테스트 때는 GPU가 정상인 상태에서 콜드부팅을 했고, 실전에서는 <strong>GPU가 크래시된 상태</strong>에서 콜드부팅을 했다. 차이는 이렇다.</p>
+<ul>
+<li><strong>정상 상태 콜드부팅</strong>: 전원 차단 → 60초 대기 → 재시작 → GPU 초기화 성공</li>
+<li><strong>크래시 상태 콜드부팅</strong>: 전원 차단 → 60초 대기 → 재시작 → GPU 드라이버가 비정상 상태의 GPU를 초기화하지 못함</li>
+</ul>
+<p>추정하건대, rtcwake의 60초 대기로는 GPU 하드웨어의 전원이 완전히 방전되지 않은 것 같다. GPU 내부의 상태가 잔류해서, 재시작 시 드라이버가 정상적으로 초기화하지 못한 것으로 보인다.</p>
+<p>수동으로 전원 버튼을 길게 눌러 강제 종료한 뒤 몇 초간 전원이 완전히 꺼진 상태를 거치면, GPU가 완전히 초기화되어 정상 부팅이 가능했다.</p>
 <hr />
 <h2 id="gpu">GPU 크래시를 재현해보려 했다<a class="headerlink" href="#gpu" title="Permanent link">#</a></h2>
-<p>콜드부팅 자동 복구 흐름을 테스트하려면 GPU 크래시를 의도적으로 만들어야 한다. 여러 방법을 시도했다.</p>
+<p>콜드부팅 복구 흐름을 다시 테스트하려면 GPU 크래시를 의도적으로 만들어야 한다. 여러 방법을 시도했다.</p>
 <h3 id="1-vram">시도 1: VRAM 가득 채우기<a class="headerlink" href="#1-vram" title="Permanent link">#</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">tensors</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">tensors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">))</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">tensors</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">tensors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">))</span>
 </span></code></pre></div>
 <p>결과: CUDA가 OOM(Out of Memory) 에러를 내고 <strong>정상 종료</strong>한다. GPU는 멀쩡하다.</p>
 <h3 id="2-ollama-comfyui">시도 2: Ollama + ComfyUI 동시 실행<a class="headerlink" href="#2-ollama-comfyui" title="Permanent link">#</a></h3>
@@ -1086,12 +1148,21 @@
 <h3 id="3-cuda">시도 3: 직접 CUDA 메모리 할당<a class="headerlink" href="#3-cuda" title="Permanent link">#</a></h3>
 <p><code>cudaMalloc</code>으로 VRAM 전체를 직접 할당하는 C 프로그램을 작성해봤다.</p>
 <p>결과: 역시 CUDA 런타임이 할당 실패를 반환할 뿐, GPU 드라이버 크래시로 이어지지 않았다.</p>
-<h3 id="_5">결론<a class="headerlink" href="#_5" title="Permanent link">#</a></h3>
+<h3 id="_8">결론<a class="headerlink" href="#_8" title="Permanent link">#</a></h3>
 <p><strong>최신 CUDA 드라이버는 OOM을 graceful하게 처리한다.</strong> 단순히 VRAM을 초과하는 것만으로는 GPU 크래시가 나지 않는다.</p>
-<p>실제로 크래시가 발생했던 상황은 PyTorch nightly + ComfyUI에서 SDXL + IP-Adapter를 <code>--lowvram</code> 없이 돌렸을 때였다. nightly 빌드의 드라이버 레벨 버그와 여러 대형 모델의 동시 로딩이 결합되어 발생한 것으로 추정된다. 안정적인 드라이버 + 적절한 VRAM 관리(<code>--lowvram</code> 모드)를 사용하면 사실상 GPU 크래시를 걱정할 필요가 없다.</p>
-<p>그래도 만약을 위해 콜드부팅 스크립트는 만들어두는 게 좋다. 복구 수단이 있다는 것 자체가 안심이 된다.</p>
+<p>실제로 크래시가 발생했던 상황은 PyTorch nightly + ComfyUI에서 SDXL + IP-Adapter를 <code>--lowvram</code> 없이 돌렸을 때였다. nightly 빌드의 드라이버 레벨 버그와 여러 대형 모델의 동시 로딩이 결합되어 발생한 것으로 추정된다.</p>
 <hr />
-<h2 id="_6">정리<a class="headerlink" href="#_6" title="Permanent link">#</a></h2>
+<h2 id="_9">남은 과제<a class="headerlink" href="#_9" title="Permanent link">#</a></h2>
+<p>rtcwake 콜드부팅은 <strong>정상 상태에서의 원격 재시작 수단</strong>으로는 유효하지만, <strong>GPU 크래시 후 자동 복구 수단</strong>으로는 불완전하다.</p>
+<p>개선 가능성이 있는 방향:</p>
+<ul>
+<li><strong>대기 시간 연장</strong>: 60초가 아닌 300초(5분) 이상 대기하여 GPU 전원 방전 시간을 확보</li>
+<li><strong>다중 콜드부팅</strong>: 1회 실패 시 watchdog으로 2차 콜드부팅 시도</li>
+<li><strong>스마트 플러그</strong>: 네트워크 제어 가능한 전원 플러그로 물리적 전원 차단/투입</li>
+</ul>
+<p>현재로서는 이 중 어느 것도 검증하지 못했다. GPU 크래시를 의도적으로 재현할 수 없기 때문이다.</p>
+<hr />
+<h2 id="_10">정리<a class="headerlink" href="#_10" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -1102,10 +1173,10 @@
 <tbody>
 <tr>
 <td><strong>문제</strong></td>
-<td>GPU 크래시 후 소프트 리부트으로 복구 불가</td>
+<td>GPU 크래시 후 소프트 리부트로 복구 불가</td>
 </tr>
 <tr>
-<td><strong>해결</strong></td>
+<td><strong>시도</strong></td>
 <td><code>rtcwake -m off -s 60</code>으로 콜드부팅</td>
 </tr>
 <tr>
@@ -1113,12 +1184,20 @@
 <td>RTC Wake → OS 모드, 그래픽 → IGD</td>
 </tr>
 <tr>
-<td><strong>크래시 재현</strong></td>
-<td>CUDA OOM은 graceful 처리되어 크래시 불가</td>
+<td><strong>테스트 결과</strong></td>
+<td>정상 상태에서 콜드부팅 성공</td>
+</tr>
+<tr>
+<td><strong>실전 결과</strong></td>
+<td>GPU 크래시 상태에서 콜드부팅 후 OS 부팅 실패</td>
+</tr>
+<tr>
+<td><strong>최종 복구</strong></td>
+<td>수동 전원 강제 종료 → 수동 재시작으로 복구</td>
 </tr>
 <tr>
 <td><strong>교훈</strong></td>
-<td><code>--lowvram</code> 모드 사용하면 OOM 자체를 방지할 수 있다</td>
+<td>rtcwake 1회 콜드부팅으로는 GPU가 완전히 초기화되지 않을 수 있다</td>
 </tr>
 </tbody>
 </table>
