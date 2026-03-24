@@ -6,19 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="RTX 5060 Ti GPU 크래시 후 rtcwake 콜드부팅으로 자동 복구를 시도했으나, 1회 콜드부팅만으로는 GPU 드라이버가 완전히 초기화되지 않아 실패한 기록.">
+        <meta name="description" content="AI 이미지 생성 첫 걸음. 모델 선택부터 프롬프트, 해상도, CFG까지 삽질하며 배운 기초를 정리한다.">
       
       
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.dev/blog/linux-gpu-cold-reboot/">
+        <link rel="canonical" href="https://home301.dev/blog/ai-image-guide-01-first-gen/">
       
       
-        <link rel="prev" href="../comfyui-rtx5060ti-install/">
+        <link rel="prev" href="../free-blog-1-why-github-pages/">
       
-      
-        <link rel="next" href="../free-blog-1-why-github-pages/">
       
       
         
@@ -29,7 +27,7 @@
     
     
       
-        <title>Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계 - Home301 Dev Blog</title>
+        <title>1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야? - Home301 Dev Blog</title>
       
     
     
@@ -73,18 +71,18 @@
     
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계 - Home301 Dev Blog">
-  <meta property="og:description" content="RTX 5060 Ti GPU 크래시 후 rtcwake 콜드부팅으로 자동 복구를 시도했으나, 1회 콜드부팅만으로는 GPU 드라이버가 완전히 초기화되지 않아 실패한 기록.">
-  <meta property="og:url" content="https://home301.dev/blog/linux-gpu-cold-reboot/">
+  <meta property="og:title" content="1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야? - Home301 Dev Blog">
+  <meta property="og:description" content="AI 이미지 생성 첫 걸음. 모델 선택부터 프롬프트, 해상도, CFG까지 삽질하며 배운 기초를 정리한다.">
+  <meta property="og:url" content="https://home301.dev/blog/ai-image-guide-01-first-gen/">
   <meta property="og:site_name" content="Home301 Dev Blog">
   <meta property="og:locale" content="ko_KR">
   
-  <meta property="article:published_time" content="2026-03-08T00:00:00+09:00">
+  <meta property="article:published_time" content="2026-03-24T00:00:00+09:00">
   <meta property="article:author" content="Mingi Choi">
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계 - Home301 Dev Blog">
-  <meta name="twitter:description" content="RTX 5060 Ti GPU 크래시 후 rtcwake 콜드부팅으로 자동 복구를 시도했으나, 1회 콜드부팅만으로는 GPU 드라이버가 완전히 초기화되지 않아 실패한 기록.">
+  <meta name="twitter:title" content="1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야? - Home301 Dev Blog">
+  <meta name="twitter:description" content="AI 이미지 생성 첫 걸음. 모델 선택부터 프롬프트, 해상도, CFG까지 삽질하며 배운 기초를 정리한다.">
 
   <script type="application/ld+json">
   {
@@ -136,7 +134,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#linux-gpu-rtcwake" class="md-skip">
+        <a href="#1" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -170,7 +168,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계
+              1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야?
             
           </span>
         </div>
@@ -728,7 +726,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        문제 상황
+        들어가며
       
     </span>
   </a>
@@ -736,22 +734,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rtcwake" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        rtcwake로 콜드부팅 자동화
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="rtcwake로 콜드부팅 자동화">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        스크립트로 만들기
+        환경
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        모델 선택이 반이다
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="모델 선택이 반이다">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        삽질 1: 모델을 아무거나 골랐다
       
     </span>
   </a>
@@ -764,52 +773,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#msi-bios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MSI 메인보드 BIOS 설정
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="MSI 메인보드 BIOS 설정">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        첫 번째 시도 — 실패
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rtc-wake" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RTC Wake 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        온보드 그래픽 출력 문제
+        첫 번째 생성
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -817,21 +787,49 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        두 번째 시도 — 부분 성공
+        프롬프트의 함정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="프롬프트의 함정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        삽질 2: 프롬프트를 길게 쓰면 좋아질 거라고 생각했다
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        실전 투입 — 실패
+        프롬프트 가중치
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        삽질 3: 가중치를 너무 높게 줬다
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -839,63 +837,47 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        왜 실패했는가
+        해상도의 함정
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="해상도의 함정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        삽질 4: 고해상도로 생성하면 더 좋을 줄 알았다
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GPU 크래시를 재현해보려 했다
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GPU 크래시를 재현해보려 했다">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-vram" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        시도 1: VRAM 가득 채우기
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-ollama-comfyui" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        시도 2: Ollama + ComfyUI 동시 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-cuda" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        시도 3: 직접 CUDA 메모리 할당
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        결론
+        샘플러와 스텝
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="샘플러와 스텝">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-cfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        삽질 5: CFG를 높이면 프롬프트대로 나올 줄 알았다
       
     </span>
   </a>
@@ -911,7 +893,7 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        남은 과제
+        네거티브 프롬프트
       
     </span>
   </a>
@@ -920,6 +902,28 @@
       
         <li class="md-nav__item">
   <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시드와 재현성
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        첫 결과 평가
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         정리
@@ -966,7 +970,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-03-08 00:00:00+00:00" class="md-ellipsis">2026년 3월 8일</time>
+                        <time datetime="2026-03-24 00:00:00+00:00" class="md-ellipsis">2026년 3월 24일</time>
                       </div>
                     </li>
                     
@@ -988,7 +992,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 4분
+                              읽는시간 7분
                             
                           </span>
                         </div>
@@ -1016,224 +1020,210 @@
       
       
       
-        <span class="md-tag">cold-boot</span>
+        <span class="md-tag">ai-image</span>
       
     
       
       
       
       
-        <span class="md-tag">gpu</span>
+        <span class="md-tag">comfyui</span>
       
     
       
       
       
       
-        <span class="md-tag">linux</span>
+        <span class="md-tag">prompt</span>
       
     
       
       
       
       
-        <span class="md-tag">msi-bios</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">rtcwake</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">rtx5060ti</span>
+        <span class="md-tag">stable-diffusion</span>
       
     
   </nav>
 
 
 
-<h1 id="linux-gpu-rtcwake">Linux에서 GPU 크래시 후 자동 복구를 시도하다 — rtcwake 콜드부팅의 한계<a class="headerlink" href="#linux-gpu-rtcwake" title="Permanent link">#</a></h1>
-<blockquote>
-<p>RTX 5060 Ti로 AI 이미지를 생성하다 GPU가 먹통이 됐다. 원격 환경에서 rtcwake 콜드부팅으로 자동 복구를 시도했지만, 결론부터 말하면 완전한 자동 복구에는 실패했다.</p>
-</blockquote>
+<h1 id="1">1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야?<a class="headerlink" href="#1" title="Permanent link">#</a></h1>
+<p><em>AI 이미지 생성 실전 가이드 | 여성 캐릭터 일러스트를 만들며 배운 것들</em></p>
 <!-- more -->
 
 <hr />
-<h2 id="_1">문제 상황<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p>ComfyUI에서 SDXL + IP-Adapter를 돌리다 VRAM이 초과됐다. <code>nvidia-smi</code>를 찍어보면:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>NVIDIA-SMI has failed because it couldn&#39;t communicate with the NVIDIA driver.
+<h2 id="_1">들어가며<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
+<p>AI로 이미지를 만든다. 프롬프트 한 줄 쓰면 그럴듯한 그림이 나온다. 그렇게 들었다.</p>
+<p>실제로 해보면 현실은 좀 다르다. "예쁜 여성 캐릭터"를 만들고 싶었을 뿐인데, 나오는 건 누구인지 모를 얼굴에 손가락이 6개고 옷은 녹아내리는 무언가다. 뭐가 잘못된 건지 감도 안 잡힌다.</p>
+<p>이 시리즈는 그 삽질의 기록이다. 로컬 환경에서 SD 1.5 모델을 돌리며, 여성 캐릭터 일러스트 하나를 완성하기까지 겪은 과정을 단계별로 정리했다. 화려한 결과물 자랑이 아니라, <strong>뭘 시도했고 뭐가 안 됐고 어떻게 고쳤는지</strong>에 초점을 맞췄다.</p>
+<h2 id="_2">환경<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>모델</strong>: Stable Diffusion 1.5 (DreamShaper 8)</li>
+<li><strong>UI</strong>: ComfyUI</li>
+<li><strong>GPU</strong>: RTX 5060 Ti 16GB</li>
+<li><strong>OS</strong>: Pop!_OS 24.04 LTS</li>
+</ul>
+<p>SD 1.5를 선택한 이유는 단순하다. VRAM 부담이 적고, 생태계가 가장 넓다. ControlNet, LoRA, 인페인팅 등 후처리에 필요한 도구가 전부 SD 1.5 기반으로 가장 많이 만들어져 있다. SDXL이나 Flux가 품질은 더 좋지만, 16GB에서 복잡한 파이프라인을 돌리려면 SD 1.5가 현실적이다.</p>
+<h2 id="_3">모델 선택이 반이다<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<p>Stable Diffusion은 "모델"을 바꾸면 완전히 다른 그림이 나온다. 같은 프롬프트를 넣어도 모델에 따라 화풍, 품질, 분위기가 천차만별이다.</p>
+<p>SD 1.5 기반 체크포인트는 수천 개가 있다. 대표적인 것만 꼽으면:</p>
+<ul>
+<li><strong>DreamShaper</strong>: 범용. 일러스트와 실사 중간 느낌. 처음 시작하기 좋다.</li>
+<li><strong>Realistic Vision</strong>: 실사 특화. 사진 같은 결과물을 원할 때.</li>
+<li><strong>Anything v5</strong>: 애니메이션/일러스트 특화. 깔끔한 선화.</li>
+<li><strong>RevAnimated</strong>: 판타지/게임 느낌. 디테일이 화려하다.</li>
+</ul>
+<p>이 시리즈에서는 <strong>DreamShaper 8</strong>을 메인으로 사용한다. 범용적이라 다양한 실험을 하기에 적합하다.</p>
+<h3 id="1_1">삽질 1: 모델을 아무거나 골랐다<a class="headerlink" href="#1_1" title="Permanent link">#</a></h3>
+<p>처음에는 "SD 1.5면 다 비슷하겠지"라고 생각했다. 아니었다. 어떤 모델은 얼굴이 뭉개지고, 어떤 모델은 색감이 탁하고, 어떤 모델은 특정 스타일에서만 결과가 좋았다.</p>
+<p><strong>교훈</strong>: 모델은 화구다. 수채화 물감으로 유화를 그릴 수 없듯이, 실사 모델로 애니메이션 스타일을 뽑으면 어정쩡한 결과가 나온다. 원하는 스타일에 맞는 모델을 먼저 골라야 한다.</p>
+<h2 id="_4">첫 번째 생성<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
+<p>ComfyUI에서 가장 기본적인 워크플로를 구성한다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[체크포인트 로드] -&gt; [프롬프트 입력] -&gt; [빈 이미지(512x768)] -&gt; [KSampler] -&gt; [VAE 디코드] -&gt; [저장]
 </span></code></pre></div>
-<p>또는:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>No devices were found
-</span></code></pre></div>
-<p>GPU가 완전히 응답을 멈춘 상태. <code>sudo reboot</code>으로 재시작해도 동일한 증상이 반복된다. 소프트 리부트로는 GPU 하드웨어 상태가 초기화되지 않기 때문이다.</p>
-<p><strong>콜드부팅</strong>(전원을 완전히 끄고 다시 켜는 것)만이 해결책이다.</p>
-<hr />
-<h2 id="rtcwake">rtcwake로 콜드부팅 자동화<a class="headerlink" href="#rtcwake" title="Permanent link">#</a></h2>
-<p>모니터 없이 원격으로만 접속하는 서버라면, 전원을 끄면 다시 켤 수가 없다. <code>rtcwake</code>를 쓰면 "전원 끄고 N초 뒤에 자동으로 켜라"를 예약할 수 있다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>rtcwake<span class="w"> </span>-m<span class="w"> </span>off<span class="w"> </span>-s<span class="w"> </span><span class="m">60</span>
+<p>프롬프트를 넣어본다.</p>
+<h2 id="_5">프롬프트의 함정<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
+<h3 id="2">삽질 2: 프롬프트를 길게 쓰면 좋아질 거라고 생각했다<a class="headerlink" href="#2" title="Permanent link">#</a></h3>
+<p>SD 1.5는 CLIP 토큰 제한이 77개다. 그 이상 쓰면 뒤쪽 단어는 영향력이 급격히 떨어진다. 프롬프트를 장문으로 쓰면 모델이 어디에 집중해야 할지 혼란스러워하고, 결과가 뒤섞인다.</p>
+<p><strong>나쁜 예 -- 장문 프롬프트:</strong></p>
+<blockquote>
+<p><strong>Positive</strong>: a beautiful gorgeous stunning young woman with long flowing silky black hair wearing an elegant luxurious red silk dress with intricate gold embroidery standing in a beautiful garden with roses and cherry blossoms under soft golden sunset lighting with bokeh background, masterpiece, best quality, ultra detailed, 8k uhd, sharp focus, professional photography, highly detailed face, perfect skin, glowing eyes, dramatic composition</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
+<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+</blockquote>
+<p><img alt="장문 프롬프트 결과" src="../ai-image/images/01/01_long_prompt_bad.png" /></p>
+<p>원하는 건 "정원에서 빨간 드레스를 입은 여성"이었다. 결과물을 보면 대충 그런 느낌은 나지만, 손가락이 뭉개지고 의상 디테일이 녹아내린다. 프롬프트에 너무 많은 걸 욱여넣은 탓이다.</p>
+<p><strong>개선 -- 핵심만 남긴 프롬프트:</strong></p>
+<blockquote>
+<p><strong>Positive</strong>: young woman, black hair, red dress, garden, sunset lighting</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
+<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+</blockquote>
+<p><img alt="핵심 프롬프트 결과" src="../ai-image/images/01/02_short_prompt_good.png" /></p>
+<p>같은 시드, 같은 설정인데 프롬프트만 줄였다. 모델이 집중할 수 있는 키워드가 적어지니 오히려 구도와 인물 표현이 안정된다. 완벽하진 않지만, 장문보다 낫다.</p>
+<h3 id="_6">프롬프트 가중치<a class="headerlink" href="#_6" title="Permanent link">#</a></h3>
+<p>특정 요소를 강조하고 싶으면 괄호와 숫자를 쓴다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>(red dress:1.3), (black hair:1.1), young woman
 </span></code></pre></div>
 <ul>
-<li><code>-m off</code>: 전원 완전 차단 (콜드 파워오프)</li>
-<li><code>-s 60</code>: 60초 후 자동 부팅</li>
+<li><code>1.0</code>이 기본값</li>
+<li><code>1.1~1.3</code>이면 적당한 강조</li>
+<li><code>1.5</code> 이상은 과하다. 이미지가 깨지기 시작한다.</li>
 </ul>
-<p>이 명령을 실행하면 시스템이 즉시 꺼지고, 메인보드의 RTC(Real Time Clock) 알람이 60초 후 시스템을 자동으로 켠다.</p>
-<h3 id="_2">스크립트로 만들기<a class="headerlink" href="#_2" title="Permanent link">#</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="ch">#!/bin/bash</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># cold-reboot.sh</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">DELAY</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">60</span><span class="si">}</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">: 콜드부팅 예약 - </span><span class="si">${</span><span class="nv">DELAY</span><span class="si">}</span><span class="s2">초 후 자동 재시작&quot;</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sudo<span class="w"> </span>rtcwake<span class="w"> </span>-m<span class="w"> </span>off<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DELAY</span><span class="s2">&quot;</span>
-</span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>cold-reboot.sh
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>./cold-reboot.sh<span class="w"> </span><span class="m">60</span><span class="w">     </span><span class="c1"># 60초 후 재시작</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>./cold-reboot.sh<span class="w"> </span><span class="m">300</span><span class="w">    </span><span class="c1"># 5분 후 재시작</span>
-</span></code></pre></div>
-<hr />
-<h2 id="msi-bios">MSI 메인보드 BIOS 설정<a class="headerlink" href="#msi-bios" title="Permanent link">#</a></h2>
-<p>rtcwake를 실행했는데 전원이 꺼지기만 하고 자동으로 안 켜진다면, <strong>BIOS 설정</strong>을 확인해야 한다.</p>
-<h3 id="_3">첫 번째 시도 — 실패<a class="headerlink" href="#_3" title="Permanent link">#</a></h3>
-<p>처음 rtcwake를 실행했을 때, 전원은 꺼졌지만 60초가 지나도 자동으로 켜지지 않았다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cat<span class="w"> </span>/proc/driver/rtc
-</span></code></pre></div>
-<p><code>alarm_IRQ: no</code> — BIOS에서 RTC Wake가 비활성화된 상태였다.</p>
-<h3 id="rtc-wake">RTC Wake 설정<a class="headerlink" href="#rtc-wake" title="Permanent link">#</a></h3>
-<p>MSI 메인보드 기준:</p>
-<ol>
-<li>BIOS 진입 (부팅 시 DEL 키)</li>
-<li><strong>Advanced</strong> → <strong>Wake Up Event Setup</strong> → <strong>Resume By RTC Alarm</strong></li>
-<li><strong>OS 모드</strong>로 설정</li>
-</ol>
-<p>주의할 점이 있다. MSI BIOS의 RTC Wake에는 두 가지 모드가 있다.</p>
+<h3 id="3">삽질 3: 가중치를 너무 높게 줬다<a class="headerlink" href="#3" title="Permanent link">#</a></h3>
+<blockquote>
+<p><strong>Positive</strong>: (beautiful face:1.8), (perfect eyes:1.8), young woman, black hair, red dress</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
+<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+</blockquote>
+<p><img alt="과도한 가중치 결과" src="../ai-image/images/01/03_weight_extreme.png" /></p>
+<p><code>(beautiful face:1.8)</code>을 넣었더니 얼굴이 예뻐지는 게 아니라 완전히 붕괴됐다. 눈 주변에 글리치 패턴이 생기고, 피부가 왁스처럼 녹아내린다. 가중치는 "더 예쁘게"가 아니라 "이 개념에 더 집중해"라는 의미다. 과하면 독이 된다.</p>
+<p><strong>적절한 가중치로 수정:</strong></p>
+<blockquote>
+<p><strong>Positive</strong>: (red dress:1.2), young woman, black hair, garden</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
+<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+</blockquote>
+<p><img alt="적절한 가중치 결과" src="../ai-image/images/01/04_weight_moderate.png" /></p>
+<p>1.2 정도면 드레스가 좀 더 강조되면서도 이미지가 깨지지 않는다.</p>
+<h2 id="_7">해상도의 함정<a class="headerlink" href="#_7" title="Permanent link">#</a></h2>
+<h3 id="4">삽질 4: 고해상도로 생성하면 더 좋을 줄 알았다<a class="headerlink" href="#4" title="Permanent link">#</a></h3>
+<p>SD 1.5는 <strong>512x512</strong> 또는 <strong>512x768</strong>로 학습됐다. 이 해상도에서 가장 안정적인 결과가 나온다.</p>
+<blockquote>
+<p><strong>Positive</strong>: young woman, black hair, red dress, portrait</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
+<p><strong>설정</strong>: DreamShaper 8 | <strong>1024x1024</strong> | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+</blockquote>
+<p><img alt="고해상도 직접 생성 결과" src="../ai-image/images/01/05_highres_bad.png" /></p>
+<p>1024x1024로 바로 생성했더니 인물이 두 명 나왔다. 모델이 학습한 해상도를 벗어나면 구조를 잡지 못하고, 같은 패턴을 반복하거나 여러 인물을 합성하는 현상이 나타난다.</p>
+<p><strong>해결</strong>: 512x768로 생성한 다음, 나중에 업스케일한다. 이건 9화에서 다룬다.</p>
+<h2 id="_8">샘플러와 스텝<a class="headerlink" href="#_8" title="Permanent link">#</a></h2>
+<p>KSampler의 설정도 결과에 영향을 준다.</p>
 <ul>
-<li><strong>BIOS 모드</strong>: BIOS에서 직접 시간을 지정 (예: 매일 07:00에 켜기)</li>
-<li><strong>OS 모드</strong>: OS(Linux)가 RTC 알람을 설정하도록 허용</li>
+<li><strong>샘플러</strong>: <code>euler_ancestral</code>이 무난한 시작점. <code>dpm++ 2m karras</code>는 좀 더 선명한 결과를 준다.</li>
+<li><strong>스텝</strong>: 20~30이 적당하다. 10 이하면 흐릿하고, 50 이상이면 과하게 수렴해서 딱딱해진다.</li>
+<li><strong>CFG Scale</strong>: 7~8이 기본. 높으면 프롬프트에 과도하게 충실해지면서 부자연스러워지고, 낮으면 프롬프트를 무시한다.</li>
 </ul>
-<p><code>rtcwake</code>는 OS에서 RTC 알람을 설정하는 방식이므로, 반드시 <strong>OS 모드</strong>여야 한다. BIOS 모드로 두면 <code>rtcwake</code>가 설정한 알람이 무시된다.</p>
-<p>설정 후 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cat<span class="w"> </span>/proc/driver/rtc
-</span></code></pre></div>
-<p><code>alarm_IRQ: yes</code>가 보이면 정상이다.</p>
-<h3 id="_4">온보드 그래픽 출력 문제<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
-<p>BIOS 설정을 바꾸려면 모니터를 연결해야 하는데, 여기서 또 다른 문제가 있었다.</p>
-<p>RTX 5060 Ti에는 DisplayPort와 HDMI만 있다. 기존 모니터가 DVI-D라면 직접 연결할 수 없다. 이 경우 메인보드의 <strong>온보드 그래픽</strong>(내장 GPU)으로 모니터를 연결해야 한다.</p>
-<p>MSI 메인보드에서 온보드 그래픽 출력을 활성화하려면:</p>
-<ol>
-<li>BIOS 진입</li>
-<li><strong>Advanced</strong> → <strong>Integrated Graphics Configuration</strong> (또는 <strong>IGD Multi-Monitor</strong>)</li>
-<li><strong>Initiate Graphic Adapter</strong>: <strong>IGD</strong>로 변경</li>
-</ol>
-<p>기본값은 <strong>PEG</strong>(외장 GPU 우선)로 되어 있어서, 외장 GPU에 모니터를 연결하지 않으면 화면이 안 나온다. <strong>IGD</strong>로 바꾸면 메인보드의 HDMI/VGA 포트로 화면이 출력된다.</p>
-<p>문제는 이미 BIOS에서 PEG로 설정된 상태에서 외장 GPU에 모니터를 연결할 수 없으면, BIOS 화면 자체를 볼 수 없다는 것이다. 이 경우:</p>
-<ol>
-<li><strong>CMOS 초기화</strong>: 메인보드의 CMOS 클리어 점퍼를 사용하거나 배터리를 빼서 BIOS를 초기화한다</li>
-<li>초기화 후 온보드 출력이 기본 활성화되므로, 메인보드 포트로 모니터를 연결한다</li>
-<li>BIOS에서 IGD 설정 + RTC Wake OS 모드를 함께 잡는다</li>
-</ol>
-<hr />
-<h2 id="_5">두 번째 시도 — 부분 성공<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
-<p>BIOS 설정을 마치고 다시 테스트했다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>rtcwake<span class="w"> </span>-m<span class="w"> </span>off<span class="w"> </span>-s<span class="w"> </span><span class="m">60</span>
-</span></code></pre></div>
-<p>이번에는 성공했다. 전원이 꺼지고 60초 후 자동으로 켜졌다. GPU도 정상이었다.</p>
-<p>여기서 "해결됐다"고 생각했다.</p>
-<hr />
-<h2 id="_6">실전 투입 — 실패<a class="headerlink" href="#_6" title="Permanent link">#</a></h2>
-<p>실제 GPU 크래시가 다시 발생했다. 이미지 생성 작업(3모델 x 4표정) 중이었다.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nvidia-smi: &quot;Unable to determine the device handle&quot;
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>nvidia-smi: &quot;No devices were found&quot;
-</span></code></pre></div>
-<p>콜드부팅 스크립트를 실행했다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>rtcwake<span class="w"> </span>-m<span class="w"> </span>off<span class="w"> </span>-s<span class="w"> </span><span class="m">60</span>
-</span></code></pre></div>
-<p>전원 차단은 성공했다. 60초 후 자동 재시작도 됐다. <strong>하지만 OS 부팅에 실패했다.</strong></p>
-<p>화면에는 GPU 드라이버 에러 메시지가 반복 출력됐다. 부팅이 완료되지 않아 SSH 접속도 불가능했다.</p>
-<p>결국 직접 전원 버튼을 길게 눌러 강제 종료하고, 수동으로 전원을 다시 켜서야 정상 부팅됐다.</p>
-<hr />
-<h2 id="_7">왜 실패했는가<a class="headerlink" href="#_7" title="Permanent link">#</a></h2>
-<p>테스트 때는 GPU가 정상인 상태에서 콜드부팅을 했고, 실전에서는 <strong>GPU가 크래시된 상태</strong>에서 콜드부팅을 했다. 차이는 이렇다.</p>
+<h3 id="5-cfg">삽질 5: CFG를 높이면 프롬프트대로 나올 줄 알았다<a class="headerlink" href="#5-cfg" title="Permanent link">#</a></h3>
+<blockquote>
+<p><strong>Positive</strong>: young woman, black hair, red dress, garden, sunset lighting</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
+<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | <strong>CFG 15.0</strong> | Seed 42</p>
+</blockquote>
+<p><img alt="CFG 15 결과" src="../ai-image/images/01/06_cfg_high.png" /></p>
+<p>CFG 15로 올렸더니 색이 과포화되고 콘트라스트가 극단적으로 높아졌다. 얼굴에 기묘한 그림자가 생기면서 공포물 분위기가 됐다. 프롬프트에 "충실"하긴 한데, 자연스러움은 사라진다.</p>
+<p><strong>비교 -- CFG 3:</strong></p>
+<blockquote>
+<p><strong>설정</strong>: 위와 동일, <strong>CFG 3.0</strong> | Seed 42</p>
+</blockquote>
+<p><img alt="CFG 3 결과" src="../ai-image/images/01/07_cfg_low.png" /></p>
+<p>CFG를 3으로 낮추면 프롬프트 영향이 약해진다. 모델이 자유롭게 생성하기 때문에 오히려 자연스러운 구도가 나올 수 있지만, 원하는 요소가 빠질 수 있다. 7~8에서 시작하고, 필요하면 0.5 단위로 조절하는 게 안전하다.</p>
+<h2 id="_9">네거티브 프롬프트<a class="headerlink" href="#_9" title="Permanent link">#</a></h2>
+<p>원하지 않는 요소를 지정하는 프롬프트다. 없어도 이미지는 생성되지만, 있으면 품질이 확실히 올라간다.</p>
+<p><strong>네거티브 프롬프트 없이 생성:</strong></p>
+<blockquote>
+<p><strong>Positive</strong>: young woman, black hair, red dress, garden</p>
+<p><strong>Negative</strong>: <em>(없음)</em></p>
+<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+</blockquote>
+<p><img alt="네거티브 없는 결과" src="../ai-image/images/01/10_no_negative.png" /></p>
+<p><strong>기본 네거티브 세트:</strong>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ugly, deformed, bad anatomy, bad hands, missing fingers, 
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>extra fingers, blurry, low quality, worst quality,
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>watermark, text, signature
+</span></code></pre></div></p>
+<p><strong>인물 특화 추가:</strong>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bad face, asymmetric eyes, deformed iris, cross-eyed,
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mutated hands, extra limbs, cloned face
+</span></code></pre></div></p>
+<p>네거티브 프롬프트는 "이것만 넣으면 만사 해결"이 아니다. 안 넣으면 확률적으로 더 자주 나오는 문제를 줄여줄 뿐이다. 손가락 6개가 나오는 문제는 네거티브로 완전히 해결되지 않는다. 그건 인페인팅으로 잡아야 하고, 4화에서 다룬다.</p>
+<h2 id="_10">시드와 재현성<a class="headerlink" href="#_10" title="Permanent link">#</a></h2>
+<p>같은 프롬프트를 넣어도 매번 다른 이미지가 나온다. 이건 <strong>시드</strong>(seed) 값이 매번 랜덤으로 바뀌기 때문이다.</p>
+<p>마음에 드는 결과가 나왔으면 시드를 기록해둬야 한다. 시드를 고정하면 같은 프롬프트로 같은 이미지를 재현할 수 있다.</p>
+<p>다만, 시드를 고정해도 다른 설정(모델, 샘플러, CFG 등)을 바꾸면 결과가 달라진다. 시드는 "완전히 같은 조건"에서만 재현성을 보장한다.</p>
+<h2 id="_11">첫 결과 평가<a class="headerlink" href="#_11" title="Permanent link">#</a></h2>
+<p>기본 설정으로 몇 장을 뽑아보면 패턴이 보인다.</p>
+<p><strong>비교적 괜찮은 결과:</strong></p>
+<blockquote>
+<p><strong>Positive</strong>: young woman, black hair, red dress, soft lighting, detailed face</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature, bad face, asymmetric eyes, deformed iris, cross-eyed, mutated hands, extra limbs</p>
+<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.5 | Seed 777</p>
+</blockquote>
+<p><img alt="괜찮은 결과" src="../ai-image/images/01/08_default_ok.png" /></p>
+<p>얼굴은 비교적 자연스럽다. 하지만 자세히 보면 AI 특유의 과도한 피부 매끈함이 있다. 실제 사람의 피부 질감과는 거리가 있다.</p>
+<p><strong>손가락이 이상한 결과:</strong></p>
+<blockquote>
+<p><strong>Positive</strong>: young woman, black hair, showing both hands, waving, casual outfit, upper body</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
+<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 123</p>
+</blockquote>
+<p><img alt="손가락 이상 결과" src="../ai-image/images/01/09_default_bad_hands.png" /></p>
+<p>손을 보여달라고 하면 거의 확실하게 문제가 생긴다. 손가락 개수, 관절 방향, 손바닥 구조가 뒤틀린다. SD 1.5의 고질적 문제다.</p>
+<p><strong>잘 되는 것:</strong>
+- 전체적인 분위기와 구도
+- 의상의 대략적인 형태
+- 조명과 색감의 방향</p>
+<p><strong>안 되는 것:</strong>
+- 손가락 (거의 항상 이상함)
+- 얼굴 디테일 (좌우 비대칭, 눈 크기 불일치)
+- 구도 제어 (포즈를 프롬프트로 잡기 어려움)
+- 일관성 (같은 캐릭터를 여러 장 뽑을 수 없음)</p>
+<p>이 "안 되는 것" 목록이 이 시리즈의 나머지 10화를 채운다.</p>
+<h2 id="_12">정리<a class="headerlink" href="#_12" title="Permanent link">#</a></h2>
+<p>1화에서 배운 것:</p>
 <ul>
-<li><strong>정상 상태 콜드부팅</strong>: 전원 차단 → 60초 대기 → 재시작 → GPU 초기화 성공</li>
-<li><strong>크래시 상태 콜드부팅</strong>: 전원 차단 → 60초 대기 → 재시작 → GPU 드라이버가 비정상 상태의 GPU를 초기화하지 못함</li>
+<li><strong>모델 선택</strong>이 결과의 절반을 결정한다</li>
+<li><strong>프롬프트는 짧고 핵심적으로</strong>. 길면 오히려 방해된다</li>
+<li><strong>해상도는 512x768</strong>로. 고해상도 직접 생성은 금물</li>
+<li><strong>가중치는 1.3 이하</strong>로 절제</li>
+<li><strong>CFG는 7~8</strong>, 샘플러는 euler_ancestral 또는 dpm++ 2m karras</li>
+<li><strong>시드를 기록</strong>해두면 나중에 재현할 수 있다</li>
+<li>txt2img만으로는 한계가 명확하다. 여기서부터 시작이다.</li>
 </ul>
-<p>추정하건대, rtcwake의 60초 대기로는 GPU 하드웨어의 전원이 완전히 방전되지 않은 것 같다. GPU 내부의 상태가 잔류해서, 재시작 시 드라이버가 정상적으로 초기화하지 못한 것으로 보인다.</p>
-<p>수동으로 전원 버튼을 길게 눌러 강제 종료한 뒤 몇 초간 전원이 완전히 꺼진 상태를 거치면, GPU가 완전히 초기화되어 정상 부팅이 가능했다.</p>
+<p>다음 화에서는 "내가 원하는 포즈가 안 나온다"는 문제를 해결한다. ControlNet이 등장한다.</p>
 <hr />
-<h2 id="gpu">GPU 크래시를 재현해보려 했다<a class="headerlink" href="#gpu" title="Permanent link">#</a></h2>
-<p>콜드부팅 복구 흐름을 다시 테스트하려면 GPU 크래시를 의도적으로 만들어야 한다. 여러 방법을 시도했다.</p>
-<h3 id="1-vram">시도 1: VRAM 가득 채우기<a class="headerlink" href="#1-vram" title="Permanent link">#</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">tensors</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">tensors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">))</span>
-</span></code></pre></div>
-<p>결과: CUDA가 OOM(Out of Memory) 에러를 내고 <strong>정상 종료</strong>한다. GPU는 멀쩡하다.</p>
-<h3 id="2-ollama-comfyui">시도 2: Ollama + ComfyUI 동시 실행<a class="headerlink" href="#2-ollama-comfyui" title="Permanent link">#</a></h3>
-<p>35B 모델을 Ollama에 올린 상태에서 ComfyUI로 SDXL 이미지 생성을 시도했다.</p>
-<p>결과: VRAM이 부족하면 Ollama가 모델을 CPU로 오프로딩하거나, ComfyUI가 OOM으로 중단한다. GPU 크래시는 발생하지 않았다.</p>
-<h3 id="3-cuda">시도 3: 직접 CUDA 메모리 할당<a class="headerlink" href="#3-cuda" title="Permanent link">#</a></h3>
-<p><code>cudaMalloc</code>으로 VRAM 전체를 직접 할당하는 C 프로그램을 작성해봤다.</p>
-<p>결과: 역시 CUDA 런타임이 할당 실패를 반환할 뿐, GPU 드라이버 크래시로 이어지지 않았다.</p>
-<h3 id="_8">결론<a class="headerlink" href="#_8" title="Permanent link">#</a></h3>
-<p><strong>최신 CUDA 드라이버는 OOM을 graceful하게 처리한다.</strong> 단순히 VRAM을 초과하는 것만으로는 GPU 크래시가 나지 않는다.</p>
-<p>실제로 크래시가 발생했던 상황은 PyTorch nightly + ComfyUI에서 SDXL + IP-Adapter를 <code>--lowvram</code> 없이 돌렸을 때였다. nightly 빌드의 드라이버 레벨 버그와 여러 대형 모델의 동시 로딩이 결합되어 발생한 것으로 추정된다.</p>
-<hr />
-<h2 id="_9">남은 과제<a class="headerlink" href="#_9" title="Permanent link">#</a></h2>
-<p>rtcwake 콜드부팅은 <strong>정상 상태에서의 원격 재시작 수단</strong>으로는 유효하지만, <strong>GPU 크래시 후 자동 복구 수단</strong>으로는 불완전하다.</p>
-<p>개선 가능성이 있는 방향:</p>
-<ul>
-<li><strong>대기 시간 연장</strong>: 60초가 아닌 300초(5분) 이상 대기하여 GPU 전원 방전 시간을 확보</li>
-<li><strong>다중 콜드부팅</strong>: 1회 실패 시 watchdog으로 2차 콜드부팅 시도</li>
-<li><strong>스마트 플러그</strong>: 네트워크 제어 가능한 전원 플러그로 물리적 전원 차단/투입</li>
-</ul>
-<p>현재로서는 이 중 어느 것도 검증하지 못했다. GPU 크래시를 의도적으로 재현할 수 없기 때문이다.</p>
-<hr />
-<h2 id="_10">정리<a class="headerlink" href="#_10" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>문제</strong></td>
-<td>GPU 크래시 후 소프트 리부트로 복구 불가</td>
-</tr>
-<tr>
-<td><strong>시도</strong></td>
-<td><code>rtcwake -m off -s 60</code>으로 콜드부팅</td>
-</tr>
-<tr>
-<td><strong>BIOS 설정</strong></td>
-<td>RTC Wake → OS 모드, 그래픽 → IGD</td>
-</tr>
-<tr>
-<td><strong>테스트 결과</strong></td>
-<td>정상 상태에서 콜드부팅 성공</td>
-</tr>
-<tr>
-<td><strong>실전 결과</strong></td>
-<td>GPU 크래시 상태에서 콜드부팅 후 OS 부팅 실패</td>
-</tr>
-<tr>
-<td><strong>최종 복구</strong></td>
-<td>수동 전원 강제 종료 → 수동 재시작으로 복구</td>
-</tr>
-<tr>
-<td><strong>교훈</strong></td>
-<td>GPU 크래시 상태에서는 정상 종료가 되지 않아 rtcwake 콜드부팅이 기대대로 작동하지 않는다. 물리적 전원 차단 등 대안이 필요하다</td>
-</tr>
-</tbody>
-</table>
-<p>환경: Pop!_OS 24.04 LTS, RTX 5060 Ti 16GB, NVIDIA 드라이버 580.126.18, MSI 메인보드</p>
+<p><em>다음: [2화. 구도와 포즈 -- ControlNet 입문]</em></p>
 
 
 
@@ -1278,7 +1268,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../comfyui-rtx5060ti-install/" class="md-footer__link md-footer__link--prev" aria-label="이전: RTX 5060 Ti 16GB에 ComfyUI 설치하기">
+          <a href="../free-blog-1-why-github-pages/" class="md-footer__link md-footer__link--prev" aria-label="이전: 블로그 플랫폼 비교 — 그래도 GitHub Pages를 선택한 이유">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1288,27 +1278,11 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                RTX 5060 Ti 16GB에 ComfyUI 설치하기
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../free-blog-1-why-github-pages/" class="md-footer__link md-footer__link--next" aria-label="다음: 블로그 플랫폼 비교 — 그래도 GitHub Pages를 선택한 이유">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                다음
-              </span>
-              <div class="md-ellipsis">
                 블로그 플랫폼 비교 — 그래도 GitHub Pages를 선택한 이유
               </div>
             </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
           </a>
+        
         
       </nav>
     
