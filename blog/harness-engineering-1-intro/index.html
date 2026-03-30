@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="AI 이미지 생성 첫 걸음. 모델 선택부터 프롬프트, 해상도, CFG까지 삽질하며 배운 기초를 정리한다.">
+        <meta name="description" content="AI 코딩 에이전트가 만든 코드를 신뢰할 수 있으려면, 코드를 만드는 환경 자체를 설계해야 한다. 하네스 엔지니어링의 개념, 필요성, 주요 도구를 소개한다.">
       
       
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.dev/blog/ai-image-guide-01-first-gen/">
+        <link rel="canonical" href="https://home301.dev/blog/harness-engineering-1-intro/">
       
       
-        <link rel="prev" href="../free-blog-1-why-github-pages/">
+        <link rel="prev" href="../harness-engineering-2-analysis/">
       
       
-        <link rel="next" href="../harness-engineering-2-analysis/">
+        <link rel="next" href="../free-blog-2-mkdocs-material-setup/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야? - Home301 Dev Blog</title>
+        <title>Harness Engineering — AI 코딩 에이전트를 제어하는 기술 - Home301 Dev Blog</title>
       
     
     
@@ -73,18 +73,18 @@
     
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야? - Home301 Dev Blog">
-  <meta property="og:description" content="AI 이미지 생성 첫 걸음. 모델 선택부터 프롬프트, 해상도, CFG까지 삽질하며 배운 기초를 정리한다.">
-  <meta property="og:url" content="https://home301.dev/blog/ai-image-guide-01-first-gen/">
+  <meta property="og:title" content="Harness Engineering — AI 코딩 에이전트를 제어하는 기술 - Home301 Dev Blog">
+  <meta property="og:description" content="AI 코딩 에이전트가 만든 코드를 신뢰할 수 있으려면, 코드를 만드는 환경 자체를 설계해야 한다. 하네스 엔지니어링의 개념, 필요성, 주요 도구를 소개한다.">
+  <meta property="og:url" content="https://home301.dev/blog/harness-engineering-1-intro/">
   <meta property="og:site_name" content="Home301 Dev Blog">
   <meta property="og:locale" content="ko_KR">
   
-  <meta property="article:published_time" content="2026-03-24T00:00:00+09:00">
+  <meta property="article:published_time" content="2026-03-28T00:00:00+09:00">
   <meta property="article:author" content="Mingi Choi">
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야? - Home301 Dev Blog">
-  <meta name="twitter:description" content="AI 이미지 생성 첫 걸음. 모델 선택부터 프롬프트, 해상도, CFG까지 삽질하며 배운 기초를 정리한다.">
+  <meta name="twitter:title" content="Harness Engineering — AI 코딩 에이전트를 제어하는 기술 - Home301 Dev Blog">
+  <meta name="twitter:description" content="AI 코딩 에이전트가 만든 코드를 신뢰할 수 있으려면, 코드를 만드는 환경 자체를 설계해야 한다. 하네스 엔지니어링의 개념, 필요성, 주요 도구를 소개한다.">
 
   <script type="application/ld+json">
   {
@@ -136,7 +136,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1" class="md-skip">
+        <a href="#harness-engineering-ai" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -170,7 +170,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야?
+              Harness Engineering — AI 코딩 에이전트를 제어하는 기술
             
           </span>
         </div>
@@ -728,7 +728,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        들어가며
+        하네스 엔지니어링이란
       
     </span>
   </a>
@@ -739,7 +739,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        환경
+        하네스 엔지니어링이 없으면
       
     </span>
   </a>
@@ -750,58 +750,30 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        모델 선택이 반이다
+        하네스 엔지니어링은 이 문제를 어떻게 해결하는가
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="모델 선택이 반이다">
+    <nav class="md-nav" aria-label="하네스 엔지니어링은 이 문제를 어떻게 해결하는가">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삽질 1: 모델을 아무거나 골랐다
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        첫 번째 생성
+        저장소를 시스템 오브 레코드로
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        프롬프트의 함정
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="프롬프트의 함정">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삽질 2: 프롬프트를 길게 쓰면 좋아질 거라고 생각했다
+        기계적 강제
       
     </span>
   </a>
@@ -812,7 +784,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        프롬프트 가중치
+        피드백 루프
       
     </span>
   </a>
@@ -820,66 +792,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삽질 3: 가중치를 너무 높게 줬다
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        해상도의 함정
+        점진적 공개
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="해상도의 함정">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삽질 4: 고해상도로 생성하면 더 좋을 줄 알았다
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        샘플러와 스텝
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="샘플러와 스텝">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#5-cfg" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삽질 5: CFG를 높이면 프롬프트대로 나올 줄 알았다
+        격리된 실행 환경
       
     </span>
   </a>
@@ -895,7 +822,7 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        네거티브 프롬프트
+        어떤 도구들이 있는가
       
     </span>
   </a>
@@ -906,29 +833,7 @@
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
-        시드와 재현성
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        첫 결과 평가
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        정리
+        참고 자료
       
     </span>
   </a>
@@ -972,7 +877,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-03-24 00:00:00+00:00" class="md-ellipsis">2026년 3월 24일</time>
+                        <time datetime="2026-03-28 00:00:00+00:00" class="md-ellipsis">2026년 3월 28일</time>
                       </div>
                     </li>
                     
@@ -994,7 +899,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 7분
+                              읽는시간 4분
                             
                           </span>
                         </div>
@@ -1022,210 +927,194 @@
       
       
       
-        <span class="md-tag">ai-image</span>
+        <span class="md-tag">ai-agent</span>
       
     
       
       
       
       
-        <span class="md-tag">comfyui</span>
+        <span class="md-tag">coding-agent</span>
       
     
       
       
       
       
-        <span class="md-tag">prompt</span>
+        <span class="md-tag">harness-engineering</span>
       
     
       
       
       
       
-        <span class="md-tag">stable-diffusion</span>
+        <span class="md-tag">openai</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">spec-driven-development</span>
       
     
   </nav>
 
 
 
-<h1 id="1">1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야?<a class="headerlink" href="#1" title="Permanent link">#</a></h1>
-<p><em>AI 이미지 생성 실전 가이드 | 여성 캐릭터 일러스트를 만들며 배운 것들</em></p>
-<!-- more -->
-
+<h1 id="harness-engineering-ai">Harness Engineering — AI 코딩 에이전트를 제어하는 기술<a class="headerlink" href="#harness-engineering-ai" title="Permanent link">#</a></h1>
+<blockquote>
+<p>AI 코딩 에이전트가 만든 코드를 신뢰할 수 있으려면, 코드를 만드는 환경 자체를 설계해야 한다.</p>
+</blockquote>
 <hr />
-<h2 id="_1">들어가며<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p>AI로 이미지를 만든다. 프롬프트 한 줄 쓰면 그럴듯한 그림이 나온다. 그렇게 들었다.</p>
-<p>실제로 해보면 현실은 좀 다르다. "예쁜 여성 캐릭터"를 만들고 싶었을 뿐인데, 나오는 건 누구인지 모를 얼굴에 손가락이 6개고 옷은 녹아내리는 무언가다. 뭐가 잘못된 건지 감도 안 잡힌다.</p>
-<p>이 시리즈는 그 삽질의 기록이다. 로컬 환경에서 SD 1.5 모델을 돌리며, 여성 캐릭터 일러스트 하나를 완성하기까지 겪은 과정을 단계별로 정리했다. 화려한 결과물 자랑이 아니라, <strong>뭘 시도했고 뭐가 안 됐고 어떻게 고쳤는지</strong>에 초점을 맞췄다.</p>
-<h2 id="_2">환경<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
-<ul>
-<li><strong>모델</strong>: Stable Diffusion 1.5 (DreamShaper 8)</li>
-<li><strong>UI</strong>: ComfyUI</li>
-<li><strong>GPU</strong>: RTX 5060 Ti 16GB</li>
-<li><strong>OS</strong>: Pop!_OS 24.04 LTS</li>
-</ul>
-<p>SD 1.5를 선택한 이유는 단순하다. VRAM 부담이 적고, 생태계가 가장 넓다. ControlNet, LoRA, 인페인팅 등 후처리에 필요한 도구가 전부 SD 1.5 기반으로 가장 많이 만들어져 있다. SDXL이나 Flux가 품질은 더 좋지만, 16GB에서 복잡한 파이프라인을 돌리려면 SD 1.5가 현실적이다.</p>
-<h2 id="_3">모델 선택이 반이다<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
-<p>Stable Diffusion은 "모델"을 바꾸면 완전히 다른 그림이 나온다. 같은 프롬프트를 넣어도 모델에 따라 화풍, 품질, 분위기가 천차만별이다.</p>
-<p>SD 1.5 기반 체크포인트는 수천 개가 있다. 대표적인 것만 꼽으면:</p>
-<ul>
-<li><strong>DreamShaper</strong>: 범용. 일러스트와 실사 중간 느낌. 처음 시작하기 좋다.</li>
-<li><strong>Realistic Vision</strong>: 실사 특화. 사진 같은 결과물을 원할 때.</li>
-<li><strong>Anything v5</strong>: 애니메이션/일러스트 특화. 깔끔한 선화.</li>
-<li><strong>RevAnimated</strong>: 판타지/게임 느낌. 디테일이 화려하다.</li>
-</ul>
-<p>이 시리즈에서는 <strong>DreamShaper 8</strong>을 메인으로 사용한다. 범용적이라 다양한 실험을 하기에 적합하다.</p>
-<h3 id="1_1">삽질 1: 모델을 아무거나 골랐다<a class="headerlink" href="#1_1" title="Permanent link">#</a></h3>
-<p>처음에는 "SD 1.5면 다 비슷하겠지"라고 생각했다. 아니었다. 어떤 모델은 얼굴이 뭉개지고, 어떤 모델은 색감이 탁하고, 어떤 모델은 특정 스타일에서만 결과가 좋았다.</p>
-<p><strong>교훈</strong>: 모델은 화구다. 수채화 물감으로 유화를 그릴 수 없듯이, 실사 모델로 애니메이션 스타일을 뽑으면 어정쩡한 결과가 나온다. 원하는 스타일에 맞는 모델을 먼저 골라야 한다.</p>
-<h2 id="_4">첫 번째 생성<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
-<p>ComfyUI에서 가장 기본적인 워크플로를 구성한다.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[체크포인트 로드] -&gt; [프롬프트 입력] -&gt; [빈 이미지(512x768)] -&gt; [KSampler] -&gt; [VAE 디코드] -&gt; [저장]
-</span></code></pre></div>
-<p>프롬프트를 넣어본다.</p>
-<h2 id="_5">프롬프트의 함정<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
-<h3 id="2">삽질 2: 프롬프트를 길게 쓰면 좋아질 거라고 생각했다<a class="headerlink" href="#2" title="Permanent link">#</a></h3>
-<p>SD 1.5는 CLIP 토큰 제한이 77개다. 그 이상 쓰면 뒤쪽 단어는 영향력이 급격히 떨어진다. 프롬프트를 장문으로 쓰면 모델이 어디에 집중해야 할지 혼란스러워하고, 결과가 뒤섞인다.</p>
-<p><strong>나쁜 예 -- 장문 프롬프트:</strong></p>
+<h2 id="_1">하네스 엔지니어링이란<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
+<p>2026년 초, OpenAI가 Codex를 활용한 내부 실험 결과를 공개하면서 "Harness Engineering"이라는 표현이 주목받기 시작했다. 100만 줄의 코드를 수동 작성 0줄로 만들었다는 실험이다. 3명으로 시작해 7명으로 늘어난 팀이 5개월간 약 1,500개의 PR을 병합했고, 1인당 하루 평균 3.5개의 PR을 처리했다.</p>
+<p>핵심 원칙은 간단하다.</p>
 <blockquote>
-<p><strong>Positive</strong>: a beautiful gorgeous stunning young woman with long flowing silky black hair wearing an elegant luxurious red silk dress with intricate gold embroidery standing in a beautiful garden with roses and cherry blossoms under soft golden sunset lighting with bokeh background, masterpiece, best quality, ultra detailed, 8k uhd, sharp focus, professional photography, highly detailed face, perfect skin, glowing eyes, dramatic composition</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+<p>"Humans steer. Agents execute."</p>
 </blockquote>
-<p><img alt="장문 프롬프트 결과" src="../ai-image/images/01/01_long_prompt_bad.png" /></p>
-<p>원하는 건 "정원에서 빨간 드레스를 입은 여성"이었다. 결과물을 보면 대충 그런 느낌은 나지만, 손가락이 뭉개지고 의상 디테일이 녹아내린다. 프롬프트에 너무 많은 걸 욱여넣은 탓이다.</p>
-<p><strong>개선 -- 핵심만 남긴 프롬프트:</strong></p>
-<blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, garden, sunset lighting</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
-</blockquote>
-<p><img alt="핵심 프롬프트 결과" src="../ai-image/images/01/02_short_prompt_good.png" /></p>
-<p>같은 시드, 같은 설정인데 프롬프트만 줄였다. 모델이 집중할 수 있는 키워드가 적어지니 오히려 구도와 인물 표현이 안정된다. 완벽하진 않지만, 장문보다 낫다.</p>
-<h3 id="_6">프롬프트 가중치<a class="headerlink" href="#_6" title="Permanent link">#</a></h3>
-<p>특정 요소를 강조하고 싶으면 괄호와 숫자를 쓴다.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>(red dress:1.3), (black hair:1.1), young woman
-</span></code></pre></div>
-<ul>
-<li><code>1.0</code>이 기본값</li>
-<li><code>1.1~1.3</code>이면 적당한 강조</li>
-<li><code>1.5</code> 이상은 과하다. 이미지가 깨지기 시작한다.</li>
-</ul>
-<h3 id="3">삽질 3: 가중치를 너무 높게 줬다<a class="headerlink" href="#3" title="Permanent link">#</a></h3>
-<blockquote>
-<p><strong>Positive</strong>: (beautiful face:1.8), (perfect eyes:1.8), young woman, black hair, red dress</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
-</blockquote>
-<p><img alt="과도한 가중치 결과" src="../ai-image/images/01/03_weight_extreme.png" /></p>
-<p><code>(beautiful face:1.8)</code>을 넣었더니 얼굴이 예뻐지는 게 아니라 완전히 붕괴됐다. 눈 주변에 글리치 패턴이 생기고, 피부가 왁스처럼 녹아내린다. 가중치는 "더 예쁘게"가 아니라 "이 개념에 더 집중해"라는 의미다. 과하면 독이 된다.</p>
-<p><strong>적절한 가중치로 수정:</strong></p>
-<blockquote>
-<p><strong>Positive</strong>: (red dress:1.2), young woman, black hair, garden</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
-</blockquote>
-<p><img alt="적절한 가중치 결과" src="../ai-image/images/01/04_weight_moderate.png" /></p>
-<p>1.2 정도면 드레스가 좀 더 강조되면서도 이미지가 깨지지 않는다.</p>
-<h2 id="_7">해상도의 함정<a class="headerlink" href="#_7" title="Permanent link">#</a></h2>
-<h3 id="4">삽질 4: 고해상도로 생성하면 더 좋을 줄 알았다<a class="headerlink" href="#4" title="Permanent link">#</a></h3>
-<p>SD 1.5는 <strong>512x512</strong> 또는 <strong>512x768</strong>로 학습됐다. 이 해상도에서 가장 안정적인 결과가 나온다.</p>
-<blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, portrait</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | <strong>1024x1024</strong> | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
-</blockquote>
-<p><img alt="고해상도 직접 생성 결과" src="../ai-image/images/01/05_highres_bad.png" /></p>
-<p>1024x1024로 바로 생성했더니 인물이 두 명 나왔다. 모델이 학습한 해상도를 벗어나면 구조를 잡지 못하고, 같은 패턴을 반복하거나 여러 인물을 합성하는 현상이 나타난다.</p>
-<p><strong>해결</strong>: 512x768로 생성한 다음, 나중에 업스케일한다. 이건 9화에서 다룬다.</p>
-<h2 id="_8">샘플러와 스텝<a class="headerlink" href="#_8" title="Permanent link">#</a></h2>
-<p>KSampler의 설정도 결과에 영향을 준다.</p>
-<ul>
-<li><strong>샘플러</strong>: <code>euler_ancestral</code>이 무난한 시작점. <code>dpm++ 2m karras</code>는 좀 더 선명한 결과를 준다.</li>
-<li><strong>스텝</strong>: 20~30이 적당하다. 10 이하면 흐릿하고, 50 이상이면 과하게 수렴해서 딱딱해진다.</li>
-<li><strong>CFG Scale</strong>: 7~8이 기본. 높으면 프롬프트에 과도하게 충실해지면서 부자연스러워지고, 낮으면 프롬프트를 무시한다.</li>
-</ul>
-<h3 id="5-cfg">삽질 5: CFG를 높이면 프롬프트대로 나올 줄 알았다<a class="headerlink" href="#5-cfg" title="Permanent link">#</a></h3>
-<blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, garden, sunset lighting</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | <strong>CFG 15.0</strong> | Seed 42</p>
-</blockquote>
-<p><img alt="CFG 15 결과" src="../ai-image/images/01/06_cfg_high.png" /></p>
-<p>CFG 15로 올렸더니 색이 과포화되고 콘트라스트가 극단적으로 높아졌다. 얼굴에 기묘한 그림자가 생기면서 공포물 분위기가 됐다. 프롬프트에 "충실"하긴 한데, 자연스러움은 사라진다.</p>
-<p><strong>비교 -- CFG 3:</strong></p>
-<blockquote>
-<p><strong>설정</strong>: 위와 동일, <strong>CFG 3.0</strong> | Seed 42</p>
-</blockquote>
-<p><img alt="CFG 3 결과" src="../ai-image/images/01/07_cfg_low.png" /></p>
-<p>CFG를 3으로 낮추면 프롬프트 영향이 약해진다. 모델이 자유롭게 생성하기 때문에 오히려 자연스러운 구도가 나올 수 있지만, 원하는 요소가 빠질 수 있다. 7~8에서 시작하고, 필요하면 0.5 단위로 조절하는 게 안전하다.</p>
-<h2 id="_9">네거티브 프롬프트<a class="headerlink" href="#_9" title="Permanent link">#</a></h2>
-<p>원하지 않는 요소를 지정하는 프롬프트다. 없어도 이미지는 생성되지만, 있으면 품질이 확실히 올라간다.</p>
-<p><strong>네거티브 프롬프트 없이 생성:</strong></p>
-<blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, garden</p>
-<p><strong>Negative</strong>: <em>(없음)</em></p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
-</blockquote>
-<p><img alt="네거티브 없는 결과" src="../ai-image/images/01/10_no_negative.png" /></p>
-<p><strong>기본 네거티브 세트:</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ugly, deformed, bad anatomy, bad hands, missing fingers, 
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>extra fingers, blurry, low quality, worst quality,
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>watermark, text, signature
-</span></code></pre></div></p>
-<p><strong>인물 특화 추가:</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bad face, asymmetric eyes, deformed iris, cross-eyed,
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mutated hands, extra limbs, cloned face
-</span></code></pre></div></p>
-<p>네거티브 프롬프트는 "이것만 넣으면 만사 해결"이 아니다. 안 넣으면 확률적으로 더 자주 나오는 문제를 줄여줄 뿐이다. 손가락 6개가 나오는 문제는 네거티브로 완전히 해결되지 않는다. 그건 인페인팅으로 잡아야 하고, 4화에서 다룬다.</p>
-<h2 id="_10">시드와 재현성<a class="headerlink" href="#_10" title="Permanent link">#</a></h2>
-<p>같은 프롬프트를 넣어도 매번 다른 이미지가 나온다. 이건 <strong>시드</strong>(seed) 값이 매번 랜덤으로 바뀌기 때문이다.</p>
-<p>마음에 드는 결과가 나왔으면 시드를 기록해둬야 한다. 시드를 고정하면 같은 프롬프트로 같은 이미지를 재현할 수 있다.</p>
-<p>다만, 시드를 고정해도 다른 설정(모델, 샘플러, CFG 등)을 바꾸면 결과가 달라진다. 시드는 "완전히 같은 조건"에서만 재현성을 보장한다.</p>
-<h2 id="_11">첫 결과 평가<a class="headerlink" href="#_11" title="Permanent link">#</a></h2>
-<p>기본 설정으로 몇 장을 뽑아보면 패턴이 보인다.</p>
-<p><strong>비교적 괜찮은 결과:</strong></p>
-<blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, soft lighting, detailed face</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature, bad face, asymmetric eyes, deformed iris, cross-eyed, mutated hands, extra limbs</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.5 | Seed 777</p>
-</blockquote>
-<p><img alt="괜찮은 결과" src="../ai-image/images/01/08_default_ok.png" /></p>
-<p>얼굴은 비교적 자연스럽다. 하지만 자세히 보면 AI 특유의 과도한 피부 매끈함이 있다. 실제 사람의 피부 질감과는 거리가 있다.</p>
-<p><strong>손가락이 이상한 결과:</strong></p>
-<blockquote>
-<p><strong>Positive</strong>: young woman, black hair, showing both hands, waving, casual outfit, upper body</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 123</p>
-</blockquote>
-<p><img alt="손가락 이상 결과" src="../ai-image/images/01/09_default_bad_hands.png" /></p>
-<p>손을 보여달라고 하면 거의 확실하게 문제가 생긴다. 손가락 개수, 관절 방향, 손바닥 구조가 뒤틀린다. SD 1.5의 고질적 문제다.</p>
-<p><strong>잘 되는 것:</strong>
-- 전체적인 분위기와 구도
-- 의상의 대략적인 형태
-- 조명과 색감의 방향</p>
-<p><strong>안 되는 것:</strong>
-- 손가락 (거의 항상 이상함)
-- 얼굴 디테일 (좌우 비대칭, 눈 크기 불일치)
-- 구도 제어 (포즈를 프롬프트로 잡기 어려움)
-- 일관성 (같은 캐릭터를 여러 장 뽑을 수 없음)</p>
-<p>이 "안 되는 것" 목록이 이 시리즈의 나머지 10화를 채운다.</p>
-<h2 id="_12">정리<a class="headerlink" href="#_12" title="Permanent link">#</a></h2>
-<p>1화에서 배운 것:</p>
-<ul>
-<li><strong>모델 선택</strong>이 결과의 절반을 결정한다</li>
-<li><strong>프롬프트는 짧고 핵심적으로</strong>. 길면 오히려 방해된다</li>
-<li><strong>해상도는 512x768</strong>로. 고해상도 직접 생성은 금물</li>
-<li><strong>가중치는 1.3 이하</strong>로 절제</li>
-<li><strong>CFG는 7~8</strong>, 샘플러는 euler_ancestral 또는 dpm++ 2m karras</li>
-<li><strong>시드를 기록</strong>해두면 나중에 재현할 수 있다</li>
-<li>txt2img만으로는 한계가 명확하다. 여기서부터 시작이다.</li>
-</ul>
-<p>다음 화에서는 "내가 원하는 포즈가 안 나온다"는 문제를 해결한다. ControlNet이 등장한다.</p>
+<p>사람은 방향을 잡고, 에이전트가 실행한다. 여기서 "방향을 잡는다"는 것이 단순히 프롬프트를 잘 쓰는 것이 아니다. 에이전트가 작업하는 환경 자체를 설계하는 것이다. 이것이 하네스 엔지니어링이다.</p>
+<p>전통적인 test harness가 "인간이 작성한 코드가 맞는지 검증하는 환경"이라면, agent harness engineering은 "AI 에이전트가 올바른 코드를 만들 수 있는 환경 전체를 설계하는 것"이다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>Test Harness</th>
+<th>Agent Harness Engineering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>대상</td>
+<td>인간이 작성한 코드 검증</td>
+<td>AI agent의 코드 생산 환경 전체</td>
+</tr>
+<tr>
+<td>범위</td>
+<td>테스트 실행, 리포트</td>
+<td>스펙 전달 → 코드 생성 → 검증 → 피드백 루프</td>
+</tr>
+<tr>
+<td>핵심 질문</td>
+<td>코드가 맞는가?</td>
+<td>agent가 올바른 코드를 만들 수 있는 환경인가?</td>
+</tr>
+<tr>
+<td>설계 대상</td>
+<td>테스트 프레임워크</td>
+<td>문서 구조, 제약 시스템, 컨텍스트 관리, 자동화</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<p><em>다음: [2화. 구도와 포즈 -- ControlNet 입문]</em></p>
+<h2 id="_2">하네스 엔지니어링이 없으면<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
+<p>AI 코딩 에이전트를 아무 환경에 그냥 풀어놓으면 어떤 일이 벌어지는가.</p>
+<p><strong>1. 아키텍처 부식</strong></p>
+<p>에이전트는 "지금 당장 동작하는 코드"를 만드는 데 최적화되어 있다. 프로젝트 전체의 아키텍처 원칙이나 모듈 경계를 지키는 것은 관심 밖이다. 계층 간 의존성이 꼬이고, 추상화가 무너지고, 코드베이스가 점진적으로 썩는다. 인간 개발자도 같은 실수를 하지만, 에이전트는 훨씬 빠른 속도로 같은 실수를 반복한다.</p>
+<p><strong>2. 컨텍스트 분실</strong></p>
+<p>에이전트가 볼 수 없는 정보는 존재하지 않는 것과 같다. Slack에서 합의한 설계 결정, Google Docs에 적은 요구사항, 팀원의 머릿속에 있는 암묵지 — 이것들은 에이전트의 세계에 없다. 결과적으로 에이전트는 이미 결정된 사항을 무시하고, 이미 해결된 문제를 다시 만들어낸다.</p>
+<p><strong>3. 검증 부재</strong></p>
+<p>에이전트가 "완료했습니다"라고 하면 정말 완료된 건가? 테스트가 통과한다고 해서 요구사항을 충족하는 건 아니다. 스펙과 구현 사이의 정합성을 기계적으로 검증하지 않으면, 겉으로는 동작하지만 실제로는 다른 것을 만드는 상황이 생긴다.</p>
+<p><strong>4. 피드백 루프 부재</strong></p>
+<p>에이전트가 실패했을 때 무엇이 잘못됐는지 자동으로 파악하고 재시도하는 구조가 없으면, 결국 인간이 하나하나 확인하고 다시 지시해야 한다. 이러면 에이전트를 쓰는 의미가 반감된다.</p>
+<p><strong>5. 규모 확장 불가</strong></p>
+<p>위 문제들은 코드베이스가 작을 때는 사람이 감당할 수 있다. 하지만 코드가 수천, 수만 줄을 넘기는 순간 사람의 주의력만으로는 통제할 수 없게 된다. OpenAI가 하네스 엔지니어링을 제안한 것도 바로 이 지점이다.</p>
+<hr />
+<h2 id="_3">하네스 엔지니어링은 이 문제를 어떻게 해결하는가<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<p>하네스 엔지니어링의 접근은 "에이전트에게 잘 시키는 것"이 아니라 "에이전트가 잘못하기 어려운 환경을 만드는 것"이다.</p>
+<h3 id="_4">저장소를 시스템 오브 레코드로<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
+<p>에이전트가 참조할 모든 정보를 저장소 안에 버전 관리한다. 아키텍처 문서, 설계 원칙, 코딩 표준, 실행 계획이 마크다운 파일로 저장소에 존재한다. Slack 스레드도, Google Docs도, 사람의 기억도 아닌 — 저장소가 유일한 진실의 원천이다.</p>
+<p>OpenAI는 이를 "AGENTS.md를 백과사전이 아닌 목차로 취급하라"고 표현했다. AGENTS.md는 100줄 내외의 짧은 진입점이고, 실제 지식은 <code>docs/</code> 디렉토리에 구조화되어 있다.</p>
+<h3 id="_5">기계적 강제<a class="headerlink" href="#_5" title="Permanent link">#</a></h3>
+<p>인간에게 "이 규칙을 지켜주세요"라고 부탁하듯 에이전트에게도 부탁만 하면 안 된다. 에이전트는 지시를 따를 수도 있고 무시할 수도 있다. 따라서 규칙은 기계적으로 강제한다.</p>
+<ul>
+<li><strong>아키텍처 경계</strong>: 커스텀 린터가 모듈 간 import 방향을 검사한다. 위반하면 CI가 실패한다.</li>
+<li><strong>코딩 표준</strong>: pre-commit hook이 네이밍 컨벤션, 파일 크기 제한, 구조화된 로깅을 강제한다.</li>
+<li><strong>품질 게이트</strong>: 테스트 통과, 커버리지 임계값, 정적 분석 통과가 PR 병합 조건이다.</li>
+</ul>
+<p>에이전트가 만든 코드가 이 게이트를 통과하지 못하면 자동으로 거부된다. 여기에 에이전트의 "판단"이 개입할 여지는 없다.</p>
+<h3 id="_6">피드백 루프<a class="headerlink" href="#_6" title="Permanent link">#</a></h3>
+<p>검증 실패 → 에이전트에게 실패 원인 전달 → 에이전트가 수정 → 재검증. 이 루프가 자동으로 돌아야 한다. OpenAI의 경우 에이전트가 자기 변경사항을 자체적으로 리뷰하고, 다른 에이전트에게도 리뷰를 요청하며, 모든 리뷰어가 만족할 때까지 반복하는 루프를 구축했다.</p>
+<h3 id="_7">점진적 공개<a class="headerlink" href="#_7" title="Permanent link">#</a></h3>
+<p>에이전트에게 한꺼번에 모든 정보를 주지 않는다. 작은 진입점(AGENTS.md)에서 시작해서, 필요한 시점에 필요한 문서를 참조하도록 안내한다. 컨텍스트 윈도우는 유한하다. 불필요한 정보로 채우면 정작 중요한 정보를 놓친다.</p>
+<h3 id="_8">격리된 실행 환경<a class="headerlink" href="#_8" title="Permanent link">#</a></h3>
+<p>각 작업을 독립된 환경에서 실행한다. git worktree 단위로 앱을 부팅하고, 임시 관찰 스택(로그, 메트릭)을 붙이고, 작업이 끝나면 환경을 정리한다. 한 에이전트의 작업이 다른 에이전트의 작업에 영향을 주지 않는다.</p>
+<hr />
+<h2 id="_9">어떤 도구들이 있는가<a class="headerlink" href="#_9" title="Permanent link">#</a></h2>
+<p>하네스 엔지니어링의 핵심 역할을 수행하는 도구들은 크게 두 부류로 나뉜다.</p>
+<p><strong>대형 도구</strong> — 이미 대규모 커뮤니티를 형성한 스펙 주도 개발 도구들이다. 스펙 관리, 태스크 분해, 제약 주입 등을 다룬다.</p>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>Stars</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/github/spec-kit">Spec Kit</a> (GitHub)</td>
+<td>83,000+</td>
+<td>Phase gate 방식 스펙 주도 개발. constitution으로 에이전트 행동 제약.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/bmad-code-org/BMAD-METHOD">BMAD-METHOD</a></td>
+<td>42,600+</td>
+<td>12+ 전문 페르소나로 역할 분리. 구현자와 검증자가 다르다.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Fission-AI/OpenSpec">OpenSpec</a> (Fission-AI)</td>
+<td>35,000+</td>
+<td>change 단위 격리. brownfield에 강함. "유연하되 엄격하지 않게".</td>
+</tr>
+<tr>
+<td><a href="https://github.com/aden-hive/hive">Hive</a> (Aden)</td>
+<td>9,900+</td>
+<td>목표 주도 에이전트 프레임워크. 자기 개선 루프 내장. YC 투자.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/kirodotdev/Kiro">Kiro</a> (AWS)</td>
+<td>3,300+</td>
+<td>스펙 주도 IDE. Steering + Hooks로 피드백 루프 자동화.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>신흥 도구</strong> — 2026년 초에 등장하기 시작한 하네스 전용 도구들이다. 검증, 측정, 기계적 강제에 특화되어 있다. 아직 초기 단계지만 독특한 접근을 가지고 있어 주시할 가치가 있다.</p>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>Stars</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/phodal/entrix">Entrix</a></td>
+<td>31</td>
+<td>규칙을 실행 가능한 가드레일로 변환. tier별 검증.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/markmishaev76/ai-harness-scorecard">AI Harness Scorecard</a></td>
+<td>14</td>
+<td>리포의 하네스 수준을 A~F로 정량 평가.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/WellDunDun/reins">Reins</a></td>
+<td>6</td>
+<td>scaffold → audit → evolve → doctor. 점진적 하네스 도입 CLI.</td>
+</tr>
+</tbody>
+</table>
+<p>각 도구의 상세 분석과 비교는 <a href="../harness-engineering-2-analysis/">2편</a>에서 다룬다.</p>
+<hr />
+<h2 id="_10">참고 자료<a class="headerlink" href="#_10" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://openai.com/index/harness-engineering/">OpenAI — Harness Engineering: Leveraging Codex in an Agent-First World</a></li>
+<li><a href="https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents">HumanLayer — Skill Issue: Harness Engineering for Coding Agents</a></li>
+<li><a href="https://blog.langchain.com/the-anatomy-of-an-agent-harness/">Viv Trivedy — The Anatomy of an Agent Harness</a></li>
+<li><a href="https://github.com/botmarch301/workspace-view/blob/main/blog/preview/harness-engineering/survey.md">전체 도구 수집 목록</a></li>
+</ul>
 
 
 
@@ -1270,7 +1159,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../free-blog-1-why-github-pages/" class="md-footer__link md-footer__link--prev" aria-label="이전: 블로그 플랫폼 비교 — 그래도 GitHub Pages를 선택한 이유">
+          <a href="../harness-engineering-2-analysis/" class="md-footer__link md-footer__link--prev" aria-label="이전: Harness Engineering 도구 비교 분석">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1280,20 +1169,20 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                블로그 플랫폼 비교 — 그래도 GitHub Pages를 선택한 이유
+                Harness Engineering 도구 비교 분석
               </div>
             </div>
           </a>
         
         
           
-          <a href="../harness-engineering-2-analysis/" class="md-footer__link md-footer__link--next" aria-label="다음: Harness Engineering 도구 비교 분석">
+          <a href="../free-blog-2-mkdocs-material-setup/" class="md-footer__link md-footer__link--next" aria-label="다음: MkDocs Material 설치부터 첫 글 배포까지">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Harness Engineering 도구 비교 분석
+                MkDocs Material 설치부터 첫 글 배포까지
               </div>
             </div>
             <div class="md-footer__button md-icon">
