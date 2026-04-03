@@ -18,7 +18,7 @@
         <link rel="prev" href="../free-blog-1-why-github-pages/">
       
       
-        <link rel="next" href="../harness-engineering-2-analysis/">
+        <link rel="next" href="../ai-image-guide-02-controlnet/">
       
       
         
@@ -928,6 +928,17 @@
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
+        시리즈 작업물: 첫 시도
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         정리
       
     </span>
@@ -994,7 +1005,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              읽는시간 7분
+                              읽는시간 8분
                             
                           </span>
                         </div>
@@ -1051,17 +1062,18 @@
 
 
 <h1 id="1">1화. 첫 생성 — 프롬프트만 넣으면 되는 거 아니야?<a class="headerlink" href="#1" title="Permanent link">#</a></h1>
-<p><em>AI 이미지 생성 실전 가이드 | 여성 캐릭터 일러스트를 만들며 배운 것들</em></p>
+<p><em>AI 이미지 생성 실전 가이드 | 사진 한 장을 완성하기까지</em></p>
 <!-- more -->
 
 <hr />
 <h2 id="_1">들어가며<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<p>AI로 이미지를 만든다. 프롬프트 한 줄 쓰면 그럴듯한 그림이 나온다. 그렇게 들었다.</p>
-<p>실제로 해보면 현실은 좀 다르다. "예쁜 여성 캐릭터"를 만들고 싶었을 뿐인데, 나오는 건 누구인지 모를 얼굴에 손가락이 6개고 옷은 녹아내리는 무언가다. 뭐가 잘못된 건지 감도 안 잡힌다.</p>
-<p>이 시리즈는 그 삽질의 기록이다. 로컬 환경에서 SD 1.5 모델을 돌리며, 여성 캐릭터 일러스트 하나를 완성하기까지 겪은 과정을 단계별로 정리했다. 화려한 결과물 자랑이 아니라, <strong>뭘 시도했고 뭐가 안 됐고 어떻게 고쳤는지</strong>에 초점을 맞췄다.</p>
+<p>AI로 이미지를 만든다. 프롬프트 한 줄 쓰면 그럴듯한 사진이 나온다. 그렇게 들었다.</p>
+<p>실제로 해보면 현실은 좀 다르다. "사진처럼 자연스러운 여성 인물"을 만들고 싶었을 뿐인데, 나오는 건 누구인지 모를 얼굴에 손가락이 6개고 옷은 녹아내리는 무언가다. 뭐가 잘못된 건지 감도 안 잡힌다.</p>
+<p>이 시리즈는 그 삽질의 기록이다. 로컬 환경에서 SD 1.5 모델을 돌리며, 하나의 이미지를 완성하기까지 겪은 과정을 정리했다. 화려한 결과물 자랑이 아니라, <strong>뭘 시도했고 뭐가 안 됐고 어떻게 고쳤는지</strong>에 초점을 맞췄다.</p>
+<p>최종 목표는 이것이다: <strong>20대 여성 무투가가 태권도 금강 품새의 학다리 자세를 취하고 있는 실사 이미지</strong>. 한 발로 서서 무릎을 올린 동적인 포즈, 태권도복, 사진처럼 자연스러운 인물. txt2img 한 방으로는 절대 나오지 않을 이미지다. 여기서부터 시작한다.</p>
 <h2 id="_2">환경<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
 <ul>
-<li><strong>모델</strong>: Stable Diffusion 1.5 (DreamShaper 8)</li>
+<li><strong>모델</strong>: Stable Diffusion 1.5 (Realistic Vision V5.1)</li>
 <li><strong>UI</strong>: ComfyUI</li>
 <li><strong>GPU</strong>: RTX 5060 Ti 16GB</li>
 <li><strong>OS</strong>: Pop!_OS 24.04 LTS</li>
@@ -1071,15 +1083,15 @@
 <p>Stable Diffusion은 "모델"을 바꾸면 완전히 다른 그림이 나온다. 같은 프롬프트를 넣어도 모델에 따라 화풍, 품질, 분위기가 천차만별이다.</p>
 <p>SD 1.5 기반 체크포인트는 수천 개가 있다. 대표적인 것만 꼽으면:</p>
 <ul>
-<li><strong>DreamShaper</strong>: 범용. 일러스트와 실사 중간 느낌. 처음 시작하기 좋다.</li>
 <li><strong>Realistic Vision</strong>: 실사 특화. 사진 같은 결과물을 원할 때.</li>
+<li><strong>DreamShaper</strong>: 범용. 일러스트와 실사 중간 느낌. 처음 시작하기 좋다.</li>
 <li><strong>Anything v5</strong>: 애니메이션/일러스트 특화. 깔끔한 선화.</li>
 <li><strong>RevAnimated</strong>: 판타지/게임 느낌. 디테일이 화려하다.</li>
 </ul>
-<p>이 시리즈에서는 <strong>DreamShaper 8</strong>을 메인으로 사용한다. 범용적이라 다양한 실험을 하기에 적합하다.</p>
+<p>이 시리즈에서는 <strong>Realistic Vision V5.1</strong>을 메인으로 사용한다. 목표가 실사 이미지이므로, 실사에 특화된 모델을 쓰는 게 맞다.</p>
 <h3 id="1_1">삽질 1: 모델을 아무거나 골랐다<a class="headerlink" href="#1_1" title="Permanent link">#</a></h3>
 <p>처음에는 "SD 1.5면 다 비슷하겠지"라고 생각했다. 아니었다. 어떤 모델은 얼굴이 뭉개지고, 어떤 모델은 색감이 탁하고, 어떤 모델은 특정 스타일에서만 결과가 좋았다.</p>
-<p><strong>교훈</strong>: 모델은 화구다. 수채화 물감으로 유화를 그릴 수 없듯이, 실사 모델로 애니메이션 스타일을 뽑으면 어정쩡한 결과가 나온다. 원하는 스타일에 맞는 모델을 먼저 골라야 한다.</p>
+<p><strong>교훈</strong>: 모델은 화구다. 수채화 물감으로 유화를 그릴 수 없듯이, 애니메이션 모델로 실사 스타일을 뽑으면 어정쩡한 결과가 나온다. 원하는 스타일에 맞는 모델을 먼저 골라야 한다.</p>
 <h2 id="_4">첫 번째 생성<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
 <p>ComfyUI에서 가장 기본적인 워크플로를 구성한다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[체크포인트 로드] -&gt; [프롬프트 입력] -&gt; [빈 이미지(512x768)] -&gt; [KSampler] -&gt; [VAE 디코드] -&gt; [저장]
@@ -1088,19 +1100,19 @@
 <h2 id="_5">프롬프트의 함정<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
 <h3 id="2">삽질 2: 프롬프트를 길게 쓰면 좋아질 거라고 생각했다<a class="headerlink" href="#2" title="Permanent link">#</a></h3>
 <p>SD 1.5는 CLIP 토큰 제한이 77개다. 그 이상 쓰면 뒤쪽 단어는 영향력이 급격히 떨어진다. 프롬프트를 장문으로 쓰면 모델이 어디에 집중해야 할지 혼란스러워하고, 결과가 뒤섞인다.</p>
-<p><strong>나쁜 예 -- 장문 프롬프트:</strong></p>
+<p><strong>나쁜 예 — 장문 프롬프트:</strong></p>
 <blockquote>
 <p><strong>Positive</strong>: a beautiful gorgeous stunning young woman with long flowing silky black hair wearing an elegant luxurious red silk dress with intricate gold embroidery standing in a beautiful garden with roses and cherry blossoms under soft golden sunset lighting with bokeh background, masterpiece, best quality, ultra detailed, 8k uhd, sharp focus, professional photography, highly detailed face, perfect skin, glowing eyes, dramatic composition</p>
 <p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 42</p>
 </blockquote>
 <p><img alt="장문 프롬프트 결과" src="../ai-image/images/01/01_long_prompt_bad.png" /></p>
 <p>원하는 건 "정원에서 빨간 드레스를 입은 여성"이었다. 결과물을 보면 대충 그런 느낌은 나지만, 손가락이 뭉개지고 의상 디테일이 녹아내린다. 프롬프트에 너무 많은 걸 욱여넣은 탓이다.</p>
-<p><strong>개선 -- 핵심만 남긴 프롬프트:</strong></p>
+<p><strong>개선 — 핵심만 남긴 프롬프트:</strong></p>
 <blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, garden, sunset lighting</p>
+<p><strong>Positive</strong>: young woman, black hair, red dress, garden, sunset lighting, photo, realistic</p>
 <p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 42</p>
 </blockquote>
 <p><img alt="핵심 프롬프트 결과" src="../ai-image/images/01/02_short_prompt_good.png" /></p>
 <p>같은 시드, 같은 설정인데 프롬프트만 줄였다. 모델이 집중할 수 있는 키워드가 적어지니 오히려 구도와 인물 표현이 안정된다. 완벽하진 않지만, 장문보다 낫다.</p>
@@ -1117,15 +1129,15 @@
 <blockquote>
 <p><strong>Positive</strong>: (beautiful face:1.8), (perfect eyes:1.8), young woman, black hair, red dress</p>
 <p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 42</p>
 </blockquote>
 <p><img alt="과도한 가중치 결과" src="../ai-image/images/01/03_weight_extreme.png" /></p>
 <p><code>(beautiful face:1.8)</code>을 넣었더니 얼굴이 예뻐지는 게 아니라 완전히 붕괴됐다. 눈 주변에 글리치 패턴이 생기고, 피부가 왁스처럼 녹아내린다. 가중치는 "더 예쁘게"가 아니라 "이 개념에 더 집중해"라는 의미다. 과하면 독이 된다.</p>
 <p><strong>적절한 가중치로 수정:</strong></p>
 <blockquote>
-<p><strong>Positive</strong>: (red dress:1.2), young woman, black hair, garden</p>
+<p><strong>Positive</strong>: (red dress:1.2), young woman, black hair, garden, photo, realistic</p>
 <p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 42</p>
 </blockquote>
 <p><img alt="적절한 가중치 결과" src="../ai-image/images/01/04_weight_moderate.png" /></p>
 <p>1.2 정도면 드레스가 좀 더 강조되면서도 이미지가 깨지지 않는다.</p>
@@ -1133,29 +1145,29 @@
 <h3 id="4">삽질 4: 고해상도로 생성하면 더 좋을 줄 알았다<a class="headerlink" href="#4" title="Permanent link">#</a></h3>
 <p>SD 1.5는 <strong>512x512</strong> 또는 <strong>512x768</strong>로 학습됐다. 이 해상도에서 가장 안정적인 결과가 나온다.</p>
 <blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, portrait</p>
+<p><strong>Positive</strong>: young woman, black hair, red dress, portrait, photo, realistic</p>
 <p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | <strong>1024x1024</strong> | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | <strong>1024x1024</strong> | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 42</p>
 </blockquote>
 <p><img alt="고해상도 직접 생성 결과" src="../ai-image/images/01/05_highres_bad.png" /></p>
 <p>1024x1024로 바로 생성했더니 인물이 두 명 나왔다. 모델이 학습한 해상도를 벗어나면 구조를 잡지 못하고, 같은 패턴을 반복하거나 여러 인물을 합성하는 현상이 나타난다.</p>
-<p><strong>해결</strong>: 512x768로 생성한 다음, 나중에 업스케일한다. 이건 9화에서 다룬다.</p>
+<p><strong>해결</strong>: 512x768로 생성한 다음, 나중에 업스케일한다.</p>
 <h2 id="_8">샘플러와 스텝<a class="headerlink" href="#_8" title="Permanent link">#</a></h2>
 <p>KSampler의 설정도 결과에 영향을 준다.</p>
 <ul>
-<li><strong>샘플러</strong>: <code>euler_ancestral</code>이 무난한 시작점. <code>dpm++ 2m karras</code>는 좀 더 선명한 결과를 준다.</li>
+<li><strong>샘플러</strong>: Realistic Vision은 <code>DPM++ SDE Karras</code>가 권장된다. <code>euler_ancestral</code>도 쓸 수 있지만 실사 모델에서는 SDE 계열이 더 안정적인 결과를 준다.</li>
 <li><strong>스텝</strong>: 20~30이 적당하다. 10 이하면 흐릿하고, 50 이상이면 과하게 수렴해서 딱딱해진다.</li>
 <li><strong>CFG Scale</strong>: 7~8이 기본. 높으면 프롬프트에 과도하게 충실해지면서 부자연스러워지고, 낮으면 프롬프트를 무시한다.</li>
 </ul>
 <h3 id="5-cfg">삽질 5: CFG를 높이면 프롬프트대로 나올 줄 알았다<a class="headerlink" href="#5-cfg" title="Permanent link">#</a></h3>
 <blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, garden, sunset lighting</p>
+<p><strong>Positive</strong>: young woman, black hair, red dress, garden, sunset lighting, photo, realistic</p>
 <p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | <strong>CFG 15.0</strong> | Seed 42</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | <strong>CFG 15.0</strong> | Seed 42</p>
 </blockquote>
 <p><img alt="CFG 15 결과" src="../ai-image/images/01/06_cfg_high.png" /></p>
 <p>CFG 15로 올렸더니 색이 과포화되고 콘트라스트가 극단적으로 높아졌다. 얼굴에 기묘한 그림자가 생기면서 공포물 분위기가 됐다. 프롬프트에 "충실"하긴 한데, 자연스러움은 사라진다.</p>
-<p><strong>비교 -- CFG 3:</strong></p>
+<p><strong>비교 — CFG 3:</strong></p>
 <blockquote>
 <p><strong>설정</strong>: 위와 동일, <strong>CFG 3.0</strong> | Seed 42</p>
 </blockquote>
@@ -1165,13 +1177,13 @@
 <p>원하지 않는 요소를 지정하는 프롬프트다. 없어도 이미지는 생성되지만, 있으면 품질이 확실히 올라간다.</p>
 <p><strong>네거티브 프롬프트 없이 생성:</strong></p>
 <blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, garden</p>
+<p><strong>Positive</strong>: young woman, black hair, red dress, garden, photo, realistic</p>
 <p><strong>Negative</strong>: <em>(없음)</em></p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 42</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 42</p>
 </blockquote>
 <p><img alt="네거티브 없는 결과" src="../ai-image/images/01/10_no_negative.png" /></p>
 <p><strong>기본 네거티브 세트:</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ugly, deformed, bad anatomy, bad hands, missing fingers, 
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ugly, deformed, bad anatomy, bad hands, missing fingers,
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>extra fingers, blurry, low quality, worst quality,
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>watermark, text, signature
 </span></code></pre></div></p>
@@ -1179,7 +1191,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bad face, asymmetric eyes, deformed iris, cross-eyed,
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mutated hands, extra limbs, cloned face
 </span></code></pre></div></p>
-<p>네거티브 프롬프트는 "이것만 넣으면 만사 해결"이 아니다. 안 넣으면 확률적으로 더 자주 나오는 문제를 줄여줄 뿐이다. 손가락 6개가 나오는 문제는 네거티브로 완전히 해결되지 않는다. 그건 인페인팅으로 잡아야 하고, 4화에서 다룬다.</p>
+<p>네거티브 프롬프트는 "이것만 넣으면 만사 해결"이 아니다. 안 넣으면 확률적으로 더 자주 나오는 문제를 줄여줄 뿐이다. 손가락 6개가 나오는 문제는 네거티브로 완전히 해결되지 않는다. 그건 별도의 후처리가 필요하다.</p>
 <h2 id="_10">시드와 재현성<a class="headerlink" href="#_10" title="Permanent link">#</a></h2>
 <p>같은 프롬프트를 넣어도 매번 다른 이미지가 나온다. 이건 <strong>시드</strong>(seed) 값이 매번 랜덤으로 바뀌기 때문이다.</p>
 <p>마음에 드는 결과가 나왔으면 시드를 기록해둬야 한다. 시드를 고정하면 같은 프롬프트로 같은 이미지를 재현할 수 있다.</p>
@@ -1188,20 +1200,20 @@
 <p>기본 설정으로 몇 장을 뽑아보면 패턴이 보인다.</p>
 <p><strong>비교적 괜찮은 결과:</strong></p>
 <blockquote>
-<p><strong>Positive</strong>: young woman, black hair, red dress, soft lighting, detailed face</p>
+<p><strong>Positive</strong>: young woman, black hair, red dress, soft lighting, detailed face, photo, realistic</p>
 <p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature, bad face, asymmetric eyes, deformed iris, cross-eyed, mutated hands, extra limbs</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.5 | Seed 777</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.5 | Seed 777</p>
 </blockquote>
 <p><img alt="괜찮은 결과" src="../ai-image/images/01/08_default_ok.png" /></p>
-<p>얼굴은 비교적 자연스럽다. 하지만 자세히 보면 AI 특유의 과도한 피부 매끈함이 있다. 실제 사람의 피부 질감과는 거리가 있다.</p>
+<p>실사 모델답게 피부 질감과 조명이 사진에 가깝다. 하지만 자세히 보면 아직 AI 특유의 어색함이 남아 있다.</p>
 <p><strong>손가락이 이상한 결과:</strong></p>
 <blockquote>
-<p><strong>Positive</strong>: young woman, black hair, showing both hands, waving, casual outfit, upper body</p>
-<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature</p>
-<p><strong>설정</strong>: DreamShaper 8 | 512x768 | euler_ancestral | Steps 20 | CFG 7.0 | Seed 123</p>
+<p><strong>Positive</strong>: young woman, counting fingers, holding up both hands, spread fingers, ten fingers visible, photo, realistic</p>
+<p><strong>Negative</strong>: ugly, deformed, blurry, low quality, worst quality, watermark, text, signature</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 88</p>
 </blockquote>
 <p><img alt="손가락 이상 결과" src="../ai-image/images/01/09_default_bad_hands.png" /></p>
-<p>손을 보여달라고 하면 거의 확실하게 문제가 생긴다. 손가락 개수, 관절 방향, 손바닥 구조가 뒤틀린다. SD 1.5의 고질적 문제다.</p>
+<p>"열 손가락을 보여달라"고 했더니 손이 4개가 나왔다. 손가락 개수도 맞지 않고, 있을 수 없는 위치에서 손가락이 자라난다. 복잡한 손 포즈를 요구할수록 문제가 극적으로 드러난다. SD 1.5의 고질적 문제다.</p>
 <p><strong>잘 되는 것:</strong>
 - 전체적인 분위기와 구도
 - 의상의 대략적인 형태
@@ -1211,21 +1223,30 @@
 - 얼굴 디테일 (좌우 비대칭, 눈 크기 불일치)
 - 구도 제어 (포즈를 프롬프트로 잡기 어려움)
 - 일관성 (같은 캐릭터를 여러 장 뽑을 수 없음)</p>
-<p>이 "안 되는 것" 목록이 이 시리즈의 나머지 10화를 채운다.</p>
-<h2 id="_12">정리<a class="headerlink" href="#_12" title="Permanent link">#</a></h2>
+<h2 id="_12">시리즈 작업물: 첫 시도<a class="headerlink" href="#_12" title="Permanent link">#</a></h2>
+<p>지금까지 배운 내용을 시리즈 목표 이미지에 적용해본다. "20대 여성 무투가, 태권도복, 학다리 자세"를 txt2img로 뽑아보자.</p>
+<blockquote>
+<p><strong>Positive</strong>: young woman, 20 years old, taekwondo uniform, dobok, crane stance, one leg standing, martial arts, full body, photo, realistic</p>
+<p><strong>Negative</strong>: ugly, deformed, bad anatomy, bad hands, missing fingers, extra fingers, blurry, low quality, worst quality, watermark, text, signature, bad face, asymmetric eyes, mutated hands, extra limbs</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 100</p>
+</blockquote>
+<p><img alt="시리즈 작업물 첫 시도" src="../ai-image/images/01/11_series_first_try.png" /></p>
+<p>예상대로 한 방에 되지 않는다. 태권도복 비슷한 옷은 입고 있지만, 학다리 자세는 나오지 않는다. 프롬프트만으로 복잡한 포즈를 제어하는 건 불가능에 가깝다. 손과 발의 위치도 엉망이다.</p>
+<p>이것이 이 시리즈의 출발점이다. 여기서부터 하나씩 고쳐나간다.</p>
+<h2 id="_13">정리<a class="headerlink" href="#_13" title="Permanent link">#</a></h2>
 <p>1화에서 배운 것:</p>
 <ul>
 <li><strong>모델 선택</strong>이 결과의 절반을 결정한다</li>
 <li><strong>프롬프트는 짧고 핵심적으로</strong>. 길면 오히려 방해된다</li>
 <li><strong>해상도는 512x768</strong>로. 고해상도 직접 생성은 금물</li>
 <li><strong>가중치는 1.3 이하</strong>로 절제</li>
-<li><strong>CFG는 7~8</strong>, 샘플러는 euler_ancestral 또는 dpm++ 2m karras</li>
+<li><strong>CFG는 7~8</strong>, 샘플러는 DPM++ SDE Karras</li>
 <li><strong>시드를 기록</strong>해두면 나중에 재현할 수 있다</li>
 <li>txt2img만으로는 한계가 명확하다. 여기서부터 시작이다.</li>
 </ul>
-<p>다음 화에서는 "내가 원하는 포즈가 안 나온다"는 문제를 해결한다. ControlNet이 등장한다.</p>
+<p>다음에는 "원하는 포즈가 안 나온다"는 문제를 ControlNet으로 풀어볼 생각이다.</p>
 <hr />
-<p><em>다음: [2화. 구도와 포즈 -- ControlNet 입문]</em></p>
+<p><em>다음: <a href="../ai-image-guide-02-controlnet/">2화. 구도와 포즈 — ControlNet 입문</a></em></p>
 
 
 
@@ -1287,13 +1308,13 @@
         
         
           
-          <a href="../harness-engineering-2-analysis/" class="md-footer__link md-footer__link--next" aria-label="다음: Harness Engineering 도구 비교 분석">
+          <a href="../ai-image-guide-02-controlnet/" class="md-footer__link md-footer__link--next" aria-label="다음: 2화. 구도와 포즈 — ControlNet 입문">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Harness Engineering 도구 비교 분석
+                2화. 구도와 포즈 — ControlNet 입문
               </div>
             </div>
             <div class="md-footer__button md-icon">

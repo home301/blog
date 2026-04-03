@@ -6,19 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="하네스 엔지니어링 도구 8개를 상세 분석하고, ISO 12207과 CMMI를 참조 프레임으로 비교한다.">
+        <meta name="description" content="인페인팅과 FaceDetailer로 AI 이미지의 얼굴을 보정한다. 마스크, denoise, 자동 감지까지 삽질하며 배운 실전 기록.">
       
       
         <meta name="author" content="Mingi Choi">
       
       
-        <link rel="canonical" href="https://home301.dev/blog/harness-engineering-2-analysis/">
+        <link rel="canonical" href="https://home301.dev/blog/ai-image-guide-03-face/">
       
       
-        <link rel="prev" href="../ai-image-guide-02-controlnet/">
+        <link rel="prev" href="../free-blog-2-mkdocs-material-setup/">
       
-      
-        <link rel="next" href="../harness-engineering-1-intro/">
       
       
         
@@ -29,7 +27,7 @@
     
     
       
-        <title>Harness Engineering 도구 비교 분석 - Home301 Dev Blog</title>
+        <title>3화. 얼굴 — 인페인팅과 FaceDetailer - Home301 Dev Blog</title>
       
     
     
@@ -73,18 +71,18 @@
     
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Harness Engineering 도구 비교 분석 - Home301 Dev Blog">
-  <meta property="og:description" content="하네스 엔지니어링 도구 8개를 상세 분석하고, ISO 12207과 CMMI를 참조 프레임으로 비교한다.">
-  <meta property="og:url" content="https://home301.dev/blog/harness-engineering-2-analysis/">
+  <meta property="og:title" content="3화. 얼굴 — 인페인팅과 FaceDetailer - Home301 Dev Blog">
+  <meta property="og:description" content="인페인팅과 FaceDetailer로 AI 이미지의 얼굴을 보정한다. 마스크, denoise, 자동 감지까지 삽질하며 배운 실전 기록.">
+  <meta property="og:url" content="https://home301.dev/blog/ai-image-guide-03-face/">
   <meta property="og:site_name" content="Home301 Dev Blog">
   <meta property="og:locale" content="ko_KR">
   
-  <meta property="article:published_time" content="2026-03-28T00:00:00+09:00">
+  <meta property="article:published_time" content="2026-04-02T00:00:00+09:00">
   <meta property="article:author" content="Mingi Choi">
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Harness Engineering 도구 비교 분석 - Home301 Dev Blog">
-  <meta name="twitter:description" content="하네스 엔지니어링 도구 8개를 상세 분석하고, ISO 12207과 CMMI를 참조 프레임으로 비교한다.">
+  <meta name="twitter:title" content="3화. 얼굴 — 인페인팅과 FaceDetailer - Home301 Dev Blog">
+  <meta name="twitter:description" content="인페인팅과 FaceDetailer로 AI 이미지의 얼굴을 보정한다. 마스크, denoise, 자동 감지까지 삽질하며 배운 실전 기록.">
 
   <script type="application/ld+json">
   {
@@ -136,7 +134,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#harness-engineering" class="md-skip">
+        <a href="#3-facedetailer" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -170,7 +168,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Harness Engineering 도구 비교 분석
+              3화. 얼굴 — 인페인팅과 FaceDetailer
             
           </span>
         </div>
@@ -728,104 +726,10 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        도구 상세 분석
+        들어가며
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="도구 상세 분석">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-spec-kit-github" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Spec Kit (GitHub)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-bmad-method" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. BMAD-METHOD
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-openspec-fission-ai" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. OpenSpec (Fission-AI)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-hive-aden" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Hive (Aden)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-kiro-aws" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Kiro (AWS)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-entrix" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Entrix (주시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-ai-harness-scorecard" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. AI Harness Scorecard (주시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-reins" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Reins (주시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -833,19 +737,30 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        비교 분석
+        인페인팅이란
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="비교 분석">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        비교를 위한 두 가지 참조 프레임
+        수동 인페인팅으로 얼굴 수정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="수동 인페인팅으로 얼굴 수정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        마스크 만들기
       
     </span>
   </a>
@@ -853,10 +768,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iso-12207" class="md-nav__link">
+  <a href="#denoise-strength" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ISO 12207 프로세스 커버리지
+        Denoise Strength — 가장 중요한 파라미터
       
     </span>
   </a>
@@ -864,10 +779,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cmmi" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CMMI 성숙도 관점
+        수동 인페인팅의 한계
       
     </span>
   </a>
@@ -880,32 +795,165 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#facedetailer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        현재 한계
+        FaceDetailer: 자동 얼굴 보정
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        마무리
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="FaceDetailer: 자동 얼굴 보정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        참고 자료
+        개요
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        워크플로 구성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주요 파라미터
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denoise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Denoise 비교
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs-facedetailer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수동 인페인팅 vs FaceDetailer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        삽질 기록
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="삽질 기록">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        마스크 크기와 이음새
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#facedetailer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FaceDetailer가 얼굴을 못 찾는 경우
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denoise-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Denoise 1.0의 함정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impact Pack 설치 시 주의
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시리즈 작업물: 얼굴 보정
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        정리
       
     </span>
   </a>
@@ -949,7 +997,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-03-28 00:00:00+00:00" class="md-ellipsis">2026년 3월 28일</time>
+                        <time datetime="2026-04-02 00:00:00+00:00" class="md-ellipsis">2026년 4월 2일</time>
                       </div>
                     </li>
                     
@@ -999,572 +1047,384 @@
       
       
       
-        <span class="md-tag">ai-agent</span>
+        <span class="md-tag">ai-image</span>
       
     
       
       
       
       
-        <span class="md-tag">cmmi</span>
+        <span class="md-tag">comfyui</span>
       
     
       
       
       
       
-        <span class="md-tag">coding-agent</span>
+        <span class="md-tag">facedetailer</span>
       
     
       
       
       
       
-        <span class="md-tag">harness-engineering</span>
+        <span class="md-tag">inpainting</span>
       
     
       
       
       
       
-        <span class="md-tag">iso-12207</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">spec-driven-development</span>
+        <span class="md-tag">stable-diffusion</span>
       
     
   </nav>
 
 
 
-<h1 id="harness-engineering">Harness Engineering 도구 비교 분석<a class="headerlink" href="#harness-engineering" title="Permanent link">#</a></h1>
+<h1 id="3-facedetailer">3화. 얼굴 — 인페인팅과 FaceDetailer<a class="headerlink" href="#3-facedetailer" title="Permanent link">#</a></h1>
+<p><em>AI 이미지 생성 실전 가이드 | 사진 한 장을 완성하기까지</em></p>
+<!-- more -->
+
+<hr />
+<h2 id="_1">들어가며<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
+<p>2화에서 포즈는 대충 잡았지만, 얼굴이 문제다.</p>
+<p>512x768 해상도에서 전신을 뽑으면 얼굴에 할당되는 픽셀이 얼마 안 된다. 전체 이미지가 512x768일 때, 얼굴 영역은 대략 80x100 픽셀 정도다. 이 해상도로는 눈, 코, 입의 디테일을 제대로 표현할 수 없다. 결과적으로 얼굴이 뭉개지거나, 좌우가 비대칭이거나, 눈 크기가 다르거나 — SD 1.5의 전형적인 문제가 나타난다.</p>
+<p>이번 화에서 다루는 해결 방법은 두 가지다. 하나는 문제 영역을 직접 지정해서 다시 생성하는 <strong>인페인팅</strong>, 다른 하나는 얼굴을 자동으로 감지해서 보정하는 <strong>FaceDetailer</strong>다.</p>
+<h2 id="_2">인페인팅이란<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
+<p>인페인팅(inpainting)은 이미지의 특정 영역만 마스킹해서 다시 생성하는 기법이다. 전체를 새로 뽑지 않고, 문제가 있는 부분만 교체한다.</p>
+<p>원리는 단순하다.</p>
+<ol>
+<li>원본 이미지에서 수정할 영역을 마스크로 지정한다 (흰색 = 다시 생성, 검은색 = 유지)</li>
+<li>마스킹된 영역만 노이즈를 넣고 디노이징한다</li>
+<li>주변 픽셀과 자연스럽게 합성된다</li>
+</ol>
+<p>ComfyUI에서의 기본 인페인팅 워크플로 구조:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[이미지 로드] → [VAE 인코드] → [마스크 적용] → [KSampler] → [VAE 디코드] → [저장]
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>[마스크 로드] ────────────────────┘
+</span></code></pre></div>
+<p>txt2img와 비슷하지만, 빈 잠재 이미지 대신 <strong>원본 이미지의 잠재 표현에 마스크를 씌운 것</strong>이 KSampler에 들어간다는 점이 다르다.</p>
+<h2 id="_3">수동 인페인팅으로 얼굴 수정<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+<h3 id="_4">마스크 만들기<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
+<p>마스크는 "어디를 다시 그릴 것인가"를 지정하는 흑백 이미지다. 흰색 영역이 다시 생성되고, 검은색 영역은 원본이 유지된다.</p>
+<p><strong>ComfyUI에서 마스크 만드는 방법:</strong></p>
+<ol>
+<li><strong>LoadImage 노드</strong>에 원본 이미지를 불러온다</li>
+<li>노드 위에서 <strong>우클릭 → Open in MaskEditor</strong>를 선택한다</li>
+<li>MaskEditor가 열리면 브러시로 수정할 영역(얼굴)을 칠한다</li>
+<li>칠한 영역이 마스크의 흰색 부분이 된다</li>
+<li><strong>Save to node</strong> 버튼을 누르면 마스크가 LoadImage 노드에 저장된다</li>
+</ol>
+<p>외부 이미지 편집기(GIMP, Photoshop 등)에서 만들어도 된다. 원본과 같은 크기의 검은색 이미지를 만들고, 수정할 영역을 흰색으로 칠하면 된다.</p>
+<p>실제 마스크 예시:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">원본</th>
+<th style="text-align: center;">마스크</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="base" src="../ai-image/images/03/ep3_base.png" /></td>
+<td style="text-align: center;"><img alt="mask" src="../ai-image/images/03/face_mask.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>마스크의 크기가 중요하다. 얼굴 윤곽에 딱 맞게 그리면 경계 부분에 이음새가 생긴다. 마스크 안쪽은 새로 생성된 영역이고 바로 바깥은 원본이라, 피부색이나 조명이 미묘하게 달라서 경계가 눈에 띈다. <strong>얼굴 윤곽보다 10~20% 정도 여유를 두는 것이 적당하다.</strong> 너무 크면 머리카락이나 옷까지 불필요하게 변경된다.</p>
+<h3 id="denoise-strength">Denoise Strength — 가장 중요한 파라미터<a class="headerlink" href="#denoise-strength" title="Permanent link">#</a></h3>
+<p>인페인팅에서 denoise strength는 "얼마나 많이 바꿀 것인가"를 결정한다.</p>
+<table>
+<thead>
+<tr>
+<th>Denoise</th>
+<th>효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0</td>
+<td>변화 없음. 원본 그대로</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>미세한 보정. 피부결, 색감 정도만 달라진다</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>중간. 얼굴 형태는 유지하면서 디테일이 개선된다</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>상당한 변화. 얼굴이 많이 달라질 수 있다</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>완전히 새로 생성. 마스크 영역을 백지로 보고 다시 그린다</td>
+</tr>
+</tbody>
+</table>
+<p>같은 이미지에 denoise만 바꿔서 인페인팅한 결과:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">원본</th>
+<th style="text-align: center;">Denoise 0.3</th>
+<th style="text-align: center;">Denoise 0.5</th>
+<th style="text-align: center;">Denoise 1.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="base" src="../ai-image/images/03/ep3_base.png" /></td>
+<td style="text-align: center;"><img alt="dn03" src="../ai-image/images/03/inpaint_dn03.png" /></td>
+<td style="text-align: center;"><img alt="dn05" src="../ai-image/images/03/inpaint_dn05.png" /></td>
+<td style="text-align: center;"><img alt="dn10" src="../ai-image/images/03/inpaint_dn10.png" /></td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p>하네스 엔지니어링 도구들은 개발 프로세스의 어디를 다루고, 얼마나 체계적인가.</p>
+<p><strong>설정</strong>: Realistic Vision V5.1 | 512x768 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 20 → 인페인팅 Seed 42</p>
 </blockquote>
-<hr />
-<p>이 글은 <a href="../harness-engineering-1-intro/">1편</a>에서 소개한 하네스 엔지니어링의 도구들을 심층 분석한다. GitHub에서 관련 저장소를 검색해 수집하고 검토한 뒤, 대중화된 도구 5개와 주시할 도구 3개를 선별했다.</p>
-<p>"하네스 엔지니어링 전용 도구"는 아직 초기 단계(대부분 2026년 1분기에 등장, Stars 100 미만)다. 반면, 하네스의 핵심 역할(스펙 관리, 제약 주입, 피드백 루프)을 실질적으로 수행하는 도구들은 이미 대규모 커뮤니티를 형성하고 있다. 이 글에서는 두 종류를 모두 다룬다.</p>
-<p>전체 수집 목록은 <a href="https://github.com/botmarch301/workspace-view/blob/main/blog/preview/harness-engineering/survey.md">별도 문서</a>에 정리했다.</p>
-<hr />
-<h2 id="_1">도구 상세 분석<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
-<h3 id="1-spec-kit-github">1. Spec Kit (GitHub)<a class="headerlink" href="#1-spec-kit-github" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장소</td>
-<td><a href="https://github.com/github/spec-kit">github/spec-kit</a></td>
-</tr>
-<tr>
-<td>Stars</td>
-<td>83,000+</td>
-</tr>
-<tr>
-<td>핵심 개념</td>
-<td>스펙 주도 개발(SDD) CLI 툴킷</td>
-</tr>
-<tr>
-<td>지원 에이전트</td>
-<td>Copilot, Claude Code, Gemini CLI, Cursor, Windsurf 등 20개+</td>
-</tr>
-</tbody>
-</table>
-<p><strong>작동 방식</strong></p>
-<p>GitHub가 만든 스펙 주도 개발 도구다. Phase gate 방식으로 개발 과정을 단계별로 나눈다.</p>
-<ol>
-<li><code>/speckit.constitution</code> — 프로젝트 거버닝 원칙을 생성한다. 에이전트의 행동 범위를 제약하는 최상위 규칙이다.</li>
-<li><code>/speckit.specify</code> — what/why 중심으로 스펙을 작성한다. how는 에이전트에 위임한다.</li>
-<li><code>/speckit.plan</code> — 기술 스택과 아키텍처를 선택하고 구현 계획을 생성한다.</li>
-<li><code>/speckit.build</code> — 태스크를 분해하고 에이전트가 순차 구현한다.</li>
-</ol>
-<p>constitution이 모든 후속 단계의 제약으로 작동한다는 점에서, 하네스의 "제약 주입" 역할을 수행한다.</p>
-<p><strong>하네스 관점 강점</strong>
-- 명확한 phase 분리로 에이전트의 scope creep(범위 확대)을 방지
-- 에코시스템 최대: 커뮤니티 확장, 프리셋 풍부
-- 20개 이상의 에이전트 지원으로 도구 독립성 높음</p>
-<p><strong>하네스 관점 한계</strong>
-- 검증과 피드백 루프는 에이전트 내부 판단에 의존한다. 기계적 강제가 없다.
-- phase gate가 슬래시 커맨드 기반이라 CI/CD 자동화 통합이 약하다.
-- brownfield 프로젝트 적용 가이드가 부족하다.</p>
-<hr />
-<h3 id="2-bmad-method">2. BMAD-METHOD<a class="headerlink" href="#2-bmad-method" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장소</td>
-<td><a href="https://github.com/bmad-code-org/BMAD-METHOD">bmad-code-org/BMAD-METHOD</a></td>
-</tr>
-<tr>
-<td>Stars</td>
-<td>42,600+</td>
-</tr>
-<tr>
-<td>핵심 개념</td>
-<td>AI 에이전트 기반 애자일 개발 프레임워크</td>
-</tr>
-<tr>
-<td>지원 에이전트</td>
-<td>Claude Code, Cursor, 기타 IDE</td>
-</tr>
-</tbody>
-</table>
-<p><strong>작동 방식</strong></p>
-<p>12개 이상의 전문 에이전트 페르소나(PM, Architect, Developer, UX, Scrum Master 등)를 정의하고, 각 페르소나가 역할에 맞는 작업을 수행한다. "Party Mode"로 다중 페르소나를 한 세션에서 협업시킬 수 있다.</p>
-<p>Scale-Domain-Adaptive 설계로 프로젝트 복잡도에 따라 계획 깊이를 자동 조정한다. 워크플로우가 34개 이상으로 가장 포괄적이다.</p>
-<p><strong>하네스 관점 강점</strong>
-- 관심사 분리(SoC)를 에이전트 레벨에서 실현. 구현자와 검증자가 분리되어 있다.
-- 테스트 아키텍트 모듈(TEA)이 독립적인 검증 계층을 제공한다.
-- Edge Case Hunter가 코드 리뷰 시 경계 조건을 탐지한다.</p>
-<p><strong>하네스 관점 한계</strong>
-- 복잡도가 높다. 소규모 프로젝트에는 과잉이다.
-- 기계적 검증보다 에이전트 간 대화 기반 검증에 의존한다.
-- 페르소나 전환에 컨텍스트 비용이 발생한다.</p>
-<hr />
-<h3 id="3-openspec-fission-ai">3. OpenSpec (Fission-AI)<a class="headerlink" href="#3-openspec-fission-ai" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장소</td>
-<td><a href="https://github.com/Fission-AI/OpenSpec">Fission-AI/OpenSpec</a></td>
-</tr>
-<tr>
-<td>Stars</td>
-<td>35,000+</td>
-</tr>
-<tr>
-<td>핵심 개념</td>
-<td>경량 스펙 프레임워크. "유연하되 엄격하지 않게"</td>
-</tr>
-<tr>
-<td>지원 에이전트</td>
-<td>20개+ AI 코딩 어시스턴트</td>
-</tr>
-</tbody>
-</table>
-<p><strong>작동 방식</strong></p>
-<p>변경(change) 단위로 독립된 작업 폴더를 생성하고, 각 폴더에 proposal, specs, design, tasks를 구조화한다.</p>
-<ol>
-<li><code>/opsx:propose</code> — 변경 제안. 독립 폴더 생성.</li>
-<li><code>/opsx:apply</code> — 태스크를 순차 구현.</li>
-<li><code>/opsx:verify</code> — 구현 결과를 스펙 대비 검증.</li>
-<li><code>/opsx:archive</code> — 완료 후 아카이브, 스펙 갱신.</li>
-</ol>
-<p>"fluid not rigid" 철학으로, 엄격한 phase gate 없이 자유 반복을 허용한다.</p>
-<p><strong>하네스 관점 강점</strong>
-- change 단위 격리가 에이전트의 컨텍스트 오염을 효과적으로 방지한다.
-- brownfield 프로젝트에 강하다. 기존 코드베이스를 분석해서 스펙을 생성할 수 있다.
-- verify 단계가 스펙 대비 검증을 명시적으로 수행한다.</p>
-<p><strong>하네스 관점 한계</strong>
-- 검증이 에이전트의 자기 판단(semantic level)에 의존한다.
-- 기계적 강제 메커니즘이 없다.
-- 다중 에이전트 협업 시나리오를 지원하지 않는다.</p>
-<hr />
-<h3 id="4-hive-aden">4. Hive (Aden)<a class="headerlink" href="#4-hive-aden" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장소</td>
-<td><a href="https://github.com/aden-hive/hive">aden-hive/hive</a></td>
-</tr>
-<tr>
-<td>Stars</td>
-<td>9,900+</td>
-</tr>
-<tr>
-<td>핵심 개념</td>
-<td>목표 주도 에이전트 개발 프레임워크 + 런타임 하네스</td>
-</tr>
-<tr>
-<td>투자</td>
-<td>Y Combinator</td>
-</tr>
-</tbody>
-</table>
-<p><strong>작동 방식</strong></p>
-<p>자연어로 목표를 말하면, Queen Agent가 에이전트 그래프와 연결 코드를 자동 생성한다. 실행 결과를 기반으로 자기 개선(self-improving)하는 루프가 내장되어 있다.</p>
-<p>MCP 102개 도구를 통합하고, Human-in-the-Loop으로 필요 시 인간이 개입할 수 있다.</p>
-<p><strong>하네스 관점 강점</strong>
-- "목표를 말하면 에이전트 시스템을 만들어주는" 메타 하네스
-- 자기 개선 루프로 피드백을 자동 처리
-- 프로덕션 런타임으로 사용 가능</p>
-<p><strong>하네스 관점 한계</strong>
-- 스펙 주도 개발보다 목표 주도(outcome-driven)에 가깝다. 스펙 정합성 검증이 약하다.
-- 프레임워크 종속도가 높다. Hive 밖에서 사용하기 어렵다.
-- 복잡도가 높다.</p>
-<hr />
-<h3 id="5-kiro-aws">5. Kiro (AWS)<a class="headerlink" href="#5-kiro-aws" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장소</td>
-<td><a href="https://github.com/kirodotdev/Kiro">kirodotdev/Kiro</a></td>
-</tr>
-<tr>
-<td>Stars</td>
-<td>3,300+</td>
-</tr>
-<tr>
-<td>핵심 개념</td>
-<td>스펙 주도 에이전틱 IDE (VSCode 기반)</td>
-</tr>
-<tr>
-<td>제공사</td>
-<td>AWS/Amazon</td>
-</tr>
-</tbody>
-</table>
-<p><strong>작동 방식</strong></p>
-<p>IDE 안에서 스펙 → 코드 → 검증의 전체 루프가 완결된다.</p>
+<p>0.3에서는 미세한 보정에 그치지만, 0.5부터 눈과 피부 질감이 눈에 띄게 달라진다. 1.0에서는 마스크 영역이 완전히 새로 생성되어 아예 다른 사람이 된다.</p>
+<p><strong>얼굴 보정 목적이라면 0.4~0.6이 실용적인 범위다.</strong> 0.3 이하는 변화가 너무 적고, 0.7 이상은 원래 얼굴과 동떨어진 결과가 나온다.</p>
+<h3 id="_5">수동 인페인팅의 한계<a class="headerlink" href="#_5" title="Permanent link">#</a></h3>
+<p>수동 인페인팅은 정밀하다. 원하는 영역만 정확하게 지정할 수 있고, 프롬프트와 denoise를 세밀하게 조절할 수 있다. 그런데 번거롭다.</p>
 <ul>
-<li><strong>Specs</strong>: 프롬프트를 구조화된 스펙(요구사항 → 설계 → 태스크)으로 자동 변환.</li>
-<li><strong>Steering</strong>: <code>.kiro/steering/</code> 마크다운 파일로 에이전트 행동 규칙을 주입.</li>
-<li><strong>Agent Hooks</strong>: 파일 변경, 이벤트에 반응하는 자동 트리거. 코드 변경 시 자동 테스트 실행, 문서 변경 시 자동 sync 등.</li>
+<li>이미지마다 마스크를 직접 그려야 한다</li>
+<li>얼굴 위치가 바뀌면 마스크도 새로 만들어야 한다</li>
+<li>여러 장을 배치로 처리할 수 없다</li>
+<li>마스크 영역 설정에 시행착오가 필요하다</li>
 </ul>
-<p><strong>하네스 관점 강점</strong>
-- Hooks가 현존하는 도구 중 가장 강력한 자동 피드백 루프 메커니즘이다.
-- Steering이 에이전트 행동의 기계적 제약으로 작동한다.
-- IDE 통합으로 개발자 경험이 매끄럽다.</p>
-<p><strong>하네스 관점 한계</strong>
-- IDE 종속. Kiro 밖에서는 사용할 수 없다.
-- 독립 CLI나 CI 통합이 제한적이다.
-- 모델 선택이 제한적이다.</p>
-<hr />
-<h3 id="6-entrix">6. Entrix (주시)<a class="headerlink" href="#6-entrix" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장소</td>
-<td><a href="https://github.com/phodal/entrix">phodal/entrix</a></td>
-</tr>
-<tr>
-<td>Stars</td>
-<td>31</td>
-</tr>
-<tr>
-<td>언어</td>
-<td>Python</td>
-</tr>
-<tr>
-<td>핵심 개념</td>
-<td>품질 규칙과 아키텍처 제약을 실행 가능한 가드레일로 변환</td>
-</tr>
-</tbody>
-</table>
-<p><strong>작동 방식</strong></p>
-<p>규칙을 코드화하고, 변경사항에 대해 자동으로 실행한다. 세 단계의 검증 티어(fast/normal/deep)를 제공하며, 변경 인식(change-aware) 검증으로 diff에 대해서만 가중 점수를 매기고 하드 게이트를 적용한다.</p>
-<p><code>review-trigger</code>로 위험한 변경을 더 깊은 검증 단계로 자동 라우팅한다. 그래프 기반 영향도 분석, 테스트 반경 추정, 리뷰 컨텍스트 분석을 선택적으로 추가할 수 있다.</p>
-<p><strong>주시하는 이유</strong></p>
-<p>대형 도구들이 "에이전트에게 잘 전달하는 것"에 집중할 때, Entrix는 "규칙을 실행 가능한 가드레일로 변환하는 것"에 집중한다. 기계적 강제를 가장 직접적으로 구현하는 도구다.</p>
-<hr />
-<h3 id="7-ai-harness-scorecard">7. AI Harness Scorecard (주시)<a class="headerlink" href="#7-ai-harness-scorecard" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>저장소</td>
-<td><a href="https://github.com/markmishaev76/ai-harness-scorecard">markmishaev76/ai-harness-scorecard</a></td>
-</tr>
-<tr>
-<td>Stars</td>
-<td>14</td>
-</tr>
-<tr>
-<td>언어</td>
-<td>Python</td>
-</tr>
-<tr>
-<td>핵심 개념</td>
-<td>리포지토리의 에이전트 코드 신뢰도를 정량 평가</td>
-</tr>
-</tbody>
-</table>
-<p><strong>작동 방식</strong></p>
-<p><code>ai-harness-scorecard assess .</code> 하나로 현재 리포의 하네스 수준을 A~F 등급으로 평가한다. 5개 카테고리, 31개 체크를 수행한다.</p>
+<p>한두 장 보정할 때는 수동 인페인팅이 낫다. 하지만 여러 장을 만들면서 매번 얼굴을 고치는 상황이라면, 자동화가 필요하다.</p>
+<h2 id="facedetailer">FaceDetailer: 자동 얼굴 보정<a class="headerlink" href="#facedetailer" title="Permanent link">#</a></h2>
+<h3 id="_6">개요<a class="headerlink" href="#_6" title="Permanent link">#</a></h3>
+<p>FaceDetailer는 ComfyUI Impact Pack에 포함된 노드다. 원리는 수동 인페인팅과 같지만, <strong>얼굴 감지부터 마스킹, 인페인팅까지 전부 자동</strong>이다.</p>
+<p>동작 과정:</p>
 <ol>
-<li><strong>아키텍처 문서화</strong> (20%)</li>
-<li><strong>기계적 제약</strong> (25%)</li>
-<li><strong>테스트와 안정성</strong> (25%)</li>
-<li><strong>리뷰와 드리프트</strong> (15%)</li>
-<li><strong>AI 특화 세이프가드</strong> (15%)</li>
+<li>감지 모델(YOLOv8 등)이 이미지에서 얼굴 위치를 찾는다</li>
+<li>감지된 영역을 잘라낸다 (crop)</li>
+<li>잘라낸 영역을 높은 해상도로 인페인팅한다</li>
+<li>보정된 얼굴을 원본에 다시 합성한다</li>
 </ol>
-<p>DORA 2025 보고서, OpenAI Harness Engineering, SlopCodeBench, Kent Beck의 테스트 원칙을 근거로 한다.</p>
-<p><strong>주시하는 이유</strong></p>
-<p>기존 도구들이 "하네스를 만드는 것"에 집중할 때, 유일하게 "하네스를 측정하는 것"에 집중한다.</p>
-<hr />
-<h3 id="8-reins">8. Reins (주시)<a class="headerlink" href="#8-reins" title="Permanent link">#</a></h3>
+<p>수동 인페인팅과의 핵심 차이는 <strong>3번</strong>이다. 전체 이미지에서 인페인팅하는 게 아니라, 얼굴 영역만 잘라내서 확대한 뒤 인페인팅한다. 512x768 이미지에서 80x100 픽셀짜리 얼굴을 384x384로 확대해서 처리하는 것이다. 디테일이 좋아질 수밖에 없다.</p>
+<h3 id="_7">설치<a class="headerlink" href="#_7" title="Permanent link">#</a></h3>
+<p>ComfyUI Impact Pack과 Impact Subpack을 설치한다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>ComfyUI/custom_nodes/
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ltdrdata/ComfyUI-Impact-Pack.git
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ltdrdata/ComfyUI-Impact-Subpack.git
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 각각 의존성 설치</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nb">cd</span><span class="w"> </span>ComfyUI-Impact-Pack<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">cd</span><span class="w"> </span>../ComfyUI-Impact-Subpack<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<p>얼굴 감지 모델도 필요하다. <a href="https://huggingface.co/Bingsu/adetailer">Bingsu/adetailer</a> 저장소에서 <code>face_yolov8m.pt</code>를 다운로드한다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ComfyUI/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  models/
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    ultralytics/
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      bbox/
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        face_yolov8m.pt
+</span></code></pre></div>
+<p>ComfyUI를 재시작하면 FaceDetailer 노드가 추가된다.</p>
+<h3 id="_8">워크플로 구성<a class="headerlink" href="#_8" title="Permanent link">#</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[이미지 로드] ──────────────────────────┐
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>[체크포인트 로드] → [프롬프트] ────────────→ [FaceDetailer] → [저장]
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>[UltralyticsDetectorProvider] ──────────┘
+</span></code></pre></div>
+<p>기본 txt2img 워크플로보다 단순하다. 이미지를 넣고 FaceDetailer에 연결하면 끝이다. 복잡한 것은 FaceDetailer 노드 내부에서 전부 처리한다.</p>
+<h3 id="_9">주요 파라미터<a class="headerlink" href="#_9" title="Permanent link">#</a></h3>
+<p>FaceDetailer의 파라미터는 많지만, 실제로 건드릴 것은 몇 개 되지 않는다.</p>
+<p><strong>감지 관련:</strong></p>
 <table>
 <thead>
 <tr>
-<th>항목</th>
-<th>내용</th>
+<th>파라미터</th>
+<th>기본값</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>저장소</td>
-<td><a href="https://github.com/WellDunDun/reins">WellDunDun/reins</a></td>
+<td>bbox_threshold</td>
+<td>0.5</td>
+<td>얼굴 감지 신뢰도 임계값. 낮으면 더 많이 잡고, 높으면 확실한 것만 잡는다</td>
 </tr>
 <tr>
-<td>Stars</td>
-<td>6</td>
+<td>bbox_dilation</td>
+<td>10</td>
+<td>감지된 영역을 얼마나 넓히는가. 얼굴 주변 여백</td>
 </tr>
 <tr>
-<td>언어</td>
-<td>TypeScript</td>
-</tr>
-<tr>
-<td>핵심 개념</td>
-<td>OpenAI 방법론의 CLI 도구화</td>
+<td>bbox_crop_factor</td>
+<td>3.0</td>
+<td>얼굴 영역의 배율. 높으면 머리카락, 목까지 포함한다</td>
 </tr>
 </tbody>
 </table>
-<p><strong>작동 방식</strong></p>
-<p>4단계 CLI로 리포의 하네스 성숙도를 점진적으로 높인다.</p>
-<ol>
-<li><code>reins scaffold</code> — 하네스 구조 초기 생성</li>
-<li><code>reins audit</code> — 현재 리포의 하네스 수준 진단</li>
-<li><code>reins evolve</code> — 진단 결과를 기반으로 개선</li>
-<li><code>reins doctor</code> — 하네스 건강 상태 확인</li>
-</ol>
-<p><strong>주시하는 이유</strong></p>
-<p>의존성 0개. 하네스 엔지니어링을 "도입하는 과정"을 단계적으로 안내한다.</p>
-<hr />
-<h2 id="_2">비교 분석<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
-<h3 id="_3">비교를 위한 두 가지 참조 프레임<a class="headerlink" href="#_3" title="Permanent link">#</a></h3>
-<p>하네스 엔지니어링 도구를 평가할 확립된 기준은 아직 없다. 다만, 하네스 엔지니어링은 완전히 새로운 분야가 아니다. 소프트웨어 엔지니어링에서 프로세스 관리와 품질 보증을 다루던 영역이 AI 에이전트 환경에 맞게 형태가 바뀐 것에 가깝다. 그렇다면 기존 소프트웨어 공학 표준을 참조 프레임으로 활용하는 것은 자연스러운 접근이라고 생각한다.</p>
-<p>이 글에서는 두 가지 표준을 참고한다. 하네스 엔지니어링을 위해 만들어진 표준이 아니므로 직접 적용은 아니다.</p>
-<p><strong>ISO/IEC 12207 — 소프트웨어 생명주기 프로세스</strong></p>
-<p>소프트웨어 개발과 유지보수에 필요한 전체 프로세스를 정의한 국제 표준이다. 요구사항 정의, 설계, 구현, 검증(Verification), 확인(Validation), 유지보수, 품질 보증 등 30개 프로세스를 체계화한다. 하네스 도구가 이 프로세스 중 어디를 지원하는지를 매핑하면, 각 도구가 개발 과정의 어느 영역을 커버하는지 파악할 수 있다.</p>
-<p><strong>CMMI — 프로세스 성숙도 모델</strong></p>
-<p>Carnegie Mellon 대학에서 개발한 프로세스 수준 개선 프레임워크다. 프로세스의 성숙도를 5단계로 평가한다.</p>
-<ol>
-<li><strong>Initial</strong>: 프로세스가 정의되지 않은 상태. 결과가 개인의 역량에 의존한다.</li>
-<li><strong>Managed</strong>: 기본적인 프로젝트 관리가 존재한다. 요구사항이 관리되고 프로세스가 계획된다.</li>
-<li><strong>Defined</strong>: 프로세스가 조직 차원에서 정의되고 문서화된다. 프로젝트 간 일관성이 있다.</li>
-<li><strong>Quantitatively Managed</strong>: 프로세스가 정량적으로 측정되고 관리된다.</li>
-<li><strong>Optimizing</strong>: 측정 결과를 기반으로 프로세스가 지속적으로 개선된다.</li>
-</ol>
-<h3 id="iso-12207">ISO 12207 프로세스 커버리지<a class="headerlink" href="#iso-12207" title="Permanent link">#</a></h3>
+<p><strong>인페인팅 관련:</strong></p>
 <table>
 <thead>
 <tr>
-<th>도구</th>
-<th>요구사항 정의</th>
-<th>설계</th>
-<th>구현</th>
-<th>검증(V&amp;V)</th>
-<th>품질 보증</th>
-<th>측정/분석</th>
-<th>구성 관리</th>
+<th>파라미터</th>
+<th>기본값</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Spec Kit (83K)</td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>guide_size</td>
+<td>384</td>
+<td>크롭된 얼굴의 인페인팅 해상도</td>
 </tr>
 <tr>
-<td>BMAD (43K)</td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td>△</td>
-<td></td>
-<td></td>
-<td></td>
+<td>denoise</td>
+<td>0.5</td>
+<td>수동 인페인팅과 같은 역할</td>
 </tr>
 <tr>
-<td>OpenSpec (35K)</td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td>△</td>
-<td></td>
-<td></td>
-<td></td>
+<td>steps / cfg / sampler</td>
+<td>20 / 7.0 / dpmpp_sde</td>
+<td>인페인팅 샘플링 설정</td>
 </tr>
 <tr>
-<td>Hive (10K)</td>
-<td></td>
-<td></td>
-<td><strong>O</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Kiro (3K)</td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td>△</td>
-<td>△</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Entrix (31)</td>
-<td></td>
-<td></td>
-<td></td>
-<td><strong>O</strong></td>
-<td><strong>O</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Scorecard (14)</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>△</td>
-<td><strong>O</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Reins (6)</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>△</td>
-<td>△</td>
-<td><strong>O</strong></td>
+<td>feather</td>
+<td>5</td>
+<td>마스크 경계의 블렌딩 정도</td>
 </tr>
 </tbody>
 </table>
-<p><strong>O</strong> = 해당 프로세스를 명시적으로 지원 / △ = 부분 지원 또는 에이전트 판단에 의존</p>
-<p>대부분의 도구가 요구사항 정의, 설계, 구현에 집중하고 있다. 반면 검증, 품질 보증, 측정은 상대적으로 비어 있다. 특히 구성 관리(변경 이력 추적, 베이스라인 관리)를 체계적으로 다루는 도구는 거의 없다.</p>
-<h3 id="cmmi">CMMI 성숙도 관점<a class="headerlink" href="#cmmi" title="Permanent link">#</a></h3>
-<p>정식 CMMI 평가가 아니다. 각 도구를 사용했을 때 에이전트의 개발 프로세스가 도달할 수 있는 성숙도 수준을 기능 기반으로 가늠한 것이며, 도구를 도입한다고 해당 레벨이 보장되는 것은 아니다.</p>
+<p><strong>guide_size</strong>가 FaceDetailer의 핵심이다. 원본에서 80x100 픽셀이던 얼굴을 384x384로 확대해서 인페인팅하고, 다시 원래 크기로 줄여서 합성한다. 이 과정에서 디테일이 추가된다.</p>
+<h3 id="denoise">Denoise 비교<a class="headerlink" href="#denoise" title="Permanent link">#</a></h3>
+<p>수동 인페인팅과 마찬가지로, FaceDetailer에서도 denoise가 결과를 좌우한다.</p>
 <table>
 <thead>
 <tr>
-<th>도구</th>
-<th>성숙도 수준</th>
-<th>근거</th>
+<th style="text-align: center;">원본</th>
+<th style="text-align: center;">Denoise 0.3</th>
+<th style="text-align: center;">Denoise 0.5</th>
+<th style="text-align: center;">Denoise 0.7</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Spec Kit (83K)</td>
-<td>Level 2 (Managed)</td>
-<td>요구사항이 관리되고 프로세스가 계획되지만, 검증과 품질 보증이 에이전트 자기 판단에 의존</td>
-</tr>
-<tr>
-<td>BMAD (43K)</td>
-<td>Level 2~3</td>
-<td>프로세스가 페르소나 단위로 정의되고 역할이 분리되지만, 기계적 강제가 약함</td>
-</tr>
-<tr>
-<td>OpenSpec (35K)</td>
-<td>Level 2 (Managed)</td>
-<td>change 단위 관리가 체계적이지만, 검증이 기계적이지 않음</td>
-</tr>
-<tr>
-<td>Hive (10K)</td>
-<td>Level 2 (Managed)</td>
-<td>런타임 관리가 있고 자기 개선 루프가 있지만, 프로세스 정의가 느슨함</td>
-</tr>
-<tr>
-<td>Kiro (3K)</td>
-<td>Level 3 (Defined)</td>
-<td>Steering으로 프로세스가 조직 차원에서 정의되고, Hooks로 일부 자동 강제</td>
-</tr>
-<tr>
-<td>Entrix (31)</td>
-<td>Level 3~4</td>
-<td>규칙이 코드로 정의되고 기계적으로 강제되며, tier별 측정이 존재</td>
-</tr>
-<tr>
-<td>Scorecard (14)</td>
-<td>Level 4 (Quantitatively Managed)</td>
-<td>정량적 측정과 등급화가 핵심 기능</td>
-</tr>
-<tr>
-<td>Reins (6)</td>
-<td>Level 2~3</td>
-<td>프로세스 정의(scaffold)와 진단(audit)을 지원하지만, 정량 측정은 제한적</td>
+<td style="text-align: center;"><img alt="base" src="../ai-image/images/03/ep3_base.png" /></td>
+<td style="text-align: center;"><img alt="fd03" src="../ai-image/images/03/facedetailer_dn03.png" /></td>
+<td style="text-align: center;"><img alt="fd05" src="../ai-image/images/03/facedetailer_dn05.png" /></td>
+<td style="text-align: center;"><img alt="fd07" src="../ai-image/images/03/facedetailer_dn07.png" /></td>
 </tr>
 </tbody>
 </table>
-<p>Level 5(Optimizing) — 측정 결과를 기반으로 프로세스가 지속 개선되는 단계 — 에 도달한 도구는 없다. 측정(Scorecard)과 개선(Reins의 evolve)을 각각 다루는 도구는 있지만, 이 둘이 자동으로 연결되어 지속적 개선 루프를 형성하는 도구는 아직 존재하지 않는다.</p>
-<hr />
-<h2 id="_4">현재 한계<a class="headerlink" href="#_4" title="Permanent link">#</a></h2>
-<p>하네스 엔지니어링은 아직 초기 단계다.</p>
+<blockquote>
+<p><strong>설정</strong>: Realistic Vision V5.1 | guide_size 384 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | Seed 42 | face_yolov8m | 원본 Seed 20</p>
+</blockquote>
+<p>수동 인페인팅과 비교하면, FaceDetailer는 같은 denoise에서 좀 더 안정적인 결과가 나온다. 얼굴 영역만 정확하게 크롭해서 처리하기 때문에, 주변 영역이 불필요하게 변경되는 문제가 적다.</p>
+<p>0.5에서 얼굴이 개선되면서도 전체 이미지와 일관성이 유지된다. 0.7부터는 얼굴이 나머지 부분보다 "깔끔해 보이는" 현상이 나타날 수 있다.</p>
+<h2 id="vs-facedetailer">수동 인페인팅 vs FaceDetailer<a class="headerlink" href="#vs-facedetailer" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>수동 인페인팅</th>
+<th>FaceDetailer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>마스크</td>
+<td>직접 그린다</td>
+<td>자동 감지</td>
+</tr>
+<tr>
+<td>해상도</td>
+<td>원본 해상도에서 처리</td>
+<td>크롭 후 확대해서 처리</td>
+</tr>
+<tr>
+<td>정밀도</td>
+<td>높음 (원하는 대로 조절)</td>
+<td>중간 (자동이라 제한적)</td>
+</tr>
+<tr>
+<td>편의성</td>
+<td>낮음</td>
+<td>높음</td>
+</tr>
+<tr>
+<td>배치 처리</td>
+<td>어려움</td>
+<td>가능</td>
+</tr>
+<tr>
+<td>적합한 상황</td>
+<td>한두 장, 세밀한 조정</td>
+<td>여러 장, 일괄 보정</td>
+</tr>
+</tbody>
+</table>
+<p>실전에서는 <strong>FaceDetailer를 기본으로 쓰고, 결과가 마음에 들지 않을 때 수동 인페인팅으로 미세 조정</strong>하는 흐름이 된다. FaceDetailer를 txt2img → ControlNet 워크플로 뒤에 붙이면, 생성할 때마다 자동으로 얼굴이 보정된다.</p>
+<h2 id="_10">삽질 기록<a class="headerlink" href="#_10" title="Permanent link">#</a></h2>
+<h3 id="_11">마스크 크기와 이음새<a class="headerlink" href="#_11" title="Permanent link">#</a></h3>
+<p>수동 인페인팅에서 마스크를 얼굴에 딱 맞게 그렸더니, 경계 부분에 부자연스러운 이음새가 생겼다. 마스크 안쪽은 새로 생성한 얼굴이고, 바로 바깥은 원본 이미지다. 피부색이나 조명이 미묘하게 달라서 경계가 보인다.</p>
+<p>해결: 마스크를 넉넉하게 그리고, feather(페더링) 값을 높인다. 페더링은 마스크 경계를 흐리게 처리해서 안쪽과 바깥쪽이 자연스럽게 섞이게 한다. ComfyUI에서는 MaskBlur 노드를 사용하거나, KSampler의 설정에서 조절할 수 있다.</p>
+<h3 id="facedetailer_1">FaceDetailer가 얼굴을 못 찾는 경우<a class="headerlink" href="#facedetailer_1" title="Permanent link">#</a></h3>
+<p>전신 이미지에서 얼굴이 너무 작으면 감지 모델이 놓칠 수 있다. bbox_threshold를 0.3으로 낮추면 더 공격적으로 감지하지만, 대신 얼굴이 아닌 부분(무릎, 주먹 등)을 얼굴로 오인할 수 있다.</p>
+<p>안정적인 방법은 guide_size를 256으로 낮추거나, bbox_crop_factor를 높여서 더 넓은 영역을 잡는 것이다.</p>
+<h3 id="denoise-10">Denoise 1.0의 함정<a class="headerlink" href="#denoise-10" title="Permanent link">#</a></h3>
+<p>수동 인페인팅에서 denoise를 1.0으로 올리면, 마스크 영역을 완전히 새로 그린다. 얼굴뿐 아니라 마스크에 걸린 의상, 머리카락까지 전부 달라진다. 소매 색이 바뀌거나, 헤어스타일이 달라지거나, 피부색이 달라져서 주변과 동떨어진 결과가 나온다.</p>
+<p>얼굴 보정 목적이라면 denoise는 0.6 이하를 넘기지 않는 것이 안전하다.</p>
+<h3 id="impact-pack">Impact Pack 설치 시 주의<a class="headerlink" href="#impact-pack" title="Permanent link">#</a></h3>
+<p>Impact Pack의 requirements.txt에 torch가 포함되어 있다. 이미 설치된 PyTorch와 버전이 충돌할 수 있다. 특히 RTX 50시리즈처럼 nightly 빌드를 쓰는 환경에서는 pip이 torch를 덮어쓰면서 CUDA 호환성이 깨질 수 있다. 설치 후 <code>torch.cuda.is_available()</code>을 확인하는 것이 좋다.</p>
+<h2 id="_12">시리즈 작업물: 얼굴 보정<a class="headerlink" href="#_12" title="Permanent link">#</a></h2>
+<p>2화에서 만든 학다리 자세 결과물에 FaceDetailer를 적용했다.</p>
+<blockquote>
+<p><strong>FaceDetailer 설정</strong>: guide_size 384 | denoise 0.5 | DPM++ SDE Karras | Steps 20 | CFG 7.0 | face_yolov8m</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">2화 결과 (OpenPose + Canny 조합, 보정 전)</th>
+<th style="text-align: center;">3화 결과 (FaceDetailer 적용)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="ep2" src="../ai-image/images/03/series_ep2_combo.png" /></td>
+<td style="text-align: center;"><img alt="ep3" src="../ai-image/images/03/series_ep3_facedetail.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>1화부터의 진행 비교:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">1화 (txt2img)</th>
+<th style="text-align: center;">2화 (OpenPose + Canny 조합)</th>
+<th style="text-align: center;">3화 (FaceDetailer)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="ep1" src="../ai-image/images/03/series_ep1_txt2img.png" /></td>
+<td style="text-align: center;"><img alt="ep2" src="../ai-image/images/03/series_ep2_combo.png" /></td>
+<td style="text-align: center;"><img alt="ep3" src="../ai-image/images/03/series_ep3_facedetail.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>1화에서 포즈를 잡을 수 없었고, 2화에서 OpenPose + Canny 조합으로 포즈를 잡았고, 3화에서 얼굴 디테일을 개선했다. 전신 이미지에서 얼굴이 차지하는 비율이 작아서 극적인 차이는 아니지만, 확대하면 눈과 피부의 선명도가 달라진 것을 확인할 수 있다.</p>
+<p>아직 남은 문제가 있다. 손과 발의 디테일, 의상의 정확성, 그리고 전체 해상도. 다음에는 해상도를 올리는 방법을 다뤄볼 생각이다.</p>
+<h2 id="_13">정리<a class="headerlink" href="#_13" title="Permanent link">#</a></h2>
+<p>3화에서 배운 것:</p>
 <ul>
-<li><strong>도구 간 파편화</strong>: 도구마다 다루는 영역이 다르고, 통합 표준이 없다.</li>
-<li><strong>검증의 한계</strong>: 대부분의 검증이 정적 분석에 머물러 있다. 스펙과 구현의 의미적 정합성을 기계적으로 검증하는 도구는 아직 없다.</li>
-<li><strong>규칙 형식 파편화</strong>: CLAUDE.md, .cursor/rules, AGENTS.md, .kiro/steering 등 에이전트마다 형식이 다르다.</li>
-<li><strong>현실적 복잡도 미반영</strong>: 대부분의 도구가 단일 저장소, 단일 프로젝트를 전제한다. FE/BE 분리, 마이크로서비스, 스펙 비대화, 테스트 전략 정의, 모노레포/멀티레포 같은 현실적 문제를 다루는 도구는 아직 없다.</li>
+<li><strong>인페인팅</strong>은 이미지의 특정 영역만 다시 생성하는 기법이다</li>
+<li><strong>Denoise 0.4~0.6</strong>이 얼굴 보정에 적합한 범위다. 1.0은 완전히 다른 얼굴이 된다</li>
+<li><strong>FaceDetailer</strong>는 얼굴 감지 → 크롭 → 확대 인페인팅 → 합성을 자동화한다</li>
+<li>FaceDetailer의 핵심은 <strong>guide_size</strong> — 작은 얼굴을 확대해서 처리하기 때문에 디테일이 좋아진다</li>
+<li>수동 인페인팅은 정밀하지만 번거롭고, FaceDetailer는 편하지만 세밀한 조정이 제한적이다</li>
+<li>실전에서는 <strong>FaceDetailer를 기본으로 쓰고, 필요하면 수동으로 미세 조정</strong>한다</li>
+<li>마스크 경계의 이음새는 <strong>페더링</strong>으로 완화한다</li>
 </ul>
 <hr />
-<h2 id="_5">마무리<a class="headerlink" href="#_5" title="Permanent link">#</a></h2>
-<p>다만, 이 한계들이 영구적인 문제인지는 생각해볼 여지가 있다.</p>
-<p>FE/BE나 BE 내 서비스를 분리하는 이유는 담당자가 다르고 배포/개발 사이클이 다르기 때문이다. 에이전트 중심 환경에서는 이런 구분이 의미를 잃고, 하나의 프로젝트에서 통합 관리하는 것이 자연스러워질 수 있다. 코드가 매번 다르게 생성되는 문제도, 정적 분석 기준을 통과하고 full coverage 테스트를 통과하는 코드라면 일관성보다 정확성이 더 중요한 기준이 될 수 있다.</p>
-<p>더 근본적으로, 하네스 엔지니어링이 성숙해질수록 "무엇을 관리해야 하는가"의 대상 자체가 달라질 수 있다. 스펙과 설계가 관리 대상이고 코드는 빌드 단계의 산출물이라면, git에서 추적해야 할 것은 코드가 아니라 스펙이 된다. 컴파일된 바이너리를 버전 관리하지 않듯이, 에이전트가 스펙으로부터 생성한 코드도 같은 위상이 될 수 있다.</p>
-<p>이 패러다임에서는 코드 일관성, 프로젝트 분리, 스펙 비대화 같은 현재의 문제는 질문 자체가 달라진다. 현재의 한계에 매몰되기보다, 이런 방향성의 변화에 관심을 두는 것이 더 유의미하다.</p>
-<p>하네스 엔지니어링은 "에이전트가 더 똑똑해지면 필요 없어지는 것"이 아니라고 생각한다. 에이전트의 능력이 커질수록, 그 능력을 올바른 방향으로 쓰게 하는 환경 설계의 중요성도 함께 커질 것이다.</p>
-<hr />
-<h2 id="_6">참고 자료<a class="headerlink" href="#_6" title="Permanent link">#</a></h2>
-<ul>
-<li><a href="https://openai.com/index/harness-engineering/">OpenAI — Harness Engineering: Leveraging Codex in an Agent-First World</a></li>
-<li><a href="https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents">HumanLayer — Skill Issue: Harness Engineering for Coding Agents</a></li>
-<li><a href="https://dora.dev/research/2025/dora-report">DORA 2025 Report</a></li>
-<li><a href="https://github.com/botmarch301/workspace-view/blob/main/blog/preview/harness-engineering/survey.md">전체 도구 수집 목록</a></li>
-</ul>
+<p><em>이전: <a href="../ai-image-guide-02-controlnet/">2화. 구도와 포즈 — ControlNet 입문</a></em></p>
 
 
 
@@ -1609,7 +1469,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../ai-image-guide-02-controlnet/" class="md-footer__link md-footer__link--prev" aria-label="이전: 2화. 구도와 포즈 — ControlNet 입문">
+          <a href="../free-blog-2-mkdocs-material-setup/" class="md-footer__link md-footer__link--prev" aria-label="이전: MkDocs Material 설치부터 첫 글 배포까지">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1619,27 +1479,11 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                2화. 구도와 포즈 — ControlNet 입문
+                MkDocs Material 설치부터 첫 글 배포까지
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../harness-engineering-1-intro/" class="md-footer__link md-footer__link--next" aria-label="다음: Harness Engineering — AI 코딩 에이전트를 제어하는 기술">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                다음
-              </span>
-              <div class="md-ellipsis">
-                Harness Engineering — AI 코딩 에이전트를 제어하는 기술
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
